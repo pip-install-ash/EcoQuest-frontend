@@ -1,12 +1,12 @@
 [
     {
         "type": "image",
-        "key": "Logo",
-        "url": "assets/ui-components/Logo.png"
+        "key": "Background",
+        "url": "assets/ui-components/OnboardingBack.png"
     },
     {
         "type": "image",
-        "key": "Background",
-        "url": "assets/ui-components/OnboardingBack.png"
+        "key": "SignUpDlg",
+        "url": "assets/ui-components/SignUp.png"
     }
 ]
