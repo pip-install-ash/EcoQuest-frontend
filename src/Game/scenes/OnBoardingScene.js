@@ -1,4 +1,5 @@
 import assetPack from "../packs/onbarding-asset-pack.json";
+import { scaleBackground } from "../partials/common";
 
 const createOnBoardingScene = () => {
   return {
@@ -10,13 +11,7 @@ const createOnBoardingScene = () => {
     },
 
     create: function () {
-      const { width, height } = this.scale;
-
-      //White Background
-      const whiteBack = this.add.graphics();
-      whiteBack.fillStyle(0xffffff, 1.0);
-      whiteBack.fillRect(0, 0, width, height);
-
+      scaleBackground(this);
     },
   };
 };

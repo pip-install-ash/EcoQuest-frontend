@@ -1,5 +1,6 @@
 import { DefaultFontStyle } from "../../utils/const";
 import assetPack from "../packs/splash-asset-pack.json";
+import { whiteBackground } from "../partials/common";
 import { createRoundedProgressBar } from "../partials/splash";
 
 const createLoadingScene = () => {
@@ -14,32 +15,25 @@ const createLoadingScene = () => {
     create: function () {
       const { width, height } = this.scale;
 
-      //White Background
-      const whiteBack = this.add.graphics();
-      whiteBack.fillStyle(0xffffff, 1.0);
-      whiteBack.fillRect(0, 0, width, height);
+      whiteBackground(this);
 
       this.add.image(width / 2, height / 2 - 50, "Logo");
 
-      const t_description = this.add.text(
-        width / 2,
-        height / 2 + 60,
-        "Lorem Ipsum your Eco-Challenge",
-        {
+      this.add
+        .text(width / 2, height / 2 + 60, "Lorem Ipsum your Eco-Challenge", {
           ...DefaultFontStyle,
           font: "24px Work Sans",
-        }
-      );
-      const t_copyright = this.add.text(
-        width / 2,
-        height - 30,
-        "2024 YourPal.ai All rights reserved.",
-        DefaultFontStyle
-      );
+        })
+        .setOrigin(0.5, 0.5);
 
-      // Center the text
-      t_description.setOrigin(0.5, 0.5); // Set the origin to the center of the text
-      t_copyright.setOrigin(0.5, 0.5); // Set the origin to the center of the text
+      this.add
+        .text(
+          width / 2,
+          height - 30,
+          "2024 YourPal.ai All rights reserved.",
+          DefaultFontStyle
+        )
+        .setOrigin(0.5, 0.5);
 
       const progressBar = createRoundedProgressBar(
         this,
@@ -54,7 +48,7 @@ const createLoadingScene = () => {
       // Example to update progress
       let progress = 0;
       this.time.addEvent({
-        delay: 50,
+        delay: 10,
         callback: () => {
           progress += 0.01;
           if (progress > 1) {

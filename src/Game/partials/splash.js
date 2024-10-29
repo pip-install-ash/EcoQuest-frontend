@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-function createRoundedProgressBar(scene, x, y, width, height, radius, color) {
+const  createRoundedProgressBar =(scene, x, y, width, height, radius, color) => {
   const graphics = scene.add.graphics();
   const progressBar = {
     graphics: graphics,
