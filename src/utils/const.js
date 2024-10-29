@@ -3,10 +3,10 @@ import Phaser from "phaser";
 const DefaultSceneConfig = {
   type: Phaser.AUTO,
   parent: "phaser-container",
-  width: window.innerWidth,
-  height: window.innerHeight,
+  width: 1440,
+  height: 1024,
   scale: {
-    mode: Phaser.Scale.RESIZE,
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
 };

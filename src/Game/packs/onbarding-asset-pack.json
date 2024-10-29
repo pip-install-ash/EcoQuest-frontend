@@ -6,7 +6,7 @@
     },
     {
         "type": "image",
-        "key": "SignUpDlg",
-        "url": "assets/ui-components/SignUp.png"
+        "key": "SignUpButton",
+        "url": "assets/ui-components/buttons/SignUp.png"
     }
 ]

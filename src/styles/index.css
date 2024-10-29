@@ -1,4 +1,22 @@
 body, canvas {
     margin: 0 !important;
     padding: 0 !important;
+    text-align: center;
+    background-color: #111;
+}
+
+.textInput {
+    position: absolute;
+    display: none; /* Initially hidden */
+    height: 20px;
+    width: 340px;
+    z-index: 10; /* Ensure it's on top */
+    font-size: 16px;
+    border: 0px solid #000; /* Custom border color */
+    background-color: #fafafa; /* Background color */
+    color: #222; /* Text color */
+}
+.textInput:focus {
+    border-color: #0056b3; /* Darker border on focus */
+    outline: none; /* Remove default outline */
 }
