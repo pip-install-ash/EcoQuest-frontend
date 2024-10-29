@@ -1,0 +1,12 @@
+[
+    {
+        "type": "image",
+        "key": "Logo",
+        "url": "assets/ui-components/Logo.png"
+    },
+    {
+        "type": "image",
+        "key": "Onboarding",
+        "url": "assets/ui-components/OnboardingBack.png"
+    }
+]
