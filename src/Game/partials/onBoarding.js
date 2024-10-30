@@ -60,9 +60,6 @@ const createInputField = (
   inputElement.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       inputElement.style.display = "block";
-      // emailInput.style.left = `${720}px`;
-      // emailInput.style.top = `${450}px`;
-      // emailInput.focus();
     }
   });
   inputElement.addEventListener("blur", (event) => {
@@ -77,7 +74,6 @@ const onSignUp = (usernameInput, passwordInput) => {
 
   if (username && password) {
     console.log("Signing up:", { username, password });
-    // Implement your sign-up logic here (e.g., send to server)
   } else {
     console.error("Please fill in both fields.");
   }

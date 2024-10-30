@@ -1,12 +1,132 @@
 [
     {
         "type": "image",
-        "key": "Background",
-        "url": "assets/ui-components/OnboardingBack.png"
+        "key": "SignUpBackground",
+        "url": "assets/ui-components/OnboardingSignUpBack.png"
+    },
+    {
+        "type": "image",
+        "key": "SignInBackground",
+        "url": "assets/ui-components/OnboardingSignInBack.png"
+    },
+    {
+        "type": "image",
+        "key": "ForgotPasswordBackground",
+        "url": "assets/ui-components/OnboardingForgotPasswordBack.png"
+    },
+    {
+        "type": "image",
+        "key": "CheckEmailBackground",
+        "url": "assets/ui-components/OnboardingCheckEmailBack.png"
+    },
+    {
+        "type": "image",
+        "key": "NewPassBackground",
+        "url": "assets/ui-components/OnboardingNewPassBack.png"
+    },
+    {
+        "type": "image",
+        "key": "MenuBackground",
+        "url": "assets/ui-components/OnboardingMenuBack.png"
     },
     {
         "type": "image",
         "key": "SignUpButton",
         "url": "assets/ui-components/buttons/SignUp.png"
+    },
+    {
+        "type": "image",
+        "key": "SignUpTextButton",
+        "url": "assets/ui-components/buttons/SignUpText.png"
+    },
+    {
+        "type": "image",
+        "key": "SignInButton",
+        "url": "assets/ui-components/buttons/SignIn.png"
+    },
+    {
+        "type": "image",
+        "key": "SignInTextButton",
+        "url": "assets/ui-components/buttons/SignInText.png"
+    },
+    {
+        "type": "image",
+        "key": "SendButton",
+        "url": "assets/ui-components/buttons/Send.png"
+    },
+    {
+        "type": "image",
+        "key": "ForgotPasswordButton",
+        "url": "assets/ui-components/buttons/ForgotPassword.png"
+    },
+    {
+        "type": "image",
+        "key": "VerifyButton",
+        "url": "assets/ui-components/buttons/Verify.png"
+    },
+    {
+        "type": "image",
+        "key": "ResetButton",
+        "url": "assets/ui-components/buttons/Reset.png"
+    },
+    {
+        "type": "image",
+        "key": "CheckButton",
+        "url": "assets/ui-components/buttons/check.png"
+    },
+    {
+        "type": "image",
+        "key": "CheckButtonOn",
+        "url": "assets/ui-components/buttons/checkOn.png"
+    },
+    {
+        "type": "image",
+        "key": "ResendButton",
+        "url": "assets/ui-components/buttons/resend.png"
+    },
+    {
+        "type": "image",
+        "key": "DigitalInput",
+        "url": "assets/ui-components/buttons/DigitalInput.png"
+    },
+    {
+        "type": "image",
+        "key": "DigitalInputOn",
+        "url": "assets/ui-components/buttons/DigitalInputOn.png"
+    },
+    {
+        "type": "image",
+        "key": "Menu-Start",
+        "url": "assets/ui-components/buttons/menu/StartGame.png"
+    },
+    {
+        "type": "image",
+        "key": "Menu-League",
+        "url": "assets/ui-components/buttons/menu/League.png"
+    },
+    {
+        "type": "image",
+        "key": "Menu-Notification",
+        "url": "assets/ui-components/buttons/menu/Notification.png"
+    },
+    {
+        "type": "image",
+        "key": "Menu-Leaderboard",
+        "url": "assets/ui-components/buttons/menu/Leaderboard.png"
+    },
+    {
+        "type": "image",
+        "key": "Menu-Setting",
+        "url": "assets/ui-components/buttons/menu/Settings.png"
+    },
+    {
+        "type": "image",
+        "key": "Menu-HowToPlay",
+        "url": "assets/ui-components/buttons/menu/How to play.png"
+    },
+    {
+        "type": "image",
+        "key": "Menu-Exit",
+        "url": "assets/ui-components/buttons/menu/Exit.png"
     }
 ]

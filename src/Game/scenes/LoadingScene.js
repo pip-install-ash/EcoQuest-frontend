@@ -53,7 +53,7 @@ const createLoadingScene = () => {
           progress += 0.01;
           if (progress > 1) {
             progress = 1;
-            this.scene.start("OnBoardingScene");
+            this.scene.start("OnBoardingSignInScene");
           }
           progressBar.setValue(progress);
         },

@@ -58,9 +58,9 @@ const addSprite = (scene, image, transform) => {
   // }
 };
 
-const scaleBackground = (scene) => {
+const scaleBackground = (scene, image) => {
   const { width, height } = scene.scale;
-  const background = scene.add.image(width / 2, height / 2, "Background");
+  const background = scene.add.image(width / 2, height / 2, image);
 
   // Calculate aspect ratios
   const imageAspect = background.width / background.height;
@@ -129,6 +129,82 @@ const addButton = (scene, image, x, y, onClick = () => {}) => {
     });
 };
 
+const addCheckButton = (
+  scene,
+  imageOn,
+  imageOff,
+  defaultVal,
+  x,
+  y,
+  onChangeVal = (val) => {}
+) => {
+  // Create an image button
+  const button = scene.add
+    .image(x, y, defaultVal ? imageOn : imageOff)
+    .setOrigin(0.5, 0.5)
+    .setInteractive();
+  button.setData("checked", defaultVal); // Store checked state
+
+  button
+    .on("pointerover", () => {
+      scene.tweens.add({
+        targets: button,
+        scaleX: 1.1,
+        scaleY: 1.1,
+        duration: 100,
+        ease: "Power1",
+      });
+    })
+    .on("pointerout", () => {
+      scene.tweens.add({
+        targets: button,
+        scaleX: 1,
+        scaleY: 1,
+        duration: 100,
+        ease: "Power1",
+      });
+    })
+    .on("pointerdown", () => {
+      scene.tweens.add({
+        targets: button,
+        scaleX: 1.05,
+        scaleY: 1.05,
+        duration: 50,
+        ease: "Power1",
+      });
+
+      const checked = button.getData("checked");
+      button.setData("checked", !checked);
+
+      // Update the appearance based on the checked state
+      if (checked) {
+        button.setTexture(imageOff); // Set to unchecked image
+      } else {
+        button.setTexture(imageOn); // Set to checked image
+      }
+
+      onChangeVal(checked);
+    })
+    .on("pointerup", () => {
+      scene.tweens.add({
+        targets: button,
+        scaleX: 1.1,
+        scaleY: 1.1,
+        duration: 100,
+        ease: "Power1",
+      });
+    });
+  return button;
+};
+
+const addText = (scene, text, x, y, font, fill, originX, originY) => {
+  const textItem = scene.add
+    .text(x, y, text, { font, fill, resolution: 2 })
+    .setOrigin(originX, originY)
+    .setInteractive();
+  return textItem;
+};
+
 const addTextButton = (
   scene,
   text,
@@ -142,7 +218,7 @@ const addTextButton = (
 ) => {
   // Create a text button
   const buttonText = scene.add
-    .text(x, y, text, { font, fill })
+    .text(x, y, text, { font, fill, resolution: 2 })
     .setOrigin(originX, originY)
     .setInteractive();
 
@@ -197,12 +273,35 @@ const showInputField = (inputField, x, y, w, h) => {
 };
 
 const blurInputs = () => {
-  const emailInput = document.getElementById('emailInput');
-  const usernameInput = document.getElementById('usernameInput');
-  const passwordInput = document.getElementById('passwordInput');
+  const emailInput = document.getElementById("emailInput");
+  const usernameInput = document.getElementById("usernameInput");
+  const passwordInput = document.getElementById("passwordInput");
+  const confirmInput = document.getElementById("confirmInput");
   emailInput.blur();
   usernameInput.blur();
   passwordInput.blur();
+  confirmInput.blur();
+};
+const emptyInputs = () => {
+  const emailInput = document.getElementById("emailInput");
+  const usernameInput = document.getElementById("usernameInput");
+  const passwordInput = document.getElementById("passwordInput");
+  const confirmInput = document.getElementById("confirmInput");
+  emailInput.value = "";
+  usernameInput.value = "";
+  passwordInput.value = "";
+  confirmInput.value = "";
+};
+
+const hideInputs = () => {
+  const emailInput = document.getElementById("emailInput");
+  const usernameInput = document.getElementById("usernameInput");
+  const passwordInput = document.getElementById("passwordInput");
+  const confirmInput = document.getElementById("confirmInput");
+  emailInput.style.display = 'none';
+  usernameInput.style.display = 'none';
+  passwordInput.style.display = 'none';
+  confirmInput.style.display = 'none';
 }
 
 export {
@@ -213,6 +312,10 @@ export {
   showInputField,
   addTextInput,
   addButton,
+  addCheckButton,
   addTextButton,
-  blurInputs
+  addText,
+  blurInputs,
+  emptyInputs,
+  hideInputs
 };
