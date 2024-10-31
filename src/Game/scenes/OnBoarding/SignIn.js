@@ -1,11 +1,12 @@
-import assetPack from "../../packs/onbarding-asset-pack.json";
 import {
   addButton,
   addCheckButton,
   blurInputs,
   emptyInputs,
+  fadeThisScreen,
   hideInputs,
   scaleBackground,
+  transitionToNextScene,
 } from "../../partials/common";
 import { createInputField } from "../../partials/onBoarding";
 
@@ -13,9 +14,6 @@ const createOnBoardingSignInScene = () => {
   return {
     key: "OnBoardingSignInScene",
     preload: function () {
-      assetPack.forEach((element) => {
-        if (element.type === "image") this.load.image(element.key, element.url);
-      });
     },
 
     create: function () {
@@ -41,13 +39,13 @@ const createOnBoardingSignInScene = () => {
         emptyInputs();
         blurInputs();
         hideInputs();
-        this.scene.start("OnBoardingMenuScene");
+        transitionToNextScene(this, "OnBoardingMenuScene");
       });
       addButton(this, "ForgotPasswordButton", 880, 500, () => {
         emptyInputs();
         blurInputs();
         hideInputs();
-        this.scene.start("OnBoardingForgotPasswordScene");
+        transitionToNextScene(this, "OnBoardingForgotPasswordScene");
       });
       addCheckButton(
         this,
@@ -63,8 +61,10 @@ const createOnBoardingSignInScene = () => {
         emptyInputs();
         blurInputs();
         hideInputs();
-        this.scene.start("OnBoardingSignUpScene");
+        transitionToNextScene(this, "OnBoardingSignUpScene");
       });
+
+      fadeThisScreen(this);
     },
   };
 };

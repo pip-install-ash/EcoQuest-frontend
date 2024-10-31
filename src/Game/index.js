@@ -20,7 +20,7 @@ const Game = () => {
         createOnBoardingForgotPasswordScene(),
         createOnBoardingCheckMailScene(),
         createOnBoardingNewPassScene(),
-        createOnBoardingMenuScene()
+        createOnBoardingMenuScene(),
       ],
     };
 

@@ -4,8 +4,10 @@ import {
   addText,
   blurInputs,
   emptyInputs,
+  fadeThisScreen,
   hideInputs,
   scaleBackground,
+  transitionToNextScene,
 } from "../../partials/common";
 
 const createOnBoardingCheckMailScene = () => {
@@ -29,13 +31,13 @@ const createOnBoardingCheckMailScene = () => {
         emptyInputs();
         blurInputs();
         hideInputs();
-        this.scene.start("OnBoardingNewPassScene");
+        transitionToNextScene(this, "OnBoardingNewPassScene");
       });
       addButton(this, "SignInTextButton", 765, 595, () => {
         emptyInputs();
         blurInputs();
         hideInputs();
-        this.scene.start("OnBoardingSignInScene");
+        transitionToNextScene(this, "OnBoardingSignInScene");
       });
       addButton(this, "ResendButton", 835, 465, () => {});
 
@@ -50,6 +52,9 @@ const createOnBoardingCheckMailScene = () => {
           () => {}
         );
       }
+
+      
+      fadeThisScreen(this);
     },
   };
 };

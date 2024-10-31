@@ -1,0 +1,52 @@
+[
+    {
+        "type": "image",
+        "key": "MultiRule",
+        "url": "assets/ui-components/MultiRule.png"
+    },
+    {
+        "type": "image",
+        "key": "SoloRule",
+        "url": "assets/ui-components/SoloRule.png"
+    },
+    {
+        "type": "image",
+        "key": "HowToPlayDialog",
+        "url": "assets/ui-components/dialogs/howtoplay.png"
+    },
+    {
+        "type": "image",
+        "key": "CloseButton",
+        "url": "assets/ui-components/buttons/CloseButton.png"
+    },
+    {
+        "type": "image",
+        "key": "SoloButton",
+        "url": "assets/ui-components/buttons/SoloButton.png"
+    },
+    {
+        "type": "image",
+        "key": "SoloButtonOff",
+        "url": "assets/ui-components/buttons/SoloButtonOff.png"
+    },
+    {
+        "type": "image",
+        "key": "MultiButton",
+        "url": "assets/ui-components/buttons/MultiButton.png"
+    },
+    {
+        "type": "image",
+        "key": "MultiButtonOff",
+        "url": "assets/ui-components/buttons/MultiButtonOff.png"
+    },
+    {
+        "type": "image",
+        "key": "SoloRule",
+        "url": "assets/ui-components/SoloRule.png"
+    },
+    {
+        "type": "image",
+        "key": "MultiRule",
+        "url": "assets/ui-components/MultiRule.png"
+    }
+]

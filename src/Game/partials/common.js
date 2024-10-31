@@ -127,6 +127,16 @@ const addButton = (scene, image, x, y, onClick = () => {}) => {
       });
       onClick();
     });
+  return button;
+};
+const addImage = (scene, image, x, y) => {
+  // Create an image button
+  const imageElement = scene.add
+    .image(x, y, image)
+    .setOrigin(0.5, 0.5)
+    .setInteractive();
+
+  return imageElement;
 };
 
 const addCheckButton = (
@@ -298,11 +308,44 @@ const hideInputs = () => {
   const usernameInput = document.getElementById("usernameInput");
   const passwordInput = document.getElementById("passwordInput");
   const confirmInput = document.getElementById("confirmInput");
-  emailInput.style.display = 'none';
-  usernameInput.style.display = 'none';
-  passwordInput.style.display = 'none';
-  confirmInput.style.display = 'none';
-}
+  emailInput.style.display = "none";
+  usernameInput.style.display = "none";
+  passwordInput.style.display = "none";
+  confirmInput.style.display = "none";
+};
+
+const transitionToNextScene = (scene, nextScene) => {
+  const { width, height } = scene.scale;
+  // Add a black rectangle to cover the screen for the fade effect
+  const fadeOverlay = scene.add
+    .rectangle(width / 2, height / 2, width, height, 0x000000)
+    .setAlpha(0);
+
+  // Fade out current scene
+  scene.tweens.add({
+    targets: fadeOverlay,
+    alpha: 0.5, // Fade to fully opaque
+    duration: 200, // Duration of fade out
+    onComplete: () => {
+      scene.scene.start(nextScene); // Start the next scene after fade out
+    },
+  });
+};
+
+const fadeThisScreen = (scene) => {
+  // Add a black rectangle to cover the screen for the fade-in effect
+  const fadeOverlay = scene.add
+    .rectangle(720, 512, 1440, 1024, 0x000000)
+    .setAlpha(0.5);
+
+  // Fade in from black
+  scene.tweens.add({
+    targets: fadeOverlay,
+    alpha: 0, // Fade to transparent
+    duration: 200, // Duration of fade in
+    onComplete: () => fadeOverlay.destroy(), // Remove overlay after fade
+  });
+};
 
 export {
   scaleBackground,
@@ -315,7 +358,10 @@ export {
   addCheckButton,
   addTextButton,
   addText,
+  addImage,
   blurInputs,
   emptyInputs,
-  hideInputs
+  hideInputs,
+  transitionToNextScene,
+  fadeThisScreen,
 };

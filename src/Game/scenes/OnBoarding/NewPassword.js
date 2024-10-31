@@ -2,8 +2,10 @@ import {
   addButton,
   blurInputs,
   emptyInputs,
+  fadeThisScreen,
   hideInputs,
   scaleBackground,
+  transitionToNextScene,
 } from "../../partials/common";
 import { createInputField } from "../../partials/onBoarding";
 
@@ -22,15 +24,17 @@ const createOnBoardingNewPassScene = () => {
         emptyInputs();
         blurInputs();
         hideInputs();
-        this.scene.start("OnBoardingSignInScene");
+        transitionToNextScene(this, "OnBoardingSignInScene");
       });
 
       addButton(this, "SignInTextButton", 770, 720, () => {
         emptyInputs();
         blurInputs();
         hideInputs();
-        this.scene.start("OnBoardingSignInScene");
+        transitionToNextScene(this, "OnBoardingSignInScene");
       });
+      
+      fadeThisScreen(this);
     },
   };
 };

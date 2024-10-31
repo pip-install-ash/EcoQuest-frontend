@@ -1,13 +1,26 @@
 import { DefaultFontStyle } from "../../utils/const";
 import assetPack from "../packs/splash-asset-pack.json";
-import { whiteBackground } from "../partials/common";
+import onboardingAssetPack from "../packs/onbarding-asset-pack.json";
+import menuAssetPack from "../packs/menu-asset-pack.json";
+import { transitionToNextScene, whiteBackground } from "../partials/common";
 import { createRoundedProgressBar } from "../partials/splash";
 
 const createLoadingScene = () => {
   return {
     key: "LoadingScene",
     preload: function () {
+      this.load.scenePlugin({
+        key: "rexuiplugin",
+        url: "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js",
+        sceneKey: "rexUI",
+      });
       assetPack.forEach((element) => {
+        if (element.type === "image") this.load.image(element.key, element.url);
+      });
+      onboardingAssetPack.forEach((element) => {
+        if (element.type === "image") this.load.image(element.key, element.url);
+      });
+      menuAssetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });
     },
@@ -53,7 +66,7 @@ const createLoadingScene = () => {
           progress += 0.01;
           if (progress > 1) {
             progress = 1;
-            this.scene.start("OnBoardingSignInScene");
+            transitionToNextScene(this, "OnBoardingSignInScene");
           }
           progressBar.setValue(progress);
         },
