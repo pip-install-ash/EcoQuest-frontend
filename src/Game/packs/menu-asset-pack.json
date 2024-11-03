@@ -16,8 +16,63 @@
     },
     {
         "type": "image",
+        "key": "ExitDialog",
+        "url": "assets/ui-components/dialogs/exit.png"
+    },
+    {
+        "type": "image",
+        "key": "SettingDialog",
+        "url": "assets/ui-components/dialogs/Settings.png"
+    },
+    {
+        "type": "image",
+        "key": "LeaderboardDialog",
+        "url": "assets/ui-components/dialogs/Leaderboard.png"
+    },
+    {
+        "type": "image",
+        "key": "NotificationDialog",
+        "url": "assets/ui-components/dialogs/Notification.png"
+    },
+    {
+        "type": "image",
+        "key": "LeagueDialog",
+        "url": "assets/ui-components/dialogs/League.png"
+    },
+    {
+        "type": "image",
+        "key": "CreateLeagueDialog",
+        "url": "assets/ui-components/dialogs/CreateLeague.png"
+    },
+    {
+        "type": "image",
+        "key": "JoinLeagueDialog",
+        "url": "assets/ui-components/dialogs/JoinLeague.png"
+    },
+    {
+        "type": "image",
+        "key": "MyLeaguesDialog",
+        "url": "assets/ui-components/dialogs/MyLeagues.png"
+    },
+    {
+        "type": "image",
+        "key": "DeleteAccountDialog",
+        "url": "assets/ui-components/dialogs/deleteAccount.png"
+    },
+    {
+        "type": "image",
         "key": "CloseButton",
         "url": "assets/ui-components/buttons/CloseButton.png"
+    },
+    {
+        "type": "image",
+        "key": "DeleteAccountButton",
+        "url": "assets/ui-components/buttons/DeleteAccountButton.png"
+    },
+    {
+        "type": "image",
+        "key": "ChangeButton",
+        "url": "assets/ui-components/buttons/ChangeButton.png"
     },
     {
         "type": "image",
@@ -41,6 +96,16 @@
     },
     {
         "type": "image",
+        "key": "ExitButton",
+        "url": "assets/ui-components/buttons/ExitButton.png"
+    },
+    {
+        "type": "image",
+        "key": "ContinueButton",
+        "url": "assets/ui-components/buttons/ContinueButton.png"
+    },
+    {
+        "type": "image",
         "key": "SoloRule",
         "url": "assets/ui-components/SoloRule.png"
     },
@@ -48,5 +113,115 @@
         "type": "image",
         "key": "MultiRule",
         "url": "assets/ui-components/MultiRule.png"
+    },
+    {
+        "type": "image",
+        "key": "RoundCheckOn",
+        "url": "assets/ui-components/buttons/RoundCheckOn.png"
+    },
+    {
+        "type": "image",
+        "key": "RoundCheckOff",
+        "url": "assets/ui-components/buttons/RoundCheckOff.png"
+    },
+    {
+        "type": "image",
+        "key": "GlobalButton",
+        "url": "assets/ui-components/buttons/GlobalButton.png"
+    },
+    {
+        "type": "image",
+        "key": "GlobalButtonOff",
+        "url": "assets/ui-components/buttons/GlobalOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "LeaguesButton",
+        "url": "assets/ui-components/buttons/LeaguesButton.png"
+    },
+    {
+        "type": "image",
+        "key": "LeaguesButtonOff",
+        "url": "assets/ui-components/buttons/LeaguesOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "ClearButton",
+        "url": "assets/ui-components/buttons/ClearButton.png"
+    },
+    {
+        "type": "image",
+        "key": "ClearAllButton",
+        "url": "assets/ui-components/buttons/ClearAllButton.png"
+    },
+    {
+        "type": "image",
+        "key": "AcceptButton",
+        "url": "assets/ui-components/buttons/AcceptButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "GoButton",
+        "url": "assets/ui-components/buttons/GoButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "YesDeleteButton",
+        "url": "assets/ui-components/buttons/YesDeleteButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "NoDeleteButton",
+        "url": "assets/ui-components/buttons/NoDeleteButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "CreateLeagueButton",
+        "url": "assets/ui-components/buttons/CreateLeague.png"
+    },
+    {
+        "type": "image", 
+        "key": "JoinLeagueButton",
+        "url": "assets/ui-components/buttons/JoinLeague.png"
+    },
+    {
+        "type": "image", 
+        "key": "MyLeaguesButton",
+        "url": "assets/ui-components/buttons/MyLeagues.png"
+    },
+    {
+        "type": "image", 
+        "key": "PrivateButton",
+        "url": "assets/ui-components/buttons/PrivateButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "PublicButton",
+        "url": "assets/ui-components/buttons/PublicButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "CreateButton",
+        "url": "assets/ui-components/buttons/CreateButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "EnterButton",
+        "url": "assets/ui-components/buttons/EnterButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "JoinButton",
+        "url": "assets/ui-components/buttons/JoinButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "ResumeButton",
+        "url": "assets/ui-components/buttons/ResumeButton.png"
+    },
+    {
+        "type": "image", 
+        "key": "LeaveButton",
+        "url": "assets/ui-components/buttons/LeaveButton.png"
     }
 ]

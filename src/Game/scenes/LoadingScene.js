@@ -9,14 +9,10 @@ const createLoadingScene = () => {
   return {
     key: "LoadingScene",
     preload: function () {
-      this.load.scenePlugin({
-        key: "rexuiplugin",
-        url: "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js",
-        sceneKey: "rexUI",
-      });
       assetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });
+      
       onboardingAssetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });

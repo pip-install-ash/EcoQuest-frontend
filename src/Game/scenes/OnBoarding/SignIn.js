@@ -13,8 +13,7 @@ import { createInputField } from "../../partials/onBoarding";
 const createOnBoardingSignInScene = () => {
   return {
     key: "OnBoardingSignInScene",
-    preload: function () {
-    },
+    preload: function () {},
 
     create: function () {
       const { width, height } = this.scale;

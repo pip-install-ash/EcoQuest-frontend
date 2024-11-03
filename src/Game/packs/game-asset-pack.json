@@ -1,0 +1,152 @@
+[
+    {
+        "type": "image",
+        "key": "Panel",
+        "url": "assets/ui-components/Dialog/Panel.png"
+    },
+    {
+        "type": "image",
+        "key": "TutorialSettingDialog",
+        "url": "assets/ui-components/Dialog/TutorialSetting.png"
+    },
+    {
+        "type": "image",
+        "key": "AwardButton",
+        "url": "assets/ui-components/buttons/Game/AwardButton.png"
+    },
+    {
+        "type": "image",
+        "key": "BankIcon",
+        "url": "assets/ui-components/buttons/Game/BankIcon.png"
+    },
+    {
+        "type": "image",
+        "key": "BuildButton",
+        "url": "assets/ui-components/buttons/Game/BuildButton.png"
+    },
+    {
+        "type": "image",
+        "key": "ElectricityIcon",
+        "url": "assets/ui-components/buttons/Game/ElectriciyIcon.png"
+    },
+    {
+        "type": "image",
+        "key": "GroupButton",
+        "url": "assets/ui-components/buttons/Game/GroupButton.png"
+    },
+    {
+        "type": "image",
+        "key": "HomeButton",
+        "url": "assets/ui-components/buttons/Game/HomeButton.png"
+    },
+    {
+        "type": "image",
+        "key": "LeafButton",
+        "url": "assets/ui-components/buttons/Game/LeafButton.png"
+    },
+    {
+        "type": "image",
+        "key": "LeafIcon",
+        "url": "assets/ui-components/buttons/Game/LeafIcon.png"
+    },
+    {
+        "type": "image",
+        "key": "LeftOffButton",
+        "url": "assets/ui-components/buttons/Game/LeftOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "NoGuideButton",
+        "url": "assets/ui-components/buttons/Game/NoGuideButton.png"
+    },
+    {
+        "type": "image",
+        "key": "ReportButton",
+        "url": "assets/ui-components/buttons/Game/ReportButton.png"
+    },
+    {
+        "type": "image",
+        "key": "RightOffButton",
+        "url": "assets/ui-components/buttons/Game/RightOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "Rubish",
+        "url": "assets/ui-components/buttons/Game/Rubish.png"
+    },
+    {
+        "type": "image",
+        "key": "SettingButton",
+        "url": "assets/ui-components/buttons/Game/SettingButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabEcoButton",
+        "url": "assets/ui-components/buttons/Game/TabEcoButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabEcoOffButton",
+        "url": "assets/ui-components/buttons/Game/TabEcoOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabGreenButton",
+        "url": "assets/ui-components/buttons/Game/TabGreenButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabGreenOffButton",
+        "url": "assets/ui-components/buttons/Game/TabGreenOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabHomeButton",
+        "url": "assets/ui-components/buttons/Game/TabHomeButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabHomeOffButton",
+        "url": "assets/ui-components/buttons/Game/TabHomeOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabIndustryButton",
+        "url": "assets/ui-components/buttons/Game/TabIndustryButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabIndustryOffButton",
+        "url": "assets/ui-components/buttons/Game/TabIndustryOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabRoadButton",
+        "url": "assets/ui-components/buttons/Game/TabRoadButton.png"
+    },
+    {
+        "type": "image",
+        "key": "TabRoadOffButton",
+        "url": "assets/ui-components/buttons/Game/TabRoadOffButton.png"
+    },
+    {
+        "type": "image",
+        "key": "UserBell",
+        "url": "assets/ui-components/buttons/Game/UserBell.png"
+    },
+    {
+        "type": "image",
+        "key": "WarningButton",
+        "url": "assets/ui-components/buttons/Game/WarningButton.png"
+    },
+    {
+        "type": "image",
+        "key": "WaterIcon",
+        "url": "assets/ui-components/buttons/Game/WaterIcon.png"
+    },
+    {
+        "type": "image",
+        "key": "YesGuideButton",
+        "url": "assets/ui-components/buttons/Game/YesGuideButton.png"
+    }
+]

@@ -129,6 +129,7 @@ const addButton = (scene, image, x, y, onClick = () => {}) => {
     });
   return button;
 };
+
 const addImage = (scene, image, x, y) => {
   // Create an image button
   const imageElement = scene.add
@@ -347,6 +348,91 @@ const fadeThisScreen = (scene) => {
   });
 };
 
+const addSlider = (
+  scene,
+  defaultVal,
+  x,
+  y,
+  w,
+  h,
+  r,
+  color,
+  onChangeVal = (val) => {}
+) => {
+  const track = scene.add.rectangle(x, y, w, h, 0xd9d9d9);
+  const progress = scene.add
+    .rectangle(-w / 2, y, defaultVal * w, h, color)
+    .setOrigin(0, 0.5);
+
+  const handle = scene.add.circle(w * (defaultVal - 0.5), y, r, color);
+  handle.setInteractive({ draggable: true });
+
+  scene.input.setDraggable(handle);
+  scene.input.on("drag", (pointer, gameObject, dragX, dragY) => {
+    if (dragX >= -w / 2 && dragX <= w / 2) {
+      gameObject.x = dragX;
+      progress.displayWidth = dragX + w / 2;
+      onChangeVal((dragX + w / 2) / w);
+    }
+  });
+  return [track, handle, progress];
+};
+
+const addInputFiled = (scene, x, y, w, h, textColor, cursorColor) => {
+  scene.inputText = ""; // Stores the input text
+  scene.cursorVisible = true; // Controls cursor blinking
+
+  // Create an interactive area for text input
+  const inputBox = scene.add
+    .rectangle(x, y, w, h, 0xffffff, 0)
+    .setOrigin(0.5)
+    .setInteractive()
+    .on("pointerdown", () => {});
+    
+  // Display text inside the input box
+  const displayText = scene.add
+    .text(x - w / 2, y, "", {
+      fontSize: "24px",
+      color: textColor,
+      fontFamily: "Arial",
+      wordWrap: { width: w }, // Wrap text if necessary
+    })
+    .setOrigin(0, 0.5);
+
+  // Create a blinking cursor
+  const cursor = scene.add
+    .rectangle(x - w / 2, y, 4, 24, cursorColor)
+    .setOrigin(0, 0.5);
+
+  // Blinking cursor effect
+  scene.time.addEvent({
+    delay: 500,
+    callback: () => {
+      scene.cursorVisible = !scene.cursorVisible;
+      cursor.setVisible(scene.cursorVisible);
+    },
+    loop: true,
+  });
+
+  // Keydown event to capture text input
+  scene.input.keyboard.on("keydown", (event) => {
+    if (event.key.length === 1 && displayText.width < w - 35) {
+      scene.inputText += event.key;
+    } else if (event.key === "Backspace") {
+      scene.inputText = scene.inputText.slice(0, -1);
+    }
+
+    // Update the text and cursor position
+    displayText.setText(scene.inputText);
+    // Position cursor at the end of the text inside the input box
+    const textWidth = displayText.width;
+    const cursorX = x - w / 2 + textWidth + 2;
+    cursor.setPosition(cursorX, y);
+  });
+
+  return [inputBox, displayText, cursor];
+};
+
 export {
   scaleBackground,
   whiteBackground,
@@ -359,9 +445,11 @@ export {
   addTextButton,
   addText,
   addImage,
+  addSlider,
   blurInputs,
   emptyInputs,
   hideInputs,
   transitionToNextScene,
   fadeThisScreen,
+  addInputFiled,
 };
