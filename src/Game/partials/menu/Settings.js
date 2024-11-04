@@ -56,7 +56,9 @@ const createSettingDlg = (scene, deleteAcount) => {
       "Exampleemail@gmail.com",
       -285,
       -215,
-      "20px Kreon",
+      "Kreon",
+      "20px",
+      "bold",
       "#000",
       0,
       0.5

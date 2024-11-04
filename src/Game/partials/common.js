@@ -208,9 +208,30 @@ const addCheckButton = (
   return button;
 };
 
-const addText = (scene, text, x, y, font, fill, originX, originY) => {
+const addText = (
+  scene,
+  text,
+  x,
+  y,
+  fontFamily,
+  fontSize,
+  fontStyle,
+  fill,
+  originX,
+  originY,
+  stroke = "#000000",
+  strokeThickness = 0
+) => {
   const textItem = scene.add
-    .text(x, y, text, { font, fill, resolution: 2 })
+    .text(x, y, text, {
+      fontFamily,
+      fontSize,
+      fontStyle,
+      fill,
+      resolution: 2,
+      stroke,
+      strokeThickness,
+    })
     .setOrigin(originX, originY)
     .setInteractive();
   return textItem;
@@ -388,7 +409,7 @@ const addInputFiled = (scene, x, y, w, h, textColor, cursorColor) => {
     .setOrigin(0.5)
     .setInteractive()
     .on("pointerdown", () => {});
-    
+
   // Display text inside the input box
   const displayText = scene.add
     .text(x - w / 2, y, "", {

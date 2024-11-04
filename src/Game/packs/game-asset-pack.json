@@ -27,7 +27,7 @@
     {
         "type": "image",
         "key": "ElectricityIcon",
-        "url": "assets/ui-components/buttons/Game/ElectriciyIcon.png"
+        "url": "assets/ui-components/buttons/Game/ElectricityIcon.png"
     },
     {
         "type": "image",
@@ -148,5 +148,15 @@
         "type": "image",
         "key": "YesGuideButton",
         "url": "assets/ui-components/buttons/Game/YesGuideButton.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoTile",
+        "url": "assets/isometric/tile.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoForest",
+        "url": "assets/isometric/forest.png"
     }
 ]

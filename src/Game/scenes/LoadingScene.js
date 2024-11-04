@@ -57,7 +57,7 @@ const createLoadingScene = () => {
       // Example to update progress
       let progress = 0;
       this.time.addEvent({
-        delay: 10,
+        delay: 1,
         callback: () => {
           progress += 0.01;
           if (progress > 1) {

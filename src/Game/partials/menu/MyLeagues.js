@@ -1,4 +1,3 @@
-import { addButton } from "../common";
 import { organizeDialog, showDialog } from "./base";
 
 /**
@@ -15,6 +14,6 @@ const createMyLeaguesDlg = (scene) => {
     ...dialogSetting
   ]);
   showDialog(scene);
-};
+}; 
 
 export default createMyLeaguesDlg;

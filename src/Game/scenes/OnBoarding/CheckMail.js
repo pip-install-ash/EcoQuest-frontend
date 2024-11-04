@@ -21,8 +21,10 @@ const createOnBoardingCheckMailScene = () => {
         this,
         "Enter the 6 digit code sent to hello********@email.com",
         720,
-        316,
-        "20px Rounded Mplus 1c",
+        325,
+        "Kreon",
+        "20px",
+        "Bold",
         "#000",
         0.5,
         0
