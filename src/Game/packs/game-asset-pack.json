@@ -2,12 +2,12 @@
     {
         "type": "image",
         "key": "Panel",
-        "url": "assets/ui-components/Dialog/Panel.png"
+        "url": "assets/ui-components/dialogs/Panel.png"
     },
     {
         "type": "image",
         "key": "TutorialSettingDialog",
-        "url": "assets/ui-components/Dialog/TutorialSetting.png"
+        "url": "assets/ui-components/dialogs/TutorialSetting.png"
     },
     {
         "type": "image",
@@ -158,5 +158,10 @@
         "type": "image",
         "key": "IsoForest",
         "url": "assets/isometric/forest.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoWater",
+        "url": "assets/isometric/WaterTile.png"
     }
 ]

@@ -5,6 +5,7 @@ import AmountInfo from "../../partials/greenCity/AmountInfo";
 import MainButtons from "../../partials/greenCity/MainButtons";
 import BuildUi from "../../partials/greenCity/BuildUi";
 import gameInitMap from "../../packs/game-init-map.json";
+import createTutorialSettingDlg from "../../partials/greenCity/TutorialSetting";
 
 const createGreenCitycene = () => {
   return {
@@ -32,7 +33,7 @@ const createGreenCitycene = () => {
               .sprite(
                 width / 2 + tileX,
                 (-height * 2) / 5 + tileY,
-                cell === 0 ? "IsoTile" : cell === 1 ? "IsoForest" : ""
+                cell === 0 ? "IsoTile" : cell === 1 ? "IsoForest" : cell === 2 ? "IsoWater": ""
               )
               .setOrigin(0.5, 1);
             tile.setInteractive(this.input.makePixelPerfect());
@@ -40,7 +41,7 @@ const createGreenCitycene = () => {
             tile.isoY = y;
 
             // Add hover effect
-            tile.on("pointerover", () => tile.setTint(0x00ff00));
+            tile.on("pointerover", () => tile.setTint(0xaaffaa));
             tile.on("pointerout", () => tile.clearTint());
 
             isoGroup.add(tile);
@@ -51,6 +52,9 @@ const createGreenCitycene = () => {
       AmountInfo(this, 1024, 52);
       MainButtons(this, 72, 334);
       BuildUi(this);
+      
+      this.dialogContainer = this.add.container(720, 512).setVisible(false);
+      createTutorialSettingDlg(this, () => {})
       fadeThisScreen(this);
     },
   };

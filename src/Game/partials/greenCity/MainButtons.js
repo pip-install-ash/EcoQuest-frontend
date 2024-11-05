@@ -11,6 +11,8 @@ const MainButtons = (scene, left, top) => {
   addButton(scene, "HomeButton", left, top, () => {
     transitionToNextScene(scene, "OnBoardingMenuScene");
   });
+  addButton(scene, "GroupButton", left + 1288, top, () => {
+  });
   addButton(scene, "SettingButton", left, top + 96, () => {});
   addButton(scene, "ReportButton", left, top + 192, () => {});
   addButton(scene, "AwardButton", left, top + 288, () => {});
