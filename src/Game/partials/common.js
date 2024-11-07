@@ -378,22 +378,37 @@ const addSlider = (
   h,
   r,
   color,
-  onChangeVal = (val) => {}
+  onChangeVal = (val) => {},
+  id = 1,
+  step = 20
 ) => {
-  const track = scene.add.rectangle(x, y, w, h, 0xd9d9d9);
+  // const track = scene.add.rectangle(x, y, w, h, 0xd9d9d9);
+  const track = scene.add.graphics();
+  track.fillStyle(0xd9d9d9, 1);
+  track.fillRoundedRect(x - w / 2, y - h / 2, w, h, h / 2);
+  track.fillStyle(color, 1);
+  track.fillRoundedRect(x - w / 2, y - h / 2, h, h, h / 2);
+
   const progress = scene.add
-    .rectangle(-w / 2, y, defaultVal * w, h, color)
+    .rectangle(x - w / 2 + h / 2, y, defaultVal * w - h / 2, h, color)
     .setOrigin(0, 0.5);
 
-  const handle = scene.add.circle(w * (defaultVal - 0.5), y, r, color);
+  const handle = scene.add.circle(x + w * (defaultVal - 0.5), y, r, color);
+  handle.sliderData = {
+    id,
+    progress,
+  };
   handle.setInteractive({ draggable: true });
 
   scene.input.setDraggable(handle);
   scene.input.on("drag", (pointer, gameObject, dragX, dragY) => {
-    if (dragX >= -w / 2 && dragX <= w / 2) {
-      gameObject.x = dragX;
-      progress.displayWidth = dragX + w / 2;
-      onChangeVal((dragX + w / 2) / w);
+    let sliderData = gameObject.sliderData;
+    if (sliderData) {
+      if (dragX >= x - w / 2 && dragX <= x + w / 2 && sliderData.id === id) {
+        gameObject.x = dragX;
+        sliderData.progress.displayWidth = dragX - x + w / 2 - h / 2;
+        onChangeVal((dragX - x + w / 2) / w);
+      }
     }
   });
   return [track, handle, progress];

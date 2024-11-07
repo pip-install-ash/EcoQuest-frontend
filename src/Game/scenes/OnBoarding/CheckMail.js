@@ -25,7 +25,7 @@ const createOnBoardingCheckMailScene = () => {
         "Kreon",
         "20px",
         "Bold",
-        "#000",
+        "#3D3D3D",
         0.5,
         0
       );

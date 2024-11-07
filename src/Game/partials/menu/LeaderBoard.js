@@ -1,4 +1,4 @@
-import { addButton, addInputFiled } from "../common";
+import { addButton } from "../common";
 import { organizeDialog, showDialog } from "./base";
 
 /**
