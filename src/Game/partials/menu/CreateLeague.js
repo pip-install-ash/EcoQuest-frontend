@@ -1,8 +1,5 @@
 import { addButton } from "../common";
 import { organizeDialog, showDialog } from "./base";
-import createJoinLeagueDlg from "./JoinLeague";
-import createLeagueDlg from "./League";
-import createMyLeaguesDlg from "./MyLeagues";
 
 /**
  * Shows a <CreateLeague> dialog.
