@@ -2,6 +2,8 @@ import { addButton, transitionToNextScene } from "../common";
 import createDeleteAccountDlg from "../menu/DeleteAccount";
 import createSettingDlg from "../menu/Settings";
 import createBuildingRuleDlg from "./BuildingRule";
+import createDisasterDlg from "./Disaster";
+import createEcoChallengeDlg from "./EcoChallenge";
 import createLeagueMainDlg from "./League/LeagueMainDlg";
 import createLeagueLeaderboardDlg from "./LeagueLeaderboard";
 
@@ -30,8 +32,12 @@ const MainButtons = (scene, left, top) => {
   addButton(scene, "AwardButton", left, top + 288, () => {
     createLeagueLeaderboardDlg(scene);
   });
-  addButton(scene, "WarningButton", left, top + 498, () => {});
-  addButton(scene, "LeafButton", left, top + 594, () => {});
+  addButton(scene, "WarningButton", left, top + 498, () => {
+    createDisasterDlg(scene);
+  });
+  addButton(scene, "LeafButton", left, top + 594, () => {
+    createEcoChallengeDlg(scene)
+  });
 };
 
 export default MainButtons;

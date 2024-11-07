@@ -138,15 +138,21 @@ const createLeagueMainDlg = (scene) => {
   //Lobby Tab
   const content1 = scene.add.container(0, 0);
   content1.add(addButton(scene, "LeagueCodeButton", 60, -165, () => {}));
-  content1.add(addButton(scene, "InviteFriendButton", 300, -165, () => {
-    createInviteFriendDlg(scene);
-  }));
-  content1.add(addButton(scene, "LeagueSettingButton", 460, -165, () => {
-    createLeagueSettingDlg(scene);
-  }));
-  content1.add(addButton(scene, "LeagueLeaveSmallButton", 530, -165, () => {
-    createLeaveLeagueDlg(scene);
-  }));
+  content1.add(
+    addButton(scene, "InviteFriendButton", 300, -165, () => {
+      createInviteFriendDlg(scene);
+    })
+  );
+  content1.add(
+    addButton(scene, "LeagueSettingButton", 460, -165, () => {
+      createLeagueSettingDlg(scene);
+    })
+  );
+  content1.add(
+    addButton(scene, "LeagueLeaveSmallButton", 530, -165, () => {
+      createLeaveLeagueDlg(scene);
+    })
+  );
   content1.add(
     addText(
       scene,
@@ -228,9 +234,11 @@ const createLeagueMainDlg = (scene) => {
 
   //Request Tab
   const content3 = scene.add.container(0, 0);
-  content3.add(addButton(scene, "SendRequestButton", 0, 345, () => {
-    requestDialogContainer.setVisible(true)
-  }));
+  content3.add(
+    addButton(scene, "SendRequestButton", 0, 345, () => {
+      requestDialogContainer.setVisible(true);
+    })
+  );
   const requestContentContainer = scene.add.container(0, 0);
   requestContentContainer.add(addImage(scene, "RequestBackground", -150, -150));
   requestContentContainer.add(
@@ -372,10 +380,10 @@ const createLeagueMainDlg = (scene) => {
   requestDialogContainer.add(addImage(scene, "RequestResourceDialog", 0, 0));
   requestDialogContainer.add(
     addButton(scene, "RequestButton", 0, 180, () => {
-      requestDialogContainer.setVisible(false)
+      requestDialogContainer.setVisible(false);
     })
   );
-  requestDialogContainer.setVisible(false)
+  requestDialogContainer.setVisible(false);
   content3.add([
     requestContentContainer,
     donateDialogContainer,
@@ -511,7 +519,7 @@ const addUser = (scene, data) => {
       480,
       30 + data[0] * 72,
       () => {
-        createLeaveLeagueDlg(scene)
+        createLeaveLeagueDlg(scene);
       }
     );
   } else {
@@ -521,7 +529,7 @@ const addUser = (scene, data) => {
       480,
       30 + data[0] * 72,
       () => {
-        createKickUserDlg(scene)
+        createKickUserDlg(scene);
       }
     );
     if (data[6] === 0) {

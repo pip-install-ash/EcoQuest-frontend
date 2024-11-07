@@ -326,6 +326,16 @@
     },
     {
         "type": "image",
+        "key": "TickButton",
+        "url": "assets/ui-components/buttons/Game/TickButton.png"
+    },
+    {
+        "type": "image",
+        "key": "CrossButton",
+        "url": "assets/ui-components/buttons/Game/CrossButton.png"
+    },
+    {
+        "type": "image",
         "key": "InviteButton",
         "url": "assets/ui-components/buttons/Game/InviteButton.png"
     },
@@ -348,6 +358,11 @@
         "type": "image",
         "key": "TransferStayButton",
         "url": "assets/ui-components/buttons/Game/TransferStayButton.png"
+    },
+    {
+        "type": "image",
+        "key": "BackButton",
+        "url": "assets/ui-components/buttons/Game/BackButton.png"
     },
     {
         "type": "image",

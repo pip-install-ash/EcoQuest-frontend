@@ -13,7 +13,7 @@ const organizeDialog = (
   w,
   h,
   originX = 0.5,
-  originY = 0.5,
+  originY = 0.5
 ) => {
   // Clear previous dialog contents
   scene.dialogContainer.removeAll(true);
@@ -39,6 +39,27 @@ const organizeDialog = (
 };
 
 /**
+ * Initialize LeftPanel background and close button.
+ *
+ * @function organizeLeftPanel
+ * @param {scene}
+ * @returns {array}
+ */
+const organizeLeftPanel = (scene) => {
+  scene.dialogContainer.removeAll(true);
+  const dialogBackground = scene.add
+    .image(-720, 0, "LeftPanel")
+    .setOrigin(0, 0.5)
+    .setInteractive();
+
+  // Close button
+  const closeButton = addButton(scene, "CloseButton", -200, -430, () => {
+    closeLeftPanel(scene);
+  });
+  return [dialogBackground, closeButton];
+};
+
+/**
  * Show Dialog with animation.
  *
  * @function showDialog
@@ -47,6 +68,7 @@ const organizeDialog = (
  */
 const showDialog = (scene) => {
   // Show the dialog
+  scene.dialogContainer.setVisible(true).setX(720);
   scene.dialogContainer.setVisible(true).setScale(0.8);
   scene.tweens.add({
     targets: scene.dialogContainer,
@@ -58,6 +80,24 @@ const showDialog = (scene) => {
 };
 
 /**
+ * Show Dialog with animation.
+ *
+ * @function showLeftPanel
+ * @param {scene}
+ * @returns {array}
+ */
+const showLeftPanel = (scene) => {
+  // Show the dialog
+  scene.dialogContainer.setVisible(true).setX(0);
+  scene.dialogContainer.setVisible(true).setScale(1);
+  scene.tweens.add({
+    targets: scene.dialogContainer,
+    x: 720,
+    duration: 300,
+  });
+};
+
+/**
  * Close Dialog with animation.
  *
  * @function closeDialog
@@ -65,6 +105,7 @@ const showDialog = (scene) => {
  * @returns {array}
  */
 const closeDialog = (scene) => {
+  scene.dialogContainer.setVisible(true).setX(720);
   scene.tweens.add({
     targets: scene.dialogContainer,
     scaleX: 0,
@@ -75,4 +116,27 @@ const closeDialog = (scene) => {
   });
 };
 
-export { organizeDialog, showDialog, closeDialog };
+/**
+ * Close Dialog with animation.
+ *
+ * @function closeLeftPanel
+ * @param {scene}
+ * @returns {array}
+ */
+const closeLeftPanel = (scene) => {
+  scene.dialogContainer.setVisible(true).setScale(1);
+  scene.tweens.add({
+    targets: scene.dialogContainer,
+    x: 0,
+    duration: 300,
+    onComplete: () => scene.dialogContainer.setVisible(false), // Hide after animation
+  });
+};
+export {
+  organizeDialog,
+  showDialog,
+  showLeftPanel,
+  closeDialog,
+  closeLeftPanel,
+  organizeLeftPanel,
+};
