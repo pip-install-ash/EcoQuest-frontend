@@ -18,6 +18,38 @@ const AmountInfo = (scene, left, top) => {
   addButton(scene, "ElectricityIcon", left + 145, top + 80, () => {});
   addButton(scene, "BankIcon", left + 335, top + 20, () => {});
   addButton(scene, "WaterIcon", left + 335, top + 80, () => {});
+  //Eco point
+  scene.add
+    .text(left + 15, top + 21, "200", {
+      fontFamily: "Kreon",
+      fontStyle: "bold",
+      fontSize: "18px",
+    })
+    .setOrigin(0, 0.5);
+  //Coin point
+  scene.add
+    .text(left + 206, top + 21, "$200,000", {
+      fontFamily: "Kreon",
+      fontStyle: "bold",
+      fontSize: "18px",
+    })
+    .setOrigin(0, 0.5);
+  //Ele point
+  scene.add
+    .text(left + 15, top + 79, "$200,000", {
+      fontFamily: "Kreon",
+      fontStyle: "bold",
+      fontSize: "18px",
+    })
+    .setOrigin(0, 0.5);
+  //Water point
+  scene.add
+    .text(left + 206, top + 79, "200", {
+      fontFamily: "Kreon",
+      fontStyle: "bold",
+      fontSize: "18px",
+    })
+    .setOrigin(0, 0.5);
 };
 
 export default AmountInfo;

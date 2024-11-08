@@ -16,27 +16,29 @@ import createLeagueLeaderboardDlg from "./LeagueLeaderboard";
  */
 const MainButtons = (scene, left, top) => {
   addButton(scene, "HomeButton", left, top, () => {
-    transitionToNextScene(scene, "OnBoardingMenuScene");
+    if (!scene.isEditBuilding)
+      transitionToNextScene(scene, "OnBoardingMenuScene");
   });
   addButton(scene, "GroupButton", left + 1288, top, () => {
-    createLeagueMainDlg(scene);
+    if (!scene.isEditBuilding) createLeagueMainDlg(scene);
   });
   addButton(scene, "SettingButton", left, top + 96, () => {
-    createSettingDlg(scene, () => {
-      createDeleteAccountDlg(scene, () => {})
-    });
+    if (!scene.isEditBuilding)
+      createSettingDlg(scene, () => {
+        if (!scene.isEditBuilding) createDeleteAccountDlg(scene, () => {});
+      });
   });
   addButton(scene, "ReportButton", left, top + 192, () => {
-    createBuildingRuleDlg(scene);
+    if (!scene.isEditBuilding) createBuildingRuleDlg(scene);
   });
   addButton(scene, "AwardButton", left, top + 288, () => {
-    createLeagueLeaderboardDlg(scene);
+    if (!scene.isEditBuilding) createLeagueLeaderboardDlg(scene);
   });
   addButton(scene, "WarningButton", left, top + 498, () => {
-    createDisasterDlg(scene);
+    if (!scene.isEditBuilding) createDisasterDlg(scene);
   });
   addButton(scene, "LeafButton", left, top + 594, () => {
-    createEcoChallengeDlg(scene)
+    if (!scene.isEditBuilding) createEcoChallengeDlg(scene);
   });
 };
 

@@ -82,11 +82,19 @@ const addTextInput = (scene, x, y, w, h) => {
   return rect;
 };
 
-const addButton = (scene, image, x, y, onClick = () => {}) => {
+const addButton = (
+  scene,
+  image,
+  x,
+  y,
+  onClick = () => {},
+  originX = 0.5,
+  originY = 0.5
+) => {
   // Create an image button
   const button = scene.add
     .image(x, y, image)
-    .setOrigin(0.5, 0.5)
+    .setOrigin(originX, originY)
     .setInteractive();
 
   button

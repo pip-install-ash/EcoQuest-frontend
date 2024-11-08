@@ -1,0 +1,47 @@
+[
+    {
+        "type": "image",
+        "key": "B-HouseA",
+        "url": "assets/ui-components/buttons/Building/HouseA.png"
+    },
+    {
+        "type": "image",
+        "key": "B-HouseB",
+        "url": "assets/ui-components/buttons/Building/HouseB.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHouseA",
+        "url": "assets/isometric/HouseA.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHouseAOff",
+        "url": "assets/isometric/HouseAOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHouseB",
+        "url": "assets/isometric/HouseB.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHouseBOff",
+        "url": "assets/isometric/HouseBOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoTile",
+        "url": "assets/isometric/tile.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoForest",
+        "url": "assets/isometric/forest.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoWater",
+        "url": "assets/isometric/WaterTile.png"
+    }
+]

@@ -178,32 +178,32 @@
         "type": "image",
         "key": "LeagueRequestButton",
         "url": "assets/ui-components/buttons/Game/LeagueRequestButton.png"
-    }, 
+    },
     {
         "type": "image",
         "key": "LeagueRequestButtonOff",
         "url": "assets/ui-components/buttons/Game/LeagueRequestButtonOff.png"
-    }, 
+    },
     {
         "type": "image",
         "key": "LeagueCodeButton",
         "url": "assets/ui-components/buttons/Game/LeagueCodeButton.png"
-    }, 
+    },
     {
         "type": "image",
         "key": "InviteFriendButton",
         "url": "assets/ui-components/buttons/Game/InviteFriendButton.png"
-    }, 
+    },
     {
         "type": "image",
         "key": "LeagueSettingButton",
         "url": "assets/ui-components/buttons/Game/LeagueSettingButton.png"
-    }, 
+    },
     {
         "type": "image",
         "key": "LeagueLeaveSmallButton",
         "url": "assets/ui-components/buttons/Game/LeagueLeaveSmallButton.png"
-    }, 
+    },
     {
         "type": "image",
         "key": "UserBell",
@@ -416,17 +416,27 @@
     },
     {
         "type": "image",
-        "key": "IsoTile",
-        "url": "assets/isometric/tile.png"
+        "key": "DiscardButton",
+        "url": "assets/ui-components/buttons/Building/DiscardButton.png"
     },
     {
         "type": "image",
-        "key": "IsoForest",
-        "url": "assets/isometric/forest.png"
+        "key": "DestroyButton",
+        "url": "assets/ui-components/buttons/Building/DestroyButton.png"
     },
     {
         "type": "image",
-        "key": "IsoWater",
-        "url": "assets/isometric/WaterTile.png"
+        "key": "PlaceButton",
+        "url": "assets/ui-components/buttons/Building/PlaceButton.png"
+    },
+    {
+        "type": "image",
+        "key": "RotateButton",
+        "url": "assets/ui-components/buttons/Building/RotateButton.png"
+    },
+    {
+        "type": "image",
+        "key": "BuildingInfo",
+        "url": "assets/ui-components/dialogs/BuildingInfo.png"
     }
 ]

@@ -39,6 +39,27 @@ const organizeDialog = (
 };
 
 /**
+ * Initialize BuildPanel background and close button.
+ *
+ * @function organizeBuildPanel
+ * @param {scene}
+ * @returns {array}
+ */
+const organizeBuildPanel = (scene) => {
+  scene.dialogContainer.removeAll(true);
+  const dialogBackground = scene.add
+    .image(0, 500, "Panel")
+    .setOrigin(0.5, 1)
+    .setInteractive();
+
+  // Close button
+  const closeButton = addButton(scene, "CloseButton", 650, 180, () => {
+    scene.dialogContainer.setVisible(false);
+  });
+  return [dialogBackground, closeButton];
+};
+
+/**
  * Initialize LeftPanel background and close button.
  *
  * @function organizeLeftPanel
@@ -58,7 +79,6 @@ const organizeLeftPanel = (scene) => {
   });
   return [dialogBackground, closeButton];
 };
-
 /**
  * Show Dialog with animation.
  *
@@ -80,24 +100,6 @@ const showDialog = (scene) => {
 };
 
 /**
- * Show Dialog with animation.
- *
- * @function showLeftPanel
- * @param {scene}
- * @returns {array}
- */
-const showLeftPanel = (scene) => {
-  // Show the dialog
-  scene.dialogContainer.setVisible(true).setX(0);
-  scene.dialogContainer.setVisible(true).setScale(1);
-  scene.tweens.add({
-    targets: scene.dialogContainer,
-    x: 720,
-    duration: 300,
-  });
-};
-
-/**
  * Close Dialog with animation.
  *
  * @function closeDialog
@@ -115,9 +117,26 @@ const closeDialog = (scene) => {
     onComplete: () => scene.dialogContainer.setVisible(false), // Hide after animation
   });
 };
+/**
+ * Show LeftPanel with animation.
+ *
+ * @function showLeftPanel
+ * @param {scene}
+ * @returns {array}
+ */
+const showLeftPanel = (scene) => {
+  // Show the dialog
+  scene.dialogContainer.setVisible(true).setX(0);
+  scene.dialogContainer.setVisible(true).setScale(1);
+  scene.tweens.add({
+    targets: scene.dialogContainer,
+    x: 720,
+    duration: 300,
+  });
+};
 
 /**
- * Close Dialog with animation.
+ * Close LeftPanel with animation.
  *
  * @function closeLeftPanel
  * @param {scene}
@@ -134,9 +153,10 @@ const closeLeftPanel = (scene) => {
 };
 export {
   organizeDialog,
+  organizeBuildPanel,
   showDialog,
   showLeftPanel,
   closeDialog,
   closeLeftPanel,
-  organizeLeftPanel,
+  organizeLeftPanel
 };
