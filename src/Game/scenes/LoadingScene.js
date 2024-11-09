@@ -12,7 +12,7 @@ const createLoadingScene = () => {
       assetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });
-      
+
       onboardingAssetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });
@@ -24,6 +24,7 @@ const createLoadingScene = () => {
         "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js",
         true
       );
+
     },
 
     create: function () {

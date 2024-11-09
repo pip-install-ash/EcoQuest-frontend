@@ -1,6 +1,6 @@
 import createEditBuildingContent from "../../scenes/GreenCity/IsometricManager/EditBuilding";
 import { addButton, addImage } from "../common";
-import { closeDialog, organizeBuildPanel, showDialog } from "../menu/base";
+import { organizeBuildPanel, showDialog } from "../menu/base";
 const buttonImages = [
   ["TabRoadButton", "TabRoadOffButton"],
   ["TabGreenButton", "TabGreenOffButton"],

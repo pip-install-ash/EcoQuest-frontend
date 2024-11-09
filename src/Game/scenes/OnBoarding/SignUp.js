@@ -1,13 +1,9 @@
 import {
   addButton,
-  blurInputs,
-  emptyInputs,
   fadeThisScreen,
-  hideInputs,
   scaleBackground,
   transitionToNextScene,
 } from "../../partials/common";
-import { createInputField } from "../../partials/onBoarding";
 
 const createOnBoardingSignUpScene = () => {
   return {
