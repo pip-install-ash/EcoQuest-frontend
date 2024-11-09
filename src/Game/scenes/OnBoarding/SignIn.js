@@ -1,14 +1,10 @@
 import {
   addButton,
   addCheckButton,
-  blurInputs,
-  emptyInputs,
   fadeThisScreen,
-  hideInputs,
   scaleBackground,
   transitionToNextScene,
 } from "../../partials/common";
-import { createInputField } from "../../partials/onBoarding";
 
 const createOnBoardingSignInScene = () => {
   return {
@@ -19,31 +15,32 @@ const createOnBoardingSignInScene = () => {
       const { width, height } = this.scale;
       scaleBackground(this, "SignInBackground");
 
-      createInputField(
-        this,
-        "emailInput",
-        width / 2 - 190,
-        height / 2 - 90,
-        "Enter your Email"
-      );
-      createInputField(
-        this,
-        "passwordInput",
-        width / 2 - 190,
-        height / 2 + 22,
-        "Enter your Password"
-      );
+      this.add
+        .rexInputText(width / 2 - 190, height / 2 - 80, 380, 56, {
+          type: "text",
+          text: "",
+          fontSize: "20px",
+          fontFamily: "Kreon",
+          placeholder: "Enter your Email",
+          color: "#000",
+        })
+        .setOrigin(0, 0.5);
+
+      this.add
+        .rexInputText(width / 2 - 190, height / 2 + 32, 380, 56, {
+          type: "password",
+          text: "",
+          fontSize: "20px",
+          fontFamily: "Kreon",
+          placeholder: "Enter your Password",
+          color: "#000",
+        })
+        .setOrigin(0, 0.5);
 
       addButton(this, "SignInButton", 730, 750, () => {
-        emptyInputs();
-        blurInputs();
-        hideInputs();
         transitionToNextScene(this, "OnBoardingMenuScene");
       });
       addButton(this, "ForgotPasswordButton", 880, 500, () => {
-        emptyInputs();
-        blurInputs();
-        hideInputs();
         transitionToNextScene(this, "OnBoardingForgotPasswordScene");
       });
       addCheckButton(
@@ -57,9 +54,6 @@ const createOnBoardingSignInScene = () => {
       );
 
       addButton(this, "SignUpTextButton", 830, 680, () => {
-        emptyInputs();
-        blurInputs();
-        hideInputs();
         transitionToNextScene(this, "OnBoardingSignUpScene");
       });
 

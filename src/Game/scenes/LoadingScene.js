@@ -19,6 +19,11 @@ const createLoadingScene = () => {
       menuAssetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });
+      this.load.plugin(
+        "rexinputtextplugin",
+        "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js",
+        true
+      );
     },
 
     create: function () {

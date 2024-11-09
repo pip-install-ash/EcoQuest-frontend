@@ -114,7 +114,10 @@ const closeDialog = (scene) => {
     scaleY: 0,
     ease: "Back.easeIn",
     duration: 200,
-    onComplete: () => scene.dialogContainer.setVisible(false), // Hide after animation
+    onComplete: () => {
+      scene.dialogContainer.removeAll(true);
+      scene.dialogContainer.setVisible(false);
+    },
   });
 };
 /**
@@ -158,5 +161,5 @@ export {
   showLeftPanel,
   closeDialog,
   closeLeftPanel,
-  organizeLeftPanel
+  organizeLeftPanel,
 };

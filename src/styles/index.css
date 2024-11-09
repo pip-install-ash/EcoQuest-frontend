@@ -1,8 +1,13 @@
-body, canvas {
+body {
     margin: 0 !important;
     padding: 0 !important;
     text-align: center;
     background-color: #111;
+    height: 100% !important;
+}
+canvas {
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .textInput {

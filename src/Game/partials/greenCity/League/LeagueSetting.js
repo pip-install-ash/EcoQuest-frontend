@@ -28,12 +28,22 @@ const createLeagueSettingDlg = (scene) => {
   const saveButton = addButton(scene, "SaveButton", 0, 170, () => {
     closeDialog(scene);
   });
+  const nameInputFiled = scene.add
+      .rexInputText(-290, 68, 480, 56, {
+        type: "text",
+        text: "",
+        fontSize: "20px",
+        fontFamily: "Kreon",
+        placeholder: "Enter League name",
+        color: "#000",
+      }) 
   scene.dialogContainer.add([
     ...dialogSetting,
     leagueSettings,
     privateButton,
     publicButton,
     saveButton,
+    nameInputFiled
   ]);
   showDialog(scene);
 };

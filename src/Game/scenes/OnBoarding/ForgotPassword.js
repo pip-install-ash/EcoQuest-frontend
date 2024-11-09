@@ -1,13 +1,9 @@
 import {
   addButton,
-  blurInputs,
-  emptyInputs,
   fadeThisScreen,
-  hideInputs,
   scaleBackground,
   transitionToNextScene,
 } from "../../partials/common";
-import { createInputField } from "../../partials/onBoarding";
 
 const createOnBoardingForgotPasswordScene = () => {
   return {
@@ -16,22 +12,24 @@ const createOnBoardingForgotPasswordScene = () => {
 
     create: function () {
       scaleBackground(this, "ForgotPasswordBackground");
-
-      createInputField(this, "emailInput", 530, 422, "Enter your Email");
+      this.add
+        .rexInputText(530, 432, 400, 56, {
+          type: "text",
+          text: "",
+          fontSize: "20px",
+          fontFamily: "Kreon",
+          placeholder: "Enter your Email",
+          color: "#000",
+        })
+        .setOrigin(0, 0.5);
 
       addButton(this, "SendButton", 732, 515, () => {
-        emptyInputs();
-        blurInputs();
-        hideInputs();
         transitionToNextScene(this, "OnBoardingCheckMailScene");
       });
       addButton(this, "SignInTextButton", 755, 565, () => {
-        emptyInputs();
-        blurInputs();
-        hideInputs();
         transitionToNextScene(this, "OnBoardingSignInScene");
       });
-      
+
       fadeThisScreen(this);
     },
   };

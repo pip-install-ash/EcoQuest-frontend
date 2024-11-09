@@ -34,19 +34,26 @@ const drawInitalMap = (scene) => {
           };
           drawEditBuilding(scene);
         } else if (
-          scene.gameInitMap[x][y] !== 0 &&
+          scene.gameInitMap[x][y] > 0 &&
           scene.gameInitMap[x][y] !== 2
         ) {
           const building = Buildings.filter(
             (v) => v.id === scene.gameInitMap[x][y]
           )[0];
-          createEditBuildingContent(scene, scene.gameInitMap[x][y], x, y);
+          scene.currentSelectedBuilding = {
+            id: building.id,
+            w: building.w,
+            h: building.h,
+            x: x,
+            y: y
+          };
           for (let xIndex = 0; xIndex < building.w; xIndex++) {
             for (let yIndex = 0; yIndex < building.h; yIndex++) {
               scene.gameInitMap[x - xIndex][y - yIndex] = 0;
             }
           }
           drawBuildings(scene);
+          createEditBuildingContent(scene, building.id, x, y, false);
         }
       });
       tile.setInteractive(scene.input.makePixelPerfect());

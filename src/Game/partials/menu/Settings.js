@@ -64,16 +64,15 @@ const createSettingDlg = (scene, deleteAcount) => {
       0.5
     );
   
-    // const inputText = scene.add
-    //   .rexInputText(-105, -335, 355, 56, {
-    //     type: "text",
-    //     text: "Nathan Jin",
-    //     fontSize: "20px",
-    //     fontFamily: "Kreon",
-    //     placeholder: "Enter your Username",
-    //     color: "#000",
-    //   })
-    //   .setOrigin(0.5);
+    const inputText = scene.add
+      .rexInputText(-105, -100, 355, 56, {
+        type: "text",
+        text: "Nathan Jin",
+        fontSize: "20px",
+        fontFamily: "Kreon",
+        placeholder: "Enter your Username",
+        color: "#000",
+      })
   
     const sliderPanel = addSlider(
       scene,
@@ -96,7 +95,7 @@ const createSettingDlg = (scene, deleteAcount) => {
       guideCheckBox,
       deleteAccountButton,
       changeButton,
-      // inputText,
+      inputText,
       emailText,
     ]);
     showDialog(scene);

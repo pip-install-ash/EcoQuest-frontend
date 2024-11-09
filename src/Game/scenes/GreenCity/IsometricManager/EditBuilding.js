@@ -3,11 +3,18 @@ import { calcIsForbidden } from "../../../../utils/utils";
 import { addButton, addImage } from "../../../partials/common";
 import { drawBuildings } from "./InitialMap";
 
-const createEditBuildingContent = (scene, buildingId, x, y) => {
+const createEditBuildingContent = (
+  scene,
+  buildingId,
+  x,
+  y,
+  isCreating = true
+) => {
   scene.isEditBuilding = true;
   scene.editBuilding = {
     x,
     y,
+    isCreating,
     buildingId,
     isForbidden: calcIsForbidden(scene, x, y, buildingId),
   };
@@ -17,6 +24,7 @@ const createEditBuildingContent = (scene, buildingId, x, y) => {
 const drawEditBuilding = (scene) => {
   const editBuilding = scene.editBuilding;
   const { width, height } = scene.scale;
+  const isCreating = scene.editBuilding.isCreating;
   const tileWidth = 96;
   const tileHeight = 64;
   const tileX = ((editBuilding.x - editBuilding.y) * tileWidth) / 2;
@@ -33,36 +41,74 @@ const drawEditBuilding = (scene) => {
     )
     .setOrigin(0.5, 1);
   const controlContent = scene.add.container(displayX, displayY);
-  const discardButton = addButton(
-    scene,
-    "DiscardButton",
-    -50,
-    -scene.editBuildingSprite.height - 30,
-    () => {
-      discardEditBuilding(scene);
-      scene.isEditBuilding = false;
-    }
-  );
-  const placeButton = addButton(
-    scene,
-    "PlaceButton",
-    0,
-    -scene.editBuildingSprite.height - 30,
-    () => {
-      if (!editBuilding.isForbidden) {
-        discardEditBuilding(scene);
-        scene.isEditBuilding = false;
-        placeEditBuilding(scene);
+
+  controlContent.add(
+    addButton(
+      scene,
+      "DiscardButton",
+      isCreating ? -50 : -75,
+      -scene.editBuildingSprite.height - 30,
+      () => {
+        if (isCreating) {
+          discardEditBuilding(scene);
+          scene.isEditBuilding = false;
+        } else {
+          discardEditBuilding(scene);
+          scene.isEditBuilding = false;
+          const prevBuilding = scene.currentSelectedBuilding;
+
+          for (let xIndex = 0; xIndex < prevBuilding.w; xIndex++) {
+            for (let yIndex = 0; yIndex < prevBuilding.h; yIndex++) {
+              scene.gameInitMap[prevBuilding.x - xIndex][
+                prevBuilding.y - yIndex
+              ] = -1;
+            }
+          }
+          scene.gameInitMap[prevBuilding.x][prevBuilding.y] = prevBuilding.id;
+          drawBuildings(scene);
+        }
       }
-    }
+    )
   );
-  const rotateButton = addButton(
-    scene,
-    "RotateButton",
-    50,
-    -scene.editBuildingSprite.height - 30,
-    () => {}
+  controlContent.add(
+    addButton(
+      scene,
+      "PlaceButton",
+      isCreating ? 0 : -25,
+      -scene.editBuildingSprite.height - 30,
+      () => {
+        if (!editBuilding.isForbidden) {
+          discardEditBuilding(scene);
+          scene.isEditBuilding = false;
+          placeEditBuilding(scene);
+        }
+      }
+    )
   );
+  controlContent.add(
+    addButton(
+      scene,
+      "RotateButton",
+      isCreating ? 50 : 25,
+      -scene.editBuildingSprite.height - 30,
+      () => {}
+    )
+  );
+
+  if (!isCreating) {
+    controlContent.add(
+      addButton(
+        scene,
+        "DestroyButton",
+        75,
+        -scene.editBuildingSprite.height - 30,
+        () => {
+          discardEditBuilding(scene);
+          scene.isEditBuilding = false;
+        }
+      )
+    );
+  }
 
   //Building information
   const buildingInformation = scene.add.container(
@@ -91,12 +137,7 @@ const drawEditBuilding = (scene) => {
     .setOrigin(0);
   buildingInformation.add([infoImage, infoTitle, infoText]);
 
-  controlContent.add([
-    discardButton,
-    placeButton,
-    rotateButton,
-    buildingInformation,
-  ]);
+  controlContent.add(buildingInformation);
   scene.controlContent = controlContent;
 };
 const discardEditBuilding = (scene) => {

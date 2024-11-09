@@ -12,7 +12,15 @@ const createJoinLeagueDlg = (scene) => {
   const dialogSetting = organizeDialog(scene, "JoinLeagueDialog", 1314, 839);
   const enterButton = addButton(scene, "EnterButton", 550, -253, () => {});
 
-  scene.dialogContainer.add([...dialogSetting, enterButton]);
+  const codeInputFiled = scene.add.rexInputText(225, -260, 410, 56, {
+    type: "text",
+    text: "",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "Enter League code",
+    color: "#000",
+  });
+  scene.dialogContainer.add([...dialogSetting, enterButton, codeInputFiled]);
   showDialog(scene);
 };
 

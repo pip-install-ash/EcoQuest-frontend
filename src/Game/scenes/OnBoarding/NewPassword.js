@@ -1,13 +1,9 @@
 import {
   addButton,
-  blurInputs,
-  emptyInputs,
   fadeThisScreen,
-  hideInputs,
   scaleBackground,
   transitionToNextScene,
 } from "../../partials/common";
-import { createInputField } from "../../partials/onBoarding";
 
 const createOnBoardingNewPassScene = () => {
   return {
@@ -16,21 +12,32 @@ const createOnBoardingNewPassScene = () => {
 
     create: function () {
       scaleBackground(this, "NewPassBackground");
-
-      createInputField(this, "passwordInput", 530, 445, "Enter your Password");
-      createInputField(this, "confirmInput", 530, 555, "Confirm your Password");
+      this.add
+        .rexInputText(530, 455, 400, 56, {
+          type: "password",
+          text: "",
+          fontSize: "20px",
+          fontFamily: "Kreon",
+          placeholder: "Enter your Password",
+          color: "#000",
+        })
+        .setOrigin(0, 0.5);
+        this.add
+          .rexInputText(530, 570, 400, 56, {
+            type: "password",
+            text: "",
+            fontSize: "20px",
+            fontFamily: "Kreon",
+            placeholder: "Confirm your Password",
+            color: "#000",
+          })
+          .setOrigin(0, 0.5);
 
       addButton(this, "ResetButton", 730, 670, () => {
-        emptyInputs();
-        blurInputs();
-        hideInputs();
         transitionToNextScene(this, "OnBoardingSignInScene");
       });
 
       addButton(this, "SignInTextButton", 770, 720, () => {
-        emptyInputs();
-        blurInputs();
-        hideInputs();
         transitionToNextScene(this, "OnBoardingSignInScene");
       });
       

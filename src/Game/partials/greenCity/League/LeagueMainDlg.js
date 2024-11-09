@@ -196,6 +196,19 @@ const createLeagueMainDlg = (scene) => {
     )
   );
 
+  content1.add(
+    scene.add
+      .rexInputText(-530, -175, 350, 45, {
+        type: "text",
+        text: "",
+        fontSize: "20px",
+        fontFamily: "Kreon",
+        placeholder: "Search player",
+        color: "#000",
+      })
+      .setOrigin(0, 0.5)
+  );
+
   const lobbyContentContainer = scene.add.container(0, 0);
 
   userData.forEach((v) => {
@@ -231,6 +244,16 @@ const createLeagueMainDlg = (scene) => {
   );
   messageContentContainer.y = Math.min(0, 527 - messageContentContainer.height);
   content2.add(messageContentContainer);
+  content2.add(
+    scene.add.rexInputText(-40, 340, 1000, 56, {
+      type: "text",
+      text: "",
+      fontSize: "20px",
+      fontFamily: "Kreon",
+      placeholder: "Send message",
+      color: "#000",
+    })
+  );
 
   //Request Tab
   const content3 = scene.add.container(0, 0);
@@ -360,6 +383,30 @@ const createLeagueMainDlg = (scene) => {
     },
     4
   );
+  const eleInputField = scene.add.rexInputText(220, -115, 70, 56, {
+    type: "number",
+    text: "300",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "",
+    color: "#000",
+  });
+  const coinInputField = scene.add.rexInputText(220, 0, 70, 56, {
+    type: "number",
+    text: "30000",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "",
+    color: "#000",
+  });
+  const waterInputField = scene.add.rexInputText(220, 115, 70, 56, {
+    type: "number",
+    text: "200",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "",
+    color: "#000",
+  });
   donateDialogContainer.add(donateCancelBtn);
   donateDialogContainer.add(donateSendBtn);
   donateDialogContainer.add(donateEleSlider);
@@ -368,6 +415,9 @@ const createLeagueMainDlg = (scene) => {
   donateDialogContainer.add(scene.donateEleText);
   donateDialogContainer.add(scene.donateCoinText);
   donateDialogContainer.add(scene.donateWaterText);
+  donateDialogContainer.add(eleInputField);
+  donateDialogContainer.add(coinInputField);
+  donateDialogContainer.add(waterInputField);
   donateDialogContainer.setVisible(false);
 
   const requestDialogContainer = scene.add.container(0, 0);
@@ -383,6 +433,35 @@ const createLeagueMainDlg = (scene) => {
       requestDialogContainer.setVisible(false);
     })
   );
+  const requestEleInputField = scene.add.rexInputText(220, -90, 70, 56, {
+    type: "number",
+    text: "300",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "",
+    color: "#000",
+  });
+  const requestCoinInputField = scene.add.rexInputText(220, 0, 70, 56, {
+    type: "number",
+    text: "30000",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "",
+    color: "#000",
+  });
+  const requestWaterInputField = scene.add.rexInputText(220, 90, 70, 56, {
+    type: "number",
+    text: "200",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "",
+    color: "#000",
+  });
+  requestDialogContainer.add([
+    requestEleInputField,
+    requestCoinInputField,
+    requestWaterInputField,
+  ]);
   requestDialogContainer.setVisible(false);
   content3.add([
     requestContentContainer,

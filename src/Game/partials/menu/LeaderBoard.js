@@ -26,19 +26,19 @@ const createLeaderboardDlg = (scene) => {
     globalButton.setTexture("GlobalButton");
   });
 
-//   const inputFiled = addInputFiled(
-//     scene,
-//     -15,
-//     -112,
-//     750,
-//     45,
-//     "#000",
-//     0x000000
-//   );
+  const inputFiled = scene.add
+      .rexInputText(-15, -112, 750, 45, {
+        type: "text",
+        text: "",
+        fontSize: "20px",
+        fontFamily: "Kreon",
+        placeholder: "Search League",
+        color: "#000",
+      })
 
   scene.dialogContainer.add([
     ...dialogSetting,
-    // ...inputFiled,
+    inputFiled,
     leaguesButton,
     globalButton,
   ]);

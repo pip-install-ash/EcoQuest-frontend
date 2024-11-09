@@ -10,8 +10,17 @@ import { organizeDialog, showDialog } from "./base";
 const createMyLeaguesDlg = (scene) => {
   const dialogSetting = organizeDialog(scene, "MyLeaguesDialog", 1314, 841);
   
+  const searchInputFiled = scene.add.rexInputText(-590, -268, 520, 56, {
+    type: "text",
+    text: "",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "Search",
+    color: "#000",
+  }).setOrigin(0,0.5);
   scene.dialogContainer.add([
-    ...dialogSetting
+    ...dialogSetting,
+    searchInputFiled
   ]);
   showDialog(scene);
 }; 
