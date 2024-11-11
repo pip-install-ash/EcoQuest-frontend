@@ -438,5 +438,40 @@
         "type": "image",
         "key": "BuildingInfo",
         "url": "assets/ui-components/dialogs/BuildingInfo.png"
+    },
+    {
+        "type": "image",
+        "key": "GuideSkipButton",
+        "url": "assets/ui-components/buttons/Game/GuideSkip.png"
+    },
+    {
+        "type": "image",
+        "key": "GuideLeftButton",
+        "url": "assets/ui-components/buttons/Game/GuideLeft.png"
+    },
+    {
+        "type": "image",
+        "key": "GuideRightButton",
+        "url": "assets/ui-components/buttons/Game/GuideRight.png"
+    },
+    {
+        "type": "image",
+        "key": "GuideTriangle",
+        "url": "assets/ui-components/buttons/Game/GuideTriangle.png"
+    },
+    {
+        "type": "image",
+        "key": "Assistant",
+        "url": "assets/ui-components/Assistant.png"
+    },
+    {
+        "type": "image",
+        "key": "Hand",
+        "url": "assets/ui-components/Hand.png"
+    },
+    {
+        "type": "image",
+        "key": "NoRoad",
+        "url": "assets/ui-components/NoRoad.png"
     }
 ]

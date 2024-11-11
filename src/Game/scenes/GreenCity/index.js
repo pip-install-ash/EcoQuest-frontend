@@ -18,6 +18,11 @@ const createGreenCitycene = () => {
       gameBuildingPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });
+      this.load.scenePlugin({
+        key: "rexuiplugin",
+        url: "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js",
+        sceneKey: "rexUI",
+      });
 
       this.isEditBuilding = false;
     },
@@ -29,9 +34,11 @@ const createGreenCitycene = () => {
       AmountInfo(this, 1024, 52);
       MainButtons(this, 72, 334);
       BuildUi(this);
-
       this.dialogContainer = this.add.container(720, 512).setVisible(false);
-      createTutorialSettingDlg(this, () => {});
+
+      if (this.showTutorial === true || this.showTutorial === undefined)
+        createTutorialSettingDlg(this, () => {});
+
       fadeThisScreen(this);
     },
   };

@@ -1,4 +1,4 @@
-import { addButton, transitionToNextScene } from "../../common";
+import { addButton, addComboBox, transitionToNextScene } from "../../common";
 import { closeDialog, organizeDialog, showDialog } from "../../menu/base";
 
 /**
@@ -19,12 +19,39 @@ const createTransferOwnershipDlg = (scene) => {
     closeDialog(scene);
   });
   const leaveButton = addButton(scene, "TransferLeaveButton", 0, 120, () => {
-    transitionToNextScene(scene, "OnBoardingMenuScene")
+    transitionToNextScene(scene, "OnBoardingMenuScene");
   });
+  const options = [
+    {
+      text: "AAA",
+      value: 0,
+    },
+    {
+      text: "BBB",
+      value: 1,
+    },
+    {
+      text: "CCC",
+      value: 2,
+    },
+    {
+      text: "DDD",
+      value: 3,
+    },
+  ];
+  const dropDownList = addComboBox(
+    scene,
+    -235,
+    -57,
+    450,
+    options,
+    "Select from this league players"
+  );
   scene.dialogContainer.add([
     ...dialogSetting,
     stayButton,
     leaveButton,
+    dropDownList,
   ]);
   showDialog(scene);
 };

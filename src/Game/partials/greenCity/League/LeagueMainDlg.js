@@ -339,7 +339,7 @@ const createLeagueMainDlg = (scene) => {
     0,
     0.5
   );
-  const donateEleSlider = addSlider(
+  scene.donateEleSlider = addSlider(
     scene,
     1,
     -80,
@@ -349,13 +349,14 @@ const createLeagueMainDlg = (scene) => {
     16,
     0xfcb651,
     (v) => {
-      console.log(scene.donateEleText);
-      if (scene.donateEleText.text)
+      if (scene.donateEleText.text) {
         scene.donateEleText.setText(`${parseInt(300 * v)}KW`);
+        scene.eleInputField.text = `${parseInt(300 * v)}`;
+      }
     },
     2
   );
-  const donateCoinSlider = addSlider(
+  scene.donateCoinSlider = addSlider(
     scene,
     1,
     -80,
@@ -366,10 +367,11 @@ const createLeagueMainDlg = (scene) => {
     0xfcb651,
     (v) => {
       scene.donateCoinText.text = `$${parseInt(30000 * v)}`;
+      scene.coinInputField.text = `${parseInt(30000 * v)}`;
     },
     3
   );
-  const donateWaterSlider = addSlider(
+  scene.donateWaterSlider = addSlider(
     scene,
     1,
     -80,
@@ -380,10 +382,11 @@ const createLeagueMainDlg = (scene) => {
     0xfcb651,
     (v) => {
       scene.donateWaterText.text = `${parseInt(200 * v)}LTR`;
+      scene.waterInputField.text = `${parseInt(200 * v)}`;
     },
     4
   );
-  const eleInputField = scene.add.rexInputText(220, -115, 70, 56, {
+  scene.eleInputField = scene.add.rexInputText(220, -115, 70, 56, {
     type: "number",
     text: "300",
     fontSize: "20px",
@@ -391,7 +394,17 @@ const createLeagueMainDlg = (scene) => {
     placeholder: "",
     color: "#000",
   });
-  const coinInputField = scene.add.rexInputText(220, 0, 70, 56, {
+  scene.eleInputField.on("textchange", () => {
+    const inputValue = parseInt(scene.eleInputField.text);
+    if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 300) {
+      // Convert input value to RexUI slider scale (0-1)
+      const sliderValue = inputValue / 300;
+      scene.donateEleText.setText(`${parseInt(inputValue)}KW`);
+      scene.donateEleSlider[1].x = -80 + 380 * (sliderValue - 0.5);
+      scene.donateEleSlider[2].displayWidth = sliderValue * 380 - 6;
+    }
+  });
+  scene.coinInputField = scene.add.rexInputText(220, 0, 70, 56, {
     type: "number",
     text: "30000",
     fontSize: "20px",
@@ -399,7 +412,17 @@ const createLeagueMainDlg = (scene) => {
     placeholder: "",
     color: "#000",
   });
-  const waterInputField = scene.add.rexInputText(220, 115, 70, 56, {
+  scene.coinInputField.on("textchange", () => {
+    const inputValue = parseInt(scene.coinInputField.text);
+    if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 30000) {
+      // Convert input value to RexUI slider scale (0-1)
+      const sliderValue = inputValue / 30000;
+      scene.donateCoinText.setText(`$${parseInt(inputValue)}`);
+      scene.donateCoinSlider[1].x = -80 + 380 * (sliderValue - 0.5);
+      scene.donateCoinSlider[2].displayWidth = sliderValue * 380 - 6;
+    }
+  });
+  scene.waterInputField = scene.add.rexInputText(220, 115, 70, 56, {
     type: "number",
     text: "200",
     fontSize: "20px",
@@ -407,17 +430,27 @@ const createLeagueMainDlg = (scene) => {
     placeholder: "",
     color: "#000",
   });
+  scene.waterInputField.on("textchange", () => {
+    const inputValue = parseInt(scene.waterInputField.text);
+    if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 200) {
+      // Convert input value to RexUI slider scale (0-1)
+      const sliderValue = inputValue / 200;
+      scene.donateWaterText.setText(`${parseInt(inputValue)}LTR`);
+      scene.donateWaterSlider[1].x = -80 + 380 * (sliderValue - 0.5);
+      scene.donateWaterSlider[2].displayWidth = sliderValue * 380 - 6;
+    }
+  });
   donateDialogContainer.add(donateCancelBtn);
   donateDialogContainer.add(donateSendBtn);
-  donateDialogContainer.add(donateEleSlider);
-  donateDialogContainer.add(donateCoinSlider);
-  donateDialogContainer.add(donateWaterSlider);
+  donateDialogContainer.add(scene.donateEleSlider);
+  donateDialogContainer.add(scene.donateCoinSlider);
+  donateDialogContainer.add(scene.donateWaterSlider);
   donateDialogContainer.add(scene.donateEleText);
   donateDialogContainer.add(scene.donateCoinText);
   donateDialogContainer.add(scene.donateWaterText);
-  donateDialogContainer.add(eleInputField);
-  donateDialogContainer.add(coinInputField);
-  donateDialogContainer.add(waterInputField);
+  donateDialogContainer.add(scene.eleInputField);
+  donateDialogContainer.add(scene.coinInputField);
+  donateDialogContainer.add(scene.waterInputField);
   donateDialogContainer.setVisible(false);
 
   const requestDialogContainer = scene.add.container(0, 0);

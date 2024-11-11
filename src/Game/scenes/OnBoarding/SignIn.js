@@ -15,6 +15,7 @@ const createOnBoardingSignInScene = () => {
       const { width, height } = this.scale;
       scaleBackground(this, "SignInBackground");
 
+      this.showTutorial = true;
       this.add
         .rexInputText(width / 2 - 190, height / 2 - 80, 380, 56, {
           type: "text",

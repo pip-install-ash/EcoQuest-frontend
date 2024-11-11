@@ -1,6 +1,7 @@
 import { Buildings } from "../../../../utils/const";
 import { calcIsForbidden } from "../../../../utils/utils";
 import gameInitMap from "../../../packs/game-init-map.json";
+import { addImage } from "../../../partials/common";
 import createEditBuildingContent, { drawEditBuilding } from "./EditBuilding";
 const drawInitalMap = (scene) => {
   const { width, height } = scene.scale;
@@ -21,39 +22,53 @@ const drawInitalMap = (scene) => {
         .setOrigin(0.5, 1);
       tile.on("pointerdown", () => {
         if (scene.isEditBuilding) {
-          scene.editBuilding = {
-            ...scene.editBuilding,
-            x,
-            y,
-            isForbidden: calcIsForbidden(
-              scene,
+          const building = Buildings.filter(
+            (v) => v.id === scene.editBuilding.buildingId
+          )[0];
+          if (building.isBuilding) {
+            scene.editBuilding = {
+              ...scene.editBuilding,
               x,
               y,
-              scene.editBuilding.buildingId
-            ),
-          };
+              isForbidden: calcIsForbidden(
+                scene,
+                x,
+                y,
+                scene.editBuilding.buildingId
+              ),
+              isRotate: scene.editBuilding.isRotate,
+            };
+          }
           drawEditBuilding(scene);
         } else if (
-          scene.gameInitMap[x][y] > 0 &&
-          scene.gameInitMap[x][y] !== 2
+          scene.gameInitMap[x][y].key > 0 &&
+          scene.gameInitMap[x][y].key !== 2
         ) {
           const building = Buildings.filter(
-            (v) => v.id === scene.gameInitMap[x][y]
+            (v) => v.id === scene.gameInitMap[x][y].key
           )[0];
           scene.currentSelectedBuilding = {
             id: building.id,
             w: building.w,
             h: building.h,
             x: x,
-            y: y
+            y: y,
+            isRotate: scene.gameInitMap[x][y].isRotate,
           };
           for (let xIndex = 0; xIndex < building.w; xIndex++) {
             for (let yIndex = 0; yIndex < building.h; yIndex++) {
-              scene.gameInitMap[x - xIndex][y - yIndex] = 0;
+              scene.gameInitMap[x - xIndex][y - yIndex].key = 0;
             }
           }
           drawBuildings(scene);
-          createEditBuildingContent(scene, building.id, x, y, false);
+          createEditBuildingContent(
+            scene,
+            building.id,
+            x,
+            y,
+            false,
+            scene.currentSelectedBuilding.isRotate
+          );
         }
       });
       tile.setInteractive(scene.input.makePixelPerfect());
@@ -78,18 +93,36 @@ const drawInitalMap = (scene) => {
     });
   });
   scene.gameMap = gameMap;
+  scene.iconMap = scene.add.container(0, 0);
   drawBuildings(scene);
 };
 const drawBuildings = (scene) => {
+  const { width, height } = scene.scale;
+  scene.iconMap.removeAll(true);
   const tmpInitmap = scene.gameInitMap;
   let i = 0;
+  const tileWidth = 96;
+  const tileHeight = 64;
   tmpInitmap.forEach((row, x) => {
     row.forEach((cell, y) => {
+      const tileX = ((x - y) * tileWidth) / 2;
+      const tileY = ((x + y) * tileHeight) / 2;
+
       //   if (cell >= 0) {
       const building = Buildings.filter(
-        (v) => parseInt(v.id) === parseInt(cell)
+        (v) => parseInt(v.id) === parseInt(cell.key)
       )[0];
       scene.gameMap[i].setTexture(building.tile);
+      scene.gameMap[i].setScale(cell.isRotate ? -1 : 1, 1);
+      if (building.isBuilding)
+        scene.iconMap.add(
+          addImage(
+            scene,
+            "NoRoad",
+            width / 2 + tileX,
+            (-height * 2) / 5 + tileY - tileHeight * building.h
+          )
+        );
       //   } else {
       // scene.gameMap[i].setTexture("IsoTile");
       //   }
