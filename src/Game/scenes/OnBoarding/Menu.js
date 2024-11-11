@@ -7,7 +7,7 @@ import {
 import createCreateLeagueDlg from "../../partials/menu/CreateLeague";
 import createDeleteAccountDlg from "../../partials/menu/DeleteAccount";
 import createExitDlg from "../../partials/menu/Exit";
-import createHowToPlayDlg from "../../partials/menu/HowToPlay";
+import createHowToPlayDlg from "../../partials/menu/howToPlay";
 import createJoinLeagueDlg from "../../partials/menu/JoinLeague";
 import createLeaderboardDlg from "../../partials/menu/LeaderBoard";
 import createLeagueDlg from "../../partials/menu/League";
