@@ -6,7 +6,7 @@ const calcIsForbidden = (scene, x, y, buildingId) => {
   let flag = false;
   for (let i = x; i > x - building.w; i--) {
     for (let j = y; j > y - building.h; j--) {
-      if (tileMap[i][j] !== 0) {
+      if (tileMap[i][j].key !== 0) {
         flag = true;
       }
     }

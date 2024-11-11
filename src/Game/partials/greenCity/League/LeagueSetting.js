@@ -1,4 +1,4 @@
-import { addButton, addText } from "../../common";
+import { addButton, addComboBox, addText } from "../../common";
 import { closeDialog, organizeDialog, showDialog } from "../../menu/base";
 
 /**
@@ -28,22 +28,36 @@ const createLeagueSettingDlg = (scene) => {
   const saveButton = addButton(scene, "SaveButton", 0, 170, () => {
     closeDialog(scene);
   });
-  const nameInputFiled = scene.add
-      .rexInputText(-290, 68, 480, 56, {
-        type: "text",
-        text: "",
-        fontSize: "20px",
-        fontFamily: "Kreon",
-        placeholder: "Enter League name",
-        color: "#000",
-      }) 
+  const nameInputFiled = scene.add.rexInputText(-290, 68, 480, 56, {
+    type: "text",
+    text: "",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "Enter League name",
+    color: "#000",
+  });
+  const options = [
+    { text: "2 to 20", value: 0 },
+    { text: "20 to 50", value: 1 },
+    { text: "50 to 100", value: 2 },
+  ];
+
+  const dropDownList = addComboBox(
+    scene,
+    30,
+    67,
+    480,
+    options,
+    "Select no of players (2 to 20)"
+  );
   scene.dialogContainer.add([
     ...dialogSetting,
     leagueSettings,
     privateButton,
     publicButton,
     saveButton,
-    nameInputFiled
+    nameInputFiled,
+    dropDownList
   ]);
   showDialog(scene);
 };

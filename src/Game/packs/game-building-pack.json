@@ -11,6 +11,76 @@
     },
     {
         "type": "image",
+        "key": "B-Road",
+        "url": "assets/ui-components/buttons/Building/Road.png"
+    },
+    {
+        "type": "image",
+        "key": "B-Shop",
+        "url": "assets/ui-components/buttons/Building/Shop.png"
+    },
+    {
+        "type": "image",
+        "key": "B-Factory",
+        "url": "assets/ui-components/buttons/Building/Factory.png"
+    },
+    {
+        "type": "image",
+        "key": "B-Hospital",
+        "url": "assets/ui-components/buttons/Building/Hospital.png"
+    },
+    {
+        "type": "image",
+        "key": "B-School",
+        "url": "assets/ui-components/buttons/Building/School.png"
+    },
+    {
+        "type": "image",
+        "key": "B-WindTurbine",
+        "url": "assets/ui-components/buttons/Building/WindTurbine.png"
+    },
+    {
+        "type": "image",
+        "key": "B-HydroPowerDam",
+        "url": "assets/ui-components/buttons/Building/HydroPowerDam.png"
+    },
+    {
+        "type": "image",
+        "key": "B-SkyScrapper",
+        "url": "assets/ui-components/buttons/Building/SkyScrapper.png"
+    },
+    {
+        "type": "image",
+        "key": "B-WasteRecycleCenter",
+        "url": "assets/ui-components/buttons/Building/WasteRecycleCenter.png"
+    },
+    {
+        "type": "image",
+        "key": "B-Solar",
+        "url": "assets/ui-components/buttons/Building/Solar.png"
+    },
+    {
+        "type": "image",
+        "key": "B-PlantC",
+        "url": "assets/ui-components/buttons/Building/PlantC.png"
+    },
+    {
+        "type": "image",
+        "key": "B-PlantB",
+        "url": "assets/ui-components/buttons/Building/PlantB.png"
+    },
+    {
+        "type": "image",
+        "key": "B-PlantA",
+        "url": "assets/ui-components/buttons/Building/PlantA.png"
+    },
+    {
+        "type": "image",
+        "key": "B-Park",
+        "url": "assets/ui-components/buttons/Building/Park.png"
+    },
+    {
+        "type": "image",
         "key": "IsoHouseA",
         "url": "assets/isometric/HouseA.png"
     },
@@ -18,6 +88,16 @@
         "type": "image",
         "key": "IsoHouseAOff",
         "url": "assets/isometric/HouseAOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHouseAR",
+        "url": "assets/isometric/HouseAR.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHouseAROff",
+        "url": "assets/isometric/HouseAROff.png"
     },
     {
         "type": "image",
@@ -43,5 +123,150 @@
         "type": "image",
         "key": "IsoWater",
         "url": "assets/isometric/WaterTile.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoRoadOff",
+        "url": "assets/isometric/RoadOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoRoad",
+        "url": "assets/isometric/Road.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoPlantAOff",
+        "url": "assets/isometric/PlantAOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoPlantBOff",
+        "url": "assets/isometric/PlantBOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoPlantA",
+        "url": "assets/isometric/PlantA.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoPlantB",
+        "url": "assets/isometric/PlantB.png"
+    },
+    {
+        "type": "image",
+        "key": "PlantCOff",
+        "url": "assets/isometric/PlantCOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoPlantC",
+        "url": "assets/isometric/PlantC.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoSolarOff",
+        "url": "assets/isometric/SolarOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoSolar",
+        "url": "assets/isometric/Solar.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHydroPowerDamOff",
+        "url": "assets/isometric/HydroPowerDamOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHydroPowerDam",
+        "url": "assets/isometric/HydroPowerDam.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoParkOff",
+        "url": "assets/isometric/ParkOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoPark",
+        "url": "assets/isometric/Park.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHospitalOff",
+        "url": "assets/isometric/HospitalOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoHospital",
+        "url": "assets/isometric/Hospital.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoWindTurbineOff",
+        "url": "assets/isometric/WindTurbineOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoWindTurbine",
+        "url": "assets/isometric/WindTurbine.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoForestOff",
+        "url": "assets/isometric/ForestOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoWasteRecycleCenterOff",
+        "url": "assets/isometric/WasteRecycleCenterOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoWasteRecycleCenter",
+        "url": "assets/isometric/WasteRecycleCenter.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoShop",
+        "url": "assets/isometric/Shop.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoShopOff",
+        "url": "assets/isometric/ShopOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoFactoryOff",
+        "url": "assets/isometric/FactoryOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoFactory",
+        "url": "assets/isometric/Factory.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoSchoolOff",
+        "url": "assets/isometric/SchoolOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoSchool",
+        "url": "assets/isometric/School.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoSkyScrapperOff",
+        "url": "assets/isometric/SkyScrapperOff.png"
+    },
+    {
+        "type": "image",
+        "key": "IsoSkyScrapper",
+        "url": "assets/isometric/SkyScrapper.png"
     }
 ]

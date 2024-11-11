@@ -477,6 +477,82 @@ const addInputFiled = (scene, x, y, w, h, textColor, cursorColor) => {
   return [inputBox, displayText, cursor];
 };
 
+///add ComboBox
+
+const COLOR_MAIN = 0xffffff;
+
+const CreateTextObject = (scene, text, color = "#000") => {
+  return scene.add.text(0, 0, text, {
+    fontFamily: "inter",
+    fontSize: 20,
+    color,
+  });
+};
+
+const addComboBox = (scene, x, y, w, options, placeholder) => {
+  const dropDownList = scene.rexUI.add
+    .dropDownList({
+      x,
+      y,
+
+      background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 16, null),
+      text: CreateTextObject(scene, placeholder).setFixedSize(w, 0),
+
+      space: {
+        left: 15,
+        right: 15,
+        top: 15,
+        bottom: 15,
+        icon: 10,
+      },
+
+      options: options,
+
+      list: {
+        createBackgroundCallback: function (scene) {
+          return scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_MAIN);
+        },
+        createButtonCallback: function (scene, option, index, options) {
+          var text = option.text;
+          var button = scene.rexUI.add.label({
+            background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0),
+
+            text: CreateTextObject(scene, text, "#000"),
+
+            space: {
+              left: 10,
+              right: 10,
+              top: 10,
+              bottom: 10,
+              icon: 10,
+            },
+          });
+          button.value = option.value;
+
+          return button;
+        },
+        onButtonClick: function (button, index, pointer, event) {
+          dropDownList.text = button.text;
+          dropDownList.textStyle = { color: "#000" };
+        },
+        onButtonOver: function (button, index, pointer, event) {
+          button.getElement("background").setFillStyle(0xc0c0c0);
+        },
+        onButtonOut: function (button, index, pointer, event) {
+          button.getElement("background").setFillStyle(0xffffff);
+        },
+      },
+
+      setValueCallback: function (dropDownList, value, previousValue) {
+        console.log(value);
+      },
+      value: undefined,
+    })
+    .setOrigin(0, 0.5)
+    .layout();
+  return dropDownList;
+};
+
 export {
   scaleBackground,
   whiteBackground,
@@ -496,4 +572,5 @@ export {
   transitionToNextScene,
   fadeThisScreen,
   addInputFiled,
+  addComboBox,
 };

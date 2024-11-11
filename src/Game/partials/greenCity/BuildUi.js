@@ -9,13 +9,29 @@ const buttonImages = [
   ["TabHomeButton", "TabHomeOffButton"],
 ];
 const tabs = [
-  [],
-  [],
-  [],
-  [],
+  [{ id: 18, image: "B-Road" }],
+  [
+    { id: 12, image: "B-Park" },
+    { id: 17, image: "B-PlantA" },
+    { id: 16, image: "B-PlantB" },
+    { id: 15, image: "B-PlantC" },
+  ],
+  [
+    { id: 6, image: "B-School" },
+    { id: 11, image: "B-Hospital" },
+    { id: 7, image: "B-Factory" },
+    { id: 8, image: "B-Shop" },
+  ],
+  [
+    { id: 10, image: "B-WindTurbine" },
+    { id: 9, image: "B-WasteRecycleCenter" },
+    { id: 13, image: "B-HydroPowerDam" },
+    { id: 14, image: "B-Solar" },
+  ],
   [
     { id: 3, image: "B-HouseA" },
-    { id: 4, image: "B-HouseB" }, 
+    { id: 4, image: "B-HouseB" },
+    { id: 5, image: "B-SkyScrapper" },
   ],
 ];
 /**
