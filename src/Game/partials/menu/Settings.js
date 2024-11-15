@@ -67,7 +67,7 @@ const createSettingDlg = (scene, deleteAcount) => {
     const inputText = scene.add
       .rexInputText(-105, -100, 355, 56, {
         type: "text",
-        text: "Nathan Jin",
+        text: "Ash",
         fontSize: "20px",
         fontFamily: "Kreon",
         placeholder: "Enter your Username",
