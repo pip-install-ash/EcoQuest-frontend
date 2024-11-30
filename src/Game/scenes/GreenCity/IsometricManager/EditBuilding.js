@@ -1,4 +1,5 @@
 import { Buildings } from "../../../../utils/const";
+import { fetchImplementation } from "../../../../utils/fetchRequest";
 import { calcIsForbidden } from "../../../../utils/utils";
 import { addButton, addImage } from "../../../partials/common";
 import { drawBuildings } from "./InitialMap";
@@ -43,6 +44,13 @@ const drawEditBuilding = (scene) => {
     .setScale(editBuilding.isRotate ? -1 : 1, 1)
     .setOrigin(0.5, 1);
   const controlContent = scene.add.container(displayX, displayY);
+
+  fetchImplementation("get", "api/points/all-points/:userID", {})
+    .then((data) => {
+      console.log(editBuilding.id, "GOT POINTS OF YOURs>>", data);
+      infoText.text = "COST:500$";
+    })
+    .catch((error) => {});
 
   controlContent.add(
     addButton(
@@ -92,11 +100,21 @@ const drawEditBuilding = (scene) => {
         "PlaceButton",
         isCreating ? 0 : -25,
         -scene.editBuildingSprite.height - 30,
-        () => {
+        async () => {
           if (!editBuilding.isForbidden) {
             discardEditBuilding(scene);
             scene.isEditBuilding = false;
             placeEditBuilding(scene);
+          }
+          // only push the building to the server if it is a new building
+          if (editBuilding.isCreating) {
+            {
+              await fetchImplementation("post", "api/user/assets", {
+                ...editBuilding,
+              }).catch((error) => {
+                console.error("Error posting assets:", error);
+              });
+            }
           }
         }
       )
@@ -125,8 +143,14 @@ const drawEditBuilding = (scene) => {
         "DestroyButton",
         building.isBuilding ? 75 : 25,
         -scene.editBuildingSprite.height - 30,
-        () => {
+        async () => {
           discardEditBuilding(scene);
+          //removing/destroying an asset
+          await fetchImplementation("delete", "api/user/assets", {
+            buildingId: editBuilding.buildingId,
+          }).catch((error) => {
+            console.error("Error posting assets:", error);
+          });
           scene.isEditBuilding = false;
         }
       )

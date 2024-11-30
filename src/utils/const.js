@@ -28,7 +28,7 @@ const Buildings = [
     tileOff: "",
     w: 1,
     h: 1,
-    isBuilding: false
+    isBuilding: false,
   },
   {
     id: 0,
@@ -36,7 +36,7 @@ const Buildings = [
     tileOff: "IsoTile",
     w: 1,
     h: 1,
-    isBuilding: false
+    isBuilding: false,
   },
   {
     id: 1,
@@ -44,7 +44,7 @@ const Buildings = [
     tileOff: "IsoForestOff",
     w: 2,
     h: 2,
-    isBuilding: false
+    isBuilding: false,
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ const Buildings = [
     tileOff: "IsoWater",
     w: 1,
     h: 1,
-    isBuilding: false
+    isBuilding: false,
   },
   {
     id: 3,
@@ -60,7 +60,7 @@ const Buildings = [
     tileOff: "IsoHouseAOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 4,
@@ -68,7 +68,7 @@ const Buildings = [
     tileOff: "IsoHouseBOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 5,
@@ -76,7 +76,7 @@ const Buildings = [
     tileOff: "IsoSkyScrapperOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 6,
@@ -84,7 +84,7 @@ const Buildings = [
     tileOff: "IsoSchoolOff",
     w: 3,
     h: 3,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 7,
@@ -92,7 +92,7 @@ const Buildings = [
     tileOff: "IsoFactoryOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 8,
@@ -100,7 +100,7 @@ const Buildings = [
     tileOff: "IsoShopOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 9,
@@ -108,7 +108,7 @@ const Buildings = [
     tileOff: "IsoWasteRecycleCenterOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 10,
@@ -116,7 +116,7 @@ const Buildings = [
     tileOff: "IsoWindTurbine",
     w: 1,
     h: 1,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 11,
@@ -124,7 +124,7 @@ const Buildings = [
     tileOff: "IsoHospitalOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 12,
@@ -132,7 +132,7 @@ const Buildings = [
     tileOff: "IsoParkOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 13,
@@ -140,7 +140,7 @@ const Buildings = [
     tileOff: "IsoHydroPowerDamOff",
     w: 2,
     h: 2,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 14,
@@ -148,7 +148,7 @@ const Buildings = [
     tileOff: "IsoSolarOff",
     w: 1,
     h: 1,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 15,
@@ -156,7 +156,7 @@ const Buildings = [
     tileOff: "IsoPlantCOff",
     w: 1,
     h: 1,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 16,
@@ -164,7 +164,7 @@ const Buildings = [
     tileOff: "IsoPlantBOff",
     w: 1,
     h: 1,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 17,
@@ -172,7 +172,7 @@ const Buildings = [
     tileOff: "IsoPlantAOff",
     w: 1,
     h: 1,
-    isBuilding: true
+    isBuilding: true,
   },
   {
     id: 18,
@@ -180,8 +180,17 @@ const Buildings = [
     tileOff: "IsoRoadOff",
     w: 1,
     h: 1,
-    isBuilding: true
+    isBuilding: true,
   },
 ];
 
-export { DefaultSceneConfig, DefaultFontStyle, Buildings };
+const firebaseConfig = {
+  apiKey: "AIzaSyDaXviMrYh_pTK6T15RPdxdJ4kQHSxVe-A",
+  authDomain: "ecoquest-9b8fa.firebaseapp.com",
+  projectId: "ecoquest-9b8fa",
+  storageBucket: "ecoquest-9b8fa.firebasestorage.app",
+  messagingSenderId: "688433320532",
+  appId: "1:688433320532:web:287bbc88a846cecdc453c1",
+  measurementId: "G-7965E9PB4X",
+};
+export { DefaultSceneConfig, DefaultFontStyle, Buildings, firebaseConfig };

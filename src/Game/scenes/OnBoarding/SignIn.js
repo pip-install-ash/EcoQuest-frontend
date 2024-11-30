@@ -1,3 +1,4 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {
   addButton,
   addCheckButton,
@@ -5,6 +6,8 @@ import {
   scaleBackground,
   transitionToNextScene,
 } from "../../partials/common";
+import toast from "react-hot-toast";
+import { fetchImplementation } from "../../../utils/fetchRequest";
 
 const createOnBoardingSignInScene = () => {
   return {
@@ -16,7 +19,7 @@ const createOnBoardingSignInScene = () => {
       scaleBackground(this, "SignInBackground");
 
       this.showTutorial = true;
-      this.add
+      const emailInput = this.add
         .rexInputText(width / 2 - 190, height / 2 - 80, 380, 56, {
           type: "text",
           text: "",
@@ -27,7 +30,7 @@ const createOnBoardingSignInScene = () => {
         })
         .setOrigin(0, 0.5);
 
-      this.add
+      const passwordInput = this.add
         .rexInputText(width / 2 - 190, height / 2 + 32, 380, 56, {
           type: "password",
           text: "",
@@ -38,8 +41,30 @@ const createOnBoardingSignInScene = () => {
         })
         .setOrigin(0, 0.5);
 
-      addButton(this, "SignInButton", 730, 750, () => {
-        transitionToNextScene(this, "OnBoardingMenuScene");
+      addButton(this, "SignInButton", 730, 750, async () => {
+        const email = emailInput.text;
+        const password = passwordInput.text;
+        const auth = getAuth();
+        // await setPersistence(auth, browserLocalPersistence)
+        await signInWithEmailAndPassword(auth, email, password)
+          .then(async (userData) => {
+            localStorage.setItem("token", userData._tokenResponse.idToken);
+            localStorage.setItem("email", email);
+
+            const userDetails = await fetchImplementation(
+              "get",
+              "user-details",
+              {}
+            );
+            const mapDetails = userDetails?.gameInitMap;
+            localStorage.setItem("user", JSON.stringify(userDetails));
+            mapDetails && localStorage.setItem("gameInitMap", mapDetails);
+            toast.success("Successfully signed in");
+            transitionToNextScene(this, "OnBoardingMenuScene");
+          })
+          .catch((err) => {
+            alert(err.message);
+          });
       });
       addButton(this, "ForgotPasswordButton", 880, 500, () => {
         transitionToNextScene(this, "OnBoardingForgotPasswordScene");
@@ -58,6 +83,10 @@ const createOnBoardingSignInScene = () => {
         transitionToNextScene(this, "OnBoardingSignUpScene");
       });
 
+      if (localStorage.getItem("token")) {
+        transitionToNextScene(this, "OnBoardingMenuScene");
+        fadeThisScreen(this);
+      }
       fadeThisScreen(this);
     },
   };

@@ -7,8 +7,11 @@ import MainButtons from "../../partials/greenCity/MainButtons";
 import BuildUi from "../../partials/greenCity/BuildUi";
 import createTutorialSettingDlg from "../../partials/greenCity/TutorialSetting";
 import drawInitalMap from "./IsometricManager/InitialMap";
+import { fetchImplementation } from "../../../utils/fetchRequest";
+// import { useEffect } from 'react';
 
-const createGreenCitycene = () => {
+const CreateGreenCityScene = () => {
+  console.log("CreateGreenCityScene");
   return {
     key: "GreenCitycene",
     preload: function () {
@@ -24,6 +27,7 @@ const createGreenCitycene = () => {
         sceneKey: "rexUI",
       });
 
+      this.testing = 0;
       this.isEditBuilding = false;
     },
 
@@ -31,7 +35,7 @@ const createGreenCitycene = () => {
       coloredBackground(this, 0x70a541);
       drawInitalMap(this);
       BasicInfo(this, 36, 52);
-      AmountInfo(this, 1024, 52);
+      this.pointsAccount = AmountInfo(this, 1024, 52);
       MainButtons(this, 72, 334);
       BuildUi(this);
       this.dialogContainer = this.add.container(720, 512).setVisible(false);
@@ -44,4 +48,4 @@ const createGreenCitycene = () => {
   };
 };
 
-export default createGreenCitycene;
+export default CreateGreenCityScene;

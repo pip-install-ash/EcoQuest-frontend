@@ -1,4 +1,5 @@
 import { Buildings } from "../../../../utils/const";
+import { fetchImplementation } from "../../../../utils/fetchRequest";
 import { calcIsForbidden } from "../../../../utils/utils";
 import gameInitMap from "../../../packs/game-init-map.json";
 import { addImage } from "../../../partials/common";
@@ -8,8 +9,9 @@ const drawInitalMap = (scene) => {
 
   const tileWidth = 96;
   const tileHeight = 64;
+  const tester = JSON.parse(localStorage.getItem("gameInitMap"));
 
-  scene.gameInitMap = gameInitMap;
+  scene.gameInitMap = tester?.length ? tester : gameInitMap;
   let gameMap = [];
 
   scene.gameInitMap.forEach((row, x) => {
@@ -128,6 +130,12 @@ const drawBuildings = (scene) => {
       //   }
       i++;
     });
+  });
+  const strigfyMap = JSON.stringify(scene.gameInitMap);
+  localStorage.setItem("gameInitMap", strigfyMap);
+  //store map changes into database
+  fetchImplementation("put", "api/users/map-update", {
+    gameInitMap: strigfyMap,
   });
 };
 export default drawInitalMap;

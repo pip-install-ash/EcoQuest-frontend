@@ -16,6 +16,7 @@ import createNotificationDlg from "../../partials/menu/Notification";
 import createSettingDlg from "../../partials/menu/Settings";
 
 const createOnBoardingMenuScene = () => {
+  const userData = JSON.parse(localStorage.getItem("user"));
   return {
     key: "OnBoardingMenuScene",
     preload: function () {
@@ -57,11 +58,15 @@ const createOnBoardingMenuScene = () => {
       });
 
       addButton(this, "Menu-Setting", 720, 660, () => {
-        createSettingDlg(this, () => {
-          createDeleteAccountDlg(this, () => {
-            transitionToNextScene(this, "OnBoardingSignInScene");
-          });
-        });
+        createSettingDlg(
+          this,
+          () => {
+            createDeleteAccountDlg(this, () => {
+              transitionToNextScene(this, "OnBoardingSignInScene");
+            });
+          },
+          userData
+        );
       });
 
       addButton(this, "Menu-HowToPlay", 720, 740, () =>
@@ -70,6 +75,8 @@ const createOnBoardingMenuScene = () => {
 
       addButton(this, "Menu-Exit", 720, 820, () =>
         createExitDlg(this, () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("gameInitMap");
           transitionToNextScene(this, "OnBoardingSignInScene");
         })
       );

@@ -19,7 +19,7 @@ const AmountInfo = (scene, left, top) => {
   addButton(scene, "BankIcon", left + 335, top + 20, () => {});
   addButton(scene, "WaterIcon", left + 335, top + 80, () => {});
   //Eco point
-  scene.add
+  const ecoPoints = scene.add
     .text(left + 15, top + 21, "200", {
       fontFamily: "Kreon",
       fontStyle: "bold",
@@ -27,7 +27,7 @@ const AmountInfo = (scene, left, top) => {
     })
     .setOrigin(0, 0.5);
   //Coin point
-  scene.add
+  const goldCoins = scene.add
     .text(left + 206, top + 21, "$200,000", {
       fontFamily: "Kreon",
       fontStyle: "bold",
@@ -35,7 +35,7 @@ const AmountInfo = (scene, left, top) => {
     })
     .setOrigin(0, 0.5);
   //Ele point
-  scene.add
+  const elePoints = scene.add
     .text(left + 15, top + 79, "$200,000", {
       fontFamily: "Kreon",
       fontStyle: "bold",
@@ -43,13 +43,28 @@ const AmountInfo = (scene, left, top) => {
     })
     .setOrigin(0, 0.5);
   //Water point
-  scene.add
+  const waterText = scene.add
     .text(left + 206, top + 79, "200", {
       fontFamily: "Kreon",
       fontStyle: "bold",
       fontSize: "18px",
     })
     .setOrigin(0, 0.5);
+
+  return {
+    updateWaterText: (newText) => {
+      waterText.setText(newText);
+    },
+    updateEcoPoints: (newText) => {
+      ecoPoints.setText(newText);
+    },
+    updateGoldCoins: (newText) => {
+      goldCoins.setText(newText);
+    },
+    updateElePoints: (newText) => {
+      elePoints.setText(newText);
+    },
+  };
 };
 
 export default AmountInfo;

@@ -61,6 +61,7 @@ const createBuildDlg = (scene) => {
 
   const buttons = [];
   let buttonX = 610;
+  // side Home buttons
   buttonImages.forEach((buttonImage, index) => {
     const button = addButton(
       scene,

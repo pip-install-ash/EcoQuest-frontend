@@ -15,6 +15,7 @@ import createLeagueLeaderboardDlg from "./LeagueLeaderboard";
  * @returns {void}
  */
 const MainButtons = (scene, left, top) => {
+  const userData = JSON.parse(localStorage.getItem("user"));
   addButton(scene, "HomeButton", left, top, () => {
     if (!scene.isEditBuilding)
       transitionToNextScene(scene, "OnBoardingMenuScene");
@@ -24,9 +25,13 @@ const MainButtons = (scene, left, top) => {
   });
   addButton(scene, "SettingButton", left, top + 96, () => {
     if (!scene.isEditBuilding)
-      createSettingDlg(scene, () => {
-        if (!scene.isEditBuilding) createDeleteAccountDlg(scene, () => {});
-      });
+      createSettingDlg(
+        scene,
+        () => {
+          if (!scene.isEditBuilding) createDeleteAccountDlg(scene, () => {});
+        },
+        userData
+      );
   });
   addButton(scene, "ReportButton", left, top + 192, () => {
     if (!scene.isEditBuilding) createBuildingRuleDlg(scene);

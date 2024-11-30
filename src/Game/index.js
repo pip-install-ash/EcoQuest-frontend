@@ -8,7 +8,7 @@ import createOnBoardingForgotPasswordScene from "./scenes/OnBoarding/ForgotPassw
 import createOnBoardingCheckMailScene from "./scenes/OnBoarding/CheckMail";
 import createOnBoardingNewPassScene from "./scenes/OnBoarding/NewPassword";
 import createOnBoardingMenuScene from "./scenes/OnBoarding/Menu";
-import createGreenCitycene from "./scenes/GreenCity";
+import CreateGreenCityScene from "./scenes/GreenCity";
 
 const Game = () => {
   useEffect(() => {
@@ -22,7 +22,7 @@ const Game = () => {
         createOnBoardingCheckMailScene(),
         createOnBoardingNewPassScene(),
         createOnBoardingMenuScene(),
-        createGreenCitycene()
+        CreateGreenCityScene(),
       ],
     };
 
