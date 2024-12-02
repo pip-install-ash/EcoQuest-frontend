@@ -184,7 +184,7 @@ const Buildings = [
   },
 ];
 
-const firebaseConfigStage = {
+const firebaseConfig = {
   apiKey: "AIzaSyDaXviMrYh_pTK6T15RPdxdJ4kQHSxVe-A",
   authDomain: "ecoquest-9b8fa.firebaseapp.com",
   projectId: "ecoquest-9b8fa",
@@ -194,13 +194,13 @@ const firebaseConfigStage = {
   measurementId: "G-7965E9PB4X",
 };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBAw_4cNmCjVDBC_QSL74HiYEE0L_00-S8",
-  authDomain: "ecoquest-prod.firebaseapp.com",
-  projectId: "ecoquest-prod",
-  storageBucket: "ecoquest-prod.firebasestorage.app",
-  messagingSenderId: "771903101051",
-  appId: "1:771903101051:web:0110572b13a8758795aade",
-  measurementId: "G-Z1J31PKK6P",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBAw_4cNmCjVDBC_QSL74HiYEE0L_00-S8",
+//   authDomain: "ecoquest-prod.firebaseapp.com",
+//   projectId: "ecoquest-prod",
+//   storageBucket: "ecoquest-prod.firebasestorage.app",
+//   messagingSenderId: "771903101051",
+//   appId: "1:771903101051:web:0110572b13a8758795aade",
+//   measurementId: "G-Z1J31PKK6P",
+// };
 export { DefaultSceneConfig, DefaultFontStyle, Buildings, firebaseConfig };
