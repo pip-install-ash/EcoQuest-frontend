@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+import { fetchImplementation } from "../../../utils/fetchRequest";
 import {
   addButton,
   fadeThisScreen,
@@ -17,6 +19,8 @@ import createSettingDlg from "../../partials/menu/Settings";
 
 const createOnBoardingMenuScene = () => {
   const userData = JSON.parse(localStorage.getItem("user"));
+  // const isLeagueOn = localStorage.getItem("activeLeagueId");
+
   return {
     key: "OnBoardingMenuScene",
     preload: function () {
@@ -29,8 +33,45 @@ const createOnBoardingMenuScene = () => {
 
     create: function () {
       scaleBackground(this, "MenuBackground");
+      addButton(this, "Resume-League", 720, 280, async () => {
+        createMyLeaguesDlg(this);
+        // isLeagueOn;
+        //  await fetchImplementation("get", `api/league-stats/${isLeagueOn}`, {})
+        //    .then((res) => {
+        //      const { data, success } = res;
+        //      if (!success) {
+        //        toast.error(data.message);
+        //        return;
+        //      }
+        //      const { leagueStats } = data;
+        //      console.log("league resumed", res);
+        //      toast.success(`League resumed successfully`);
+        //      localStorage.setItem(
+        //        "gameInitMap",
+        //        JSON.stringify(leagueStats.gameInitMap)
+        //      );
+        //      localStorage.setItem("activeLeagueId", JSON.stringify({leagueId:leagueStats.leagueId, leagueName:leagueStats.leagueName}));
+        //      transitionToNextScene(scene, "GreenCitycene");
+        //    })
+        //    .catch((err) => {
+        //      console.log("error resuming league", err);
+        //      toast.error("Error resuming league");
+        //    });
+      });
+      addButton(this, "Menu-Start", 720, 340, async () => {
+        const userDetails = await fetchImplementation(
+          "get",
+          "user-details",
+          {}
+        );
+        const mapDetails = userDetails?.gameInitMap;
+        localStorage.setItem("activeLeagueId", "");
+        localStorage.setItem("activeLeagueName", "");
 
-      addButton(this, "Menu-Start", 720, 340, () => {
+        mapDetails.length > 1
+          ? localStorage.setItem("gameInitMap", mapDetails)
+          : localStorage.setItem("gameInitMap", ""); // to get the uodated Map
+
         transitionToNextScene(this, "GreenCitycene");
       });
 

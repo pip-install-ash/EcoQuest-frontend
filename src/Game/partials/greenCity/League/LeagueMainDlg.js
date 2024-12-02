@@ -6,16 +6,40 @@ import createInviteFriendDlg from "./InviteFriend";
 import createLeagueSettingDlg from "./LeagueSetting";
 import createLeaveLeagueDlg from "./LeaveLeague";
 import createKickUserDlg from "./KickUser";
+import { fetchImplementation } from "../../../../utils/fetchRequest";
+import toast from "react-hot-toast";
 
-const userData = [
-  [1, "Michael Scott", 200, 200, 45, 0, 1],
-  [2, "Michael Scott", 200, 200, 45, 1, 0],
-  [3, "Michael Scott", 200, 200, 45, 1, 1],
-  [4, "Michael Scott", 200, 200, 45, 1, 0],
-  [5, "Michael Scott", 200, 200, 45, 1, 1],
-  [6, "Michael Scott", 200, 200, 45, 1, 0],
-  [7, "Michael Scott", 200, 200, 45, 1, 1],
-];
+const fetchUserData = async (leagueId) => {
+  try {
+    const leagueData = await fetchImplementation(
+      "get",
+      `api/leagues/details/${leagueId}`
+    );
+
+    if (!leagueData.success) {
+      throw new Error("Network response was not ok");
+    }
+    return leagueData.data || [];
+  } catch (error) {
+    console.error("Failed to fetch user data:", error);
+    return [];
+  }
+};
+
+// const userData = await fetchUserData();
+// let userData = [];
+// (async () => {
+//   userData = await fetchUserData();
+// })();
+// const userData = [
+//   [1, "Michael Scott", 200, 200, 45, 0, 1],
+//   [2, "Azmi Scott", 200, 200, 45, 1, 0],
+//   [3, "Mic", 200, 200, 45, 1, 1],
+//   [4, "Mict", 200, 200, 45, 1, 0],
+//   [5, "Miccott", 200, 200, 45, 1, 1],
+//   [6, "Mictt", 200, 200, 45, 1, 0],
+//   [7, "Micott", 200, 200, 45, 1, 1],
+// ];
 const messageData = [
   {
     isMe: true,
@@ -67,14 +91,18 @@ const messageData = [
  * @param {scene}
  * @returns {void}
  */
-const createLeagueMainDlg = (scene) => {
+const createLeagueMainDlg = async (scene, leagueId) => {
+  const fetchedleagueData = await fetchUserData(leagueId);
+  const leagueData = fetchedleagueData?.leagueData;
+  const userData = JSON.parse(localStorage.getItem("user"));
+
   const dialogSetting = organizeDialog(scene, "LeagueLobbyDialog", 1205, 795);
   const dialogBackground = dialogSetting[0];
 
   //Display League title
   const leagueTitle = addText(
     scene,
-    "Titanic House",
+    leagueData?.leagueName || "Titanic House",
     0,
     -360,
     "Inter",
@@ -137,7 +165,12 @@ const createLeagueMainDlg = (scene) => {
 
   //Lobby Tab
   const content1 = scene.add.container(0, 0);
-  content1.add(addButton(scene, "LeagueCodeButton", 60, -165, () => {}));
+  content1.add(
+    addButton(scene, "LeagueCodeButton", 60, -165, () => {
+      navigator.clipboard.writeText(leagueData.joiningCode);
+      toast.success("Joining code copied to clipboard");
+    })
+  );
   content1.add(
     addButton(scene, "InviteFriendButton", 300, -165, () => {
       createInviteFriendDlg(scene);
@@ -150,13 +183,13 @@ const createLeagueMainDlg = (scene) => {
   );
   content1.add(
     addButton(scene, "LeagueLeaveSmallButton", 530, -165, () => {
-      createLeaveLeagueDlg(scene);
+      createLeaveLeagueDlg(scene, leagueData, fetchedleagueData?.isOwner); //here
     })
   );
   content1.add(
     addText(
       scene,
-      "Players: 1/20",
+      `Players: ${leagueData?.userPresent}/${leagueData?.numberOfPlayers}`,
       -550,
       -70,
       "Inter",
@@ -184,7 +217,7 @@ const createLeagueMainDlg = (scene) => {
   content1.add(
     addText(
       scene,
-      "Owner: Michael Scott",
+      `Owner: ${leagueData?.owner?.userName}`,
       550,
       -70,
       "Inter",
@@ -210,9 +243,10 @@ const createLeagueMainDlg = (scene) => {
   );
 
   const lobbyContentContainer = scene.add.container(0, 0);
-
-  userData.forEach((v) => {
-    lobbyContentContainer.add(addUser(scene, v));
+  fetchedleagueData?.userData?.forEach((v) => {
+    lobbyContentContainer.add(
+      addUser(scene, v, leagueData, fetchedleagueData?.isOwner)
+    );
   });
   makeScrollArea(scene, lobbyContentContainer, 100, 558, 1205, 350, 520);
 
@@ -516,7 +550,7 @@ const createLeagueMainDlg = (scene) => {
   ]);
   showDialog(scene);
 };
-const makeScrollArea = (
+export const makeScrollArea = (
   scene,
   contentContainer,
   x,
@@ -561,7 +595,7 @@ const makeScrollArea = (
     }
   });
 };
-const addUser = (scene, data) => {
+const addUser = (scene, data, leagueData, isOwner) => {
   const noText = addText(
     scene,
     `${data[0]}`,
@@ -612,7 +646,7 @@ const addUser = (scene, data) => {
   );
   const buildingText = addText(
     scene,
-    `$${data[4]}`,
+    `${data[4]}`,
     240,
     20 + data[0] * 72,
     "Inter",
@@ -624,31 +658,44 @@ const addUser = (scene, data) => {
   );
   let actionButton;
   let actionStatus = [];
-  if (data[5] === 0) {
+  if (isOwner) {
+    if (data[5] === 0) {
+      actionButton = addButton(
+        scene,
+        "ActionLeaveButton",
+        480,
+        30 + data[0] * 72,
+        () => {
+          createLeaveLeagueDlg(scene, leagueData, isOwner);
+        }
+      );
+    } else {
+      actionButton = addButton(
+        scene,
+        "ActionKickButton",
+        480,
+        30 + data[0] * 72,
+        () => {
+          createKickUserDlg(scene, data, leagueData.id);
+        }
+      );
+      if (data[6] === 0) {
+        actionStatus.push(addImage(scene, "Offline", 550, 20 + data[0] * 72));
+      } else {
+        actionStatus.push(addImage(scene, "Online", 550, 20 + data[0] * 72));
+      }
+    }
+  } else {
     actionButton = addButton(
       scene,
       "ActionLeaveButton",
       480,
       30 + data[0] * 72,
       () => {
-        createLeaveLeagueDlg(scene);
+        //TODO: store the Id of the league,userID to leave or you can send inthe scene may be the values and
+        createLeaveLeagueDlg(scene, leagueData, isOwner);
       }
     );
-  } else {
-    actionButton = addButton(
-      scene,
-      "ActionKickButton",
-      480,
-      30 + data[0] * 72,
-      () => {
-        createKickUserDlg(scene);
-      }
-    );
-    if (data[6] === 0) {
-      actionStatus.push(addImage(scene, "Offline", 550, 20 + data[0] * 72));
-    } else {
-      actionStatus.push(addImage(scene, "Online", 550, 20 + data[0] * 72));
-    }
   }
   return [
     noText,

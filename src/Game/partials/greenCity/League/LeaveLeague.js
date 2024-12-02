@@ -1,6 +1,8 @@
+import toast from "react-hot-toast";
 import { addButton, addText, transitionToNextScene } from "../../common";
 import { organizeDialog, showDialog } from "../../menu/base";
 import createTransferOwnershipDlg from "./TransferOwnership";
+import { fetchImplementation } from "../../../../utils/fetchRequest";
 
 /**
  * Shows a <LeaveLeague> dialog.
@@ -9,8 +11,17 @@ import createTransferOwnershipDlg from "./TransferOwnership";
  * @param {scene, onAccept}
  * @returns {void}
  */
-const createLeaveLeagueDlg = (scene) => {
+const createLeaveLeagueDlg = (scene, leagueData, isOwner) => {
   const dialogSetting = organizeDialog(scene, "LeaveLeagueDialog", 674, 408);
+  console.log("OwnerHE", isOwner, "LeaveLeagueDialog", leagueData);
+  /**
+   *
+   * OwnerHE true LeaveLeagueDialog userData,
+   * leagueData
+   * {user_id: '54QK1FcFwpbkPGewDnMBlJrNK6w2', email: 'testuser@gmail.com', userName: 'testbar',email: "testuser@gmail.com",
+   * "userName: "testbar"user_id: "54QK1FcFwpbkPGewDnMBlJrNK6w2"[[Prototype]]: Object
+   * {id: 'ak3gozZUZ5y37o3u3V7s', leagueName: 'kano', numberOfPlayers: '20', userPresent: 1, isPrivate: false, …}
+   */
 
   const leagueSettings = addText(
     scene,
@@ -29,8 +40,21 @@ const createLeaveLeagueDlg = (scene) => {
     "DeleteLeagueButton",
     0,
     20,
-    () => {
-      transitionToNextScene(scene, 'OnBoardingMenuScene');
+    async () => {
+      await fetchImplementation("delete", `api/leagues/delete/${leagueData.id}`)
+        .then((res) => {
+          console.log("delete league", res);
+          if (!res.status) {
+            toast.error(res.message);
+            return;
+          }
+          toast.success("League deleted successfully");
+          transitionToNextScene(scene, "OnBoardingMenuScene");
+        })
+        .catch((err) => {
+          toast.error("Error deleting league");
+          console.log("delete league error", err);
+        });
     }
   );
   const transferButton = addButton(
@@ -39,7 +63,12 @@ const createLeaveLeagueDlg = (scene) => {
     0,
     100,
     () => {
-      createTransferOwnershipDlg(scene)
+      if (!isOwner) {
+        console.log("owner>>>", isOwner);
+        toast.error("You are not the owner of this league");
+        return;
+      }
+      createTransferOwnershipDlg(scene, leagueData);
     }
   );
   scene.dialogContainer.add([

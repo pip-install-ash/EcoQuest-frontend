@@ -16,13 +16,21 @@ import createLeagueLeaderboardDlg from "./LeagueLeaderboard";
  */
 const MainButtons = (scene, left, top) => {
   const userData = JSON.parse(localStorage.getItem("user"));
+  const isLeagueOn = localStorage.getItem("activeLeagueId");
+  console.log("leageuss", isLeagueOn);
+
   addButton(scene, "HomeButton", left, top, () => {
     if (!scene.isEditBuilding)
       transitionToNextScene(scene, "OnBoardingMenuScene");
   });
-  addButton(scene, "GroupButton", left + 1288, top, () => {
-    if (!scene.isEditBuilding) createLeagueMainDlg(scene);
-  });
+
+  if (isLeagueOn?.length > 1) {
+    // show on whenever user is from a leagues
+    addButton(scene, "GroupButton", left + 1288, top, () => {
+      if (!scene.isEditBuilding) createLeagueMainDlg(scene, isLeagueOn);
+    });
+  }
+
   addButton(scene, "SettingButton", left, top + 96, () => {
     if (!scene.isEditBuilding)
       createSettingDlg(

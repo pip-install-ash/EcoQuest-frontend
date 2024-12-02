@@ -1,5 +1,25 @@
+import { fetchImplementation } from "../../../../utils/fetchRequest";
 import { addButton, addComboBox, transitionToNextScene } from "../../common";
 import { closeDialog, organizeDialog, showDialog } from "../../menu/base";
+import toast from "react-hot-toast";
+
+const transferOwnership = async (leagueID, newOwnerID, leaveLeague) => {
+  try {
+    console.log("transferOwnership", leagueID, newOwnerID, leaveLeague);
+    // const response = await fetchImplementation(
+    //   "post",
+    //   `api/leagues/transfer-ownership?leaveLeague=${leaveLeague}`,
+    //   { leagueID, newOwnerID }
+    // );
+    // if (response.status) {
+    //   toast.success("Ownership transferred successfully", "success");
+    // } else {
+    //   toast.error(response.message);
+    // }
+  } catch (error) {
+    toast.success(error.message);
+  }
+};
 
 /**
  * Shows a <TransferOwnership> dialog.
@@ -8,19 +28,33 @@ import { closeDialog, organizeDialog, showDialog } from "../../menu/base";
  * @param {scene}
  * @returns {void}
  */
-const createTransferOwnershipDlg = (scene) => {
+const createTransferOwnershipDlg = async (scene, leagueData) => {
+  const usersInLeague = await fetchImplementation(
+    "get",
+    `api/leagues/league-users/${leagueData.id}`
+  );
+  console.log("USERS>>", usersInLeague);
   const dialogSetting = organizeDialog(
     scene,
     "TransferOwnershipDialog",
     674,
     408
   );
-  const stayButton = addButton(scene, "TransferStayButton", 0, 40, () => {
-    closeDialog(scene);
+  const stayButton = addButton(scene, "TransferStayButton", 0, 40, async () => {
+    console.log("DROP IT", dropDownList.text);
+    await transferOwnership(1, 2, false);
+    // closeDialog(scene);
   });
-  const leaveButton = addButton(scene, "TransferLeaveButton", 0, 120, () => {
-    transitionToNextScene(scene, "OnBoardingMenuScene");
-  });
+  const leaveButton = addButton(
+    scene,
+    "TransferLeaveButton",
+    0,
+    120,
+    async () => {
+      //  await transferOwnership();
+      // transitionToNextScene(scene, "OnBoardingMenuScene");
+    }
+  );
   const options = [
     {
       text: "AAA",

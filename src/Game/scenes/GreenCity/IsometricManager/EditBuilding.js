@@ -27,6 +27,7 @@ const createEditBuildingContent = (
 const drawEditBuilding = (scene) => {
   const editBuilding = scene.editBuilding;
   const buildData = JSON.parse(localStorage.getItem("buildData"));
+  const leagueId = localStorage.getItem("activeLeagueId");
 
   const { width, height } = scene.scale;
   const isCreating = scene.editBuilding.isCreating;
@@ -46,16 +47,6 @@ const drawEditBuilding = (scene) => {
     .setScale(editBuilding.isRotate ? -1 : 1, 1)
     .setOrigin(0.5, 1);
   const controlContent = scene.add.container(displayX, displayY);
-
-  // fetchImplementation("get", `api/buildings/build/${editBuilding.buildingId}`)
-  //   .then((responseData) => {
-  //     const { data } = responseData;
-  //     infoTitle.text = data.title;
-  //     infoText.text = `Cost: $${data.cost}\nResident Capacity: ${data.residentCapacity}\nTax Income: $${data.taxIncome} per Resident\nElectricity consumption: ${data.electricityConsumption} units/Day\nWater usage: ${data.waterUsage} units/Day\nWaste produce: ${data.wasteProduce} units/Day`;
-  //   })
-  //   .catch((error) => {
-  //     console.log("Error fetching building data:", error);
-  //   });
 
   controlContent.add(
     addButton(
@@ -114,10 +105,11 @@ const drawEditBuilding = (scene) => {
           // only push the building to the server if it is a new building
           if (editBuilding.isCreating) {
             {
-              await fetchImplementation("post", "api/user/assets", {
+              fetchImplementation("post", "api/user/assets", {
                 ...editBuilding,
+                leagueId,
               }).catch((error) => {
-                console.error("Error posting assets:", error);
+                console.log("Error posting assets:", error);
               });
             }
           }
@@ -153,6 +145,7 @@ const drawEditBuilding = (scene) => {
           //removing/destroying an asset
           await fetchImplementation("delete", "api/user/assets", {
             buildingId: editBuilding.buildingId,
+            leagueId,
           }).catch((error) => {
             console.error("Error posting assets:", error);
           });

@@ -1,7 +1,8 @@
 import toast from "react-hot-toast";
 import { fetchImplementation } from "../../../utils/fetchRequest";
-import { addButton } from "../common";
+import { addButton, transitionToNextScene } from "../common";
 import { organizeDialog, showDialog } from "./base";
+import createLeaveLeagueDlg from "../greenCity/League/LeaveLeague";
 
 const leagues = [
   {
@@ -31,6 +32,7 @@ const leagues = [
  * @returns {void}
  */
 const createMyLeaguesDlg = async (scene) => {
+  const userData = JSON.parse(localStorage.getItem("userData"));
   const fetchedData = await fetchImplementation(
     "get",
     `api/leagues/my-leagues`
@@ -52,7 +54,7 @@ const createMyLeaguesDlg = async (scene) => {
   let listItems = [];
 
   myLeaguesList?.forEach((v, idx) => {
-    const rowItems = addRow(scene, v, -75 + 92 * idx);
+    const rowItems = addRow(scene, v, -75 + 92 * idx, userData);
     listItems = [...listItems, ...rowItems];
   });
   listWidget.add(listItems);
@@ -60,7 +62,7 @@ const createMyLeaguesDlg = async (scene) => {
   showDialog(scene);
 };
 
-const addRow = (scene, data, y) => {
+const addRow = (scene, data, y, userData) => {
   const textStyle = {
     fontFamily: "Inter",
     fontSize: 18,
@@ -94,11 +96,11 @@ const addRow = (scene, data, y) => {
           const { leagueStats } = data;
           console.log("league resumed", res);
           toast.success(`League resumed successfully`);
-          localStorage.setItem(
-            "gameInitMap",
-            JSON.stringify(leagueStats.gameInitMap)
-          );
-          localStorage.setItem("activeLeagueId", data.leagueID);
+          localStorage.setItem("activeLeagueId", leagueStats.leagueId);
+          localStorage.setItem("activeLeagueName", leagueStats.leagueName);
+          localStorage.setItem("gameInitMap", leagueStats.gameInitMap);
+
+          transitionToNextScene(scene, "GreenCitycene");
         })
         .catch((err) => {
           console.log("error resuming league", err);
@@ -106,10 +108,12 @@ const addRow = (scene, data, y) => {
         });
     }
   );
-  const laveButton = addButton(scene, "LeaveButton", 560, y + 10, () => {
-    console.log("Leave");
+  const leaveButton = addButton(scene, "LeaveButton", 560, y + 10, () => {
+    console.log("Leave", data);
+    // createLeaveLeagueDlg(scene, data, data.isOwner) // this is not working Issue with UI
   });
   const rect = scene.add.rectangle(0, y + 46, 1314, 1, 0x2d3020).setOrigin(0.5);
-  return [name, players, points, lastLogin, actionButton, laveButton, rect];
+
+  return [name, players, points, lastLogin, actionButton, leaveButton, rect];
 };
 export default createMyLeaguesDlg;

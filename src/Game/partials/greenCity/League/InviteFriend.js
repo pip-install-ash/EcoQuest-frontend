@@ -25,7 +25,7 @@ const createInviteFriendDlg = (scene) => {
     text: "",
     fontSize: "20px",
     fontFamily: "Kreon",
-    placeholder: "Enter League name",
+    placeholder: "Enter username/email",
     color: "#000",
   });
   scene.dialogContainer.add([

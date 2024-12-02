@@ -9,11 +9,15 @@ import Phaser from "phaser";
  * @returns {void}
  */
 const BasicInfo = (scene, left, top) => {
+  const leagueName = localStorage.getItem("activeLeagueName");
+  const isLeagueOn = localStorage.getItem("activeLeagueId")?.length > 1;
+
   addButton(scene, "UserBell", left + 25, top + 25, () => {});
   addButton(scene, "Rubish", left + 25, top + 127, () => {});
   const graphics = scene.add.graphics();
   graphics.fillStyle(0x000000, 0.4);
-  graphics.fillRoundedRect(left + 60, top + 9, 145, 32, 16);
+  // show on whenever user is from a leagues
+  isLeagueOn && graphics.fillRoundedRect(left + 60, top + 9, 145, 32, 16);
   graphics.fillRoundedRect(left, top + 60, 205, 32, 16);
   graphics.fillRoundedRect(left + 60, top + 111, 145, 32, 16);
   graphics.fillStyle(0x23f52c, 1);
@@ -50,21 +54,24 @@ const BasicInfo = (scene, left, top) => {
 
   // Fill and stroke the shape
   graphics.fillPath();
-
-  addText(
-    scene,
-    "Titanic House",
-    left + 70,
-    top + 14,
-    "Kreon",
-    "18px",
-    "bold",
-    "#ffffff",
-    0,
-    0,
-    "#333333",
-    3
-  );
+  console.log("isLeagueOn", isLeagueOn);
+  // show on whenever user is from a league
+  if (isLeagueOn) {
+    addText(
+      scene,
+      leagueName,
+      left + 70,
+      top + 14,
+      "Kreon",
+      "18px",
+      "bold",
+      "#ffffff",
+      0,
+      0,
+      "#333333",
+      3
+    );
+  }
 
   addText(
     scene,

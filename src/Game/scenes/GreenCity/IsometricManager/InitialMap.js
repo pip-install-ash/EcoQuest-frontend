@@ -9,9 +9,13 @@ const drawInitalMap = (scene) => {
 
   const tileWidth = 96;
   const tileHeight = 64;
-  const tester = JSON.parse(localStorage.getItem("gameInitMap"));
+  const tester =
+    localStorage.getItem("gameInitMap").length > 1
+      ? JSON.parse(localStorage.getItem("gameInitMap"))
+      : "";
 
-  scene.gameInitMap = tester?.length ? tester : gameInitMap;
+  scene.gameInitMap = tester?.length > 0 ? tester : gameInitMap;
+
   let gameMap = [];
 
   scene.gameInitMap.forEach((row, x) => {
@@ -133,10 +137,19 @@ const drawBuildings = (scene) => {
   });
   const strigfyMap = JSON.stringify(scene.gameInitMap);
   localStorage.setItem("gameInitMap", strigfyMap);
+  const isLeagueOn = localStorage.getItem("activeLeagueId");
+
   //store map changes into database
-  fetchImplementation("put", "api/users/map-update", {
-    gameInitMap: strigfyMap,
-  });
+  console.log("this.leagueIsActive? BEfore'' :", isLeagueOn);
+  fetchImplementation(
+    "put",
+    isLeagueOn?.length > 1
+      ? `api/league-stats/${isLeagueOn}`
+      : "api/users/map-update",
+    {
+      gameInitMap: strigfyMap,
+    }
+  );
 };
 export default drawInitalMap;
 export { drawBuildings };
