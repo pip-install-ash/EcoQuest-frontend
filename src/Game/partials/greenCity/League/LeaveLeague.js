@@ -13,7 +13,7 @@ import { fetchImplementation } from "../../../../utils/fetchRequest";
  */
 const createLeaveLeagueDlg = (scene, leagueData, isOwner) => {
   const dialogSetting = organizeDialog(scene, "LeaveLeagueDialog", 674, 408);
-  console.log("OwnerHE", isOwner, "LeaveLeagueDialog", leagueData);
+
   /**
    *
    * OwnerHE true LeaveLeagueDialog userData,
