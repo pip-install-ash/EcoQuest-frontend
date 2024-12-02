@@ -12,9 +12,10 @@ import { fetchImplementation } from "../../../utils/fetchRequest";
 
 const CreateGreenCityScene = () => {
   console.log("CreateGreenCityScene");
+
   return {
     key: "GreenCitycene",
-    preload: function () {
+    preload: async function () {
       gameAssetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);
       });
@@ -27,6 +28,24 @@ const CreateGreenCityScene = () => {
         sceneKey: "rexUI",
       });
 
+      await fetchImplementation("get", "api/buildings/all-buildings")
+        .then((res) => {
+          const { data } = res;
+          localStorage.setItem("buildData", JSON.stringify(data));
+        })
+        .catch((err) => {
+          console.log("buildings fetch", err);
+        });
+
+      await fetchImplementation("get", "api/points/all-points")
+        .then((res) => {
+          const { data } = res;
+          this.playData = data;
+        })
+        .catch((err) => {
+          console.log("first fetch error", err);
+        });
+
       this.testing = 0;
       this.isEditBuilding = false;
     },
@@ -35,7 +54,7 @@ const CreateGreenCityScene = () => {
       coloredBackground(this, 0x70a541);
       drawInitalMap(this);
       BasicInfo(this, 36, 52);
-      this.pointsAccount = AmountInfo(this, 1024, 52);
+      this.accounts = AmountInfo(this, 1024, 52, this.playData);
       MainButtons(this, 72, 334);
       BuildUi(this);
       this.dialogContainer = this.add.container(720, 512).setVisible(false);

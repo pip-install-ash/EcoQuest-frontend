@@ -26,6 +26,8 @@ const createEditBuildingContent = (
 
 const drawEditBuilding = (scene) => {
   const editBuilding = scene.editBuilding;
+  const buildData = JSON.parse(localStorage.getItem("buildData"));
+
   const { width, height } = scene.scale;
   const isCreating = scene.editBuilding.isCreating;
   const tileWidth = 96;
@@ -45,12 +47,15 @@ const drawEditBuilding = (scene) => {
     .setOrigin(0.5, 1);
   const controlContent = scene.add.container(displayX, displayY);
 
-  fetchImplementation("get", "api/points/all-points/:userID", {})
-    .then((data) => {
-      console.log(editBuilding.id, "GOT POINTS OF YOURs>>", data);
-      infoText.text = "COST:500$";
-    })
-    .catch((error) => {});
+  // fetchImplementation("get", `api/buildings/build/${editBuilding.buildingId}`)
+  //   .then((responseData) => {
+  //     const { data } = responseData;
+  //     infoTitle.text = data.title;
+  //     infoText.text = `Cost: $${data.cost}\nResident Capacity: ${data.residentCapacity}\nTax Income: $${data.taxIncome} per Resident\nElectricity consumption: ${data.electricityConsumption} units/Day\nWater usage: ${data.waterUsage} units/Day\nWaste produce: ${data.wasteProduce} units/Day`;
+  //   })
+  //   .catch((error) => {
+  //     console.log("Error fetching building data:", error);
+  //   });
 
   controlContent.add(
     addButton(
@@ -174,7 +179,7 @@ const drawEditBuilding = (scene) => {
     .text(
       70,
       65,
-      "Cost: $5,000\nResident Capacity: 10\nTax Income: $1 per Resident\nElectricity consumption: 10 units/Day\nWater usage: 2 unity/Day\nWaste produce: 2 unit/Day",
+      "Cost: $5000\nResident Capacity: 10\nTax Income: $1 per Resident\nElectricity consumption: 10 units/Day\nWater usage: 2 units/Day\nWaste produce: 2 units/Day",
       {
         fontFamily: "Kreon",
         fontSize: "16px",
@@ -182,6 +187,17 @@ const drawEditBuilding = (scene) => {
       }
     )
     .setOrigin(0);
+
+  if (buildData?.length > 0) {
+    const buildingDes = buildData.filter((v) => {
+      return v?.id == editBuilding.buildingId;
+    })[0];
+
+    if (buildingDes) {
+      infoTitle.text = buildingDes.title;
+      infoText.text = `Cost: $${buildingDes.cost}\nResident Capacity: ${buildingDes.residentCapacity}\nTax Income: $${buildingDes.taxIncome} per Resident\nElectricity consumption: ${buildingDes.electricityConsumption} units/Day\nWater usage: ${buildingDes.waterUsage} units/Day\nWaste produce: ${buildingDes.wasteProduce} units/Day`;
+    }
+  }
   buildingInformation.add([infoImage, infoTitle, infoText]);
 
   controlContent.add(buildingInformation);
