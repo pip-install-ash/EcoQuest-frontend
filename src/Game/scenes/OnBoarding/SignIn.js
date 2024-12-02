@@ -48,6 +48,7 @@ const createOnBoardingSignInScene = () => {
         // await setPersistence(auth, browserLocalPersistence)
         await signInWithEmailAndPassword(auth, email, password)
           .then(async (userData) => {
+            console.log("userData", userData);
             localStorage.setItem("token", userData._tokenResponse.idToken);
             localStorage.setItem("email", email);
 

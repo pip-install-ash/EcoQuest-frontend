@@ -2,7 +2,8 @@ import toast from "react-hot-toast";
 import { fetchImplementation } from "../../../utils/fetchRequest";
 import { addButton, transitionToNextScene } from "../common";
 import { organizeDialog, showDialog } from "./base";
-import createLeaveLeagueDlg from "../greenCity/League/LeaveLeague";
+import { gameInitMap } from "../../packs/intial.map";
+// import createLeaveLeagueDlg from "../greenCity/League/LeaveLeague";
 
 const leagues = [
   {
@@ -96,9 +97,14 @@ const addRow = (scene, data, y, userData) => {
           const { leagueStats } = data;
           console.log("league resumed", res);
           toast.success(`League resumed successfully`);
+          localStorage.setItem(
+            "gameInitMap",
+            leagueStats?.gameInitMap?.length > 1
+              ? leagueStats.gameInitMap
+              : JSON.stringify(gameInitMap)
+          );
           localStorage.setItem("activeLeagueId", leagueStats.leagueId);
           localStorage.setItem("activeLeagueName", leagueStats.leagueName);
-          localStorage.setItem("gameInitMap", leagueStats.gameInitMap);
 
           transitionToNextScene(scene, "GreenCitycene");
         })

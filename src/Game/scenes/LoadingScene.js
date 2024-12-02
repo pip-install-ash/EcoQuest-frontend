@@ -24,7 +24,6 @@ const createLoadingScene = () => {
         "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js",
         true
       );
-
     },
 
     create: function () {
@@ -35,7 +34,7 @@ const createLoadingScene = () => {
       this.add.image(width / 2, height / 2 - 50, "Logo");
 
       this.add
-        .text(width / 2, height / 2 + 60, "Lorem Ipsum your Eco-Challenge", {
+        .text(width / 2, height / 2 + 60, "Eco-Challenge", {
           ...DefaultFontStyle,
           font: "24px Work Sans",
         })

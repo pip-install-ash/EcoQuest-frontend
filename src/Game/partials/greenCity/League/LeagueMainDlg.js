@@ -93,8 +93,13 @@ const messageData = [
  */
 const createLeagueMainDlg = async (scene, leagueId) => {
   const fetchedleagueData = await fetchUserData(leagueId);
+  const loginedUser = localStorage.getItem("user").length
+    ? JSON.parse(localStorage.getItem("user"))
+    : "";
   const leagueData = fetchedleagueData?.leagueData;
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const isUserOwner = fetchedleagueData?.isOwner;
+
+  console.log(loginedUser, "isOwner>>>", isUserOwner);
 
   const dialogSetting = organizeDialog(scene, "LeagueLobbyDialog", 1205, 795);
   const dialogBackground = dialogSetting[0];
@@ -181,11 +186,13 @@ const createLeagueMainDlg = async (scene, leagueId) => {
       createLeagueSettingDlg(scene);
     })
   );
-  content1.add(
-    addButton(scene, "LeagueLeaveSmallButton", 530, -165, () => {
-      createLeaveLeagueDlg(scene, leagueData, fetchedleagueData?.isOwner); //here
-    })
-  );
+  if (isUserOwner) {
+    content1.add(
+      addButton(scene, "LeagueLeaveSmallButton", 530, -165, () => {
+        createLeaveLeagueDlg(scene, leagueData, isUserOwner); //here
+      })
+    );
+  }
   content1.add(
     addText(
       scene,
@@ -245,7 +252,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   const lobbyContentContainer = scene.add.container(0, 0);
   fetchedleagueData?.userData?.forEach((v) => {
     lobbyContentContainer.add(
-      addUser(scene, v, leagueData, fetchedleagueData?.isOwner)
+      addUser(scene, v, leagueData, isUserOwner, loginedUser)
     );
   });
   makeScrollArea(scene, lobbyContentContainer, 100, 558, 1205, 350, 520);
@@ -595,7 +602,7 @@ export const makeScrollArea = (
     }
   });
 };
-const addUser = (scene, data, leagueData, isOwner) => {
+const addUser = (scene, data, leagueData, isOwner, loginedUser) => {
   const noText = addText(
     scene,
     `${data[0]}`,
@@ -686,26 +693,33 @@ const addUser = (scene, data, leagueData, isOwner) => {
       }
     }
   } else {
-    actionButton = addButton(
-      scene,
-      "ActionLeaveButton",
-      480,
-      30 + data[0] * 72,
-      () => {
-        //TODO: store the Id of the league,userID to leave or you can send inthe scene may be the values and
-        createLeaveLeagueDlg(scene, leagueData, isOwner);
-      }
-    );
+    console.log("userID", data[7]);
+    if (loginedUser?.user_id === data[7]) {
+      actionButton = addButton(
+        scene,
+        "ActionLeaveButton",
+        480,
+        30 + data[0] * 72,
+        () => {
+          createKickUserDlg(scene, data, leagueData.id);
+        }
+      );
+    }
   }
-  return [
+  const elements = [
     noText,
     userText,
     ecoText,
     coinText,
     buildingText,
-    actionButton,
     ...actionStatus,
   ];
+
+  if (actionButton) {
+    elements.push(actionButton);
+  }
+
+  return elements;
 };
 const addMessage = (scene, data, y) => {
   const fixedWidth = 450;
