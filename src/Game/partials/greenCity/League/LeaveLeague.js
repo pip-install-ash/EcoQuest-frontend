@@ -44,7 +44,7 @@ const createLeaveLeagueDlg = (scene, leagueData, isOwner) => {
       await fetchImplementation("delete", `api/leagues/delete/${leagueData.id}`)
         .then((res) => {
           console.log("delete league", res);
-          if (!res.status) {
+          if (!res.success) {
             toast.error(res.message);
             return;
           }

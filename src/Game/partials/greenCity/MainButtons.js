@@ -17,7 +17,6 @@ import createLeagueLeaderboardDlg from "./LeagueLeaderboard";
 const MainButtons = (scene, left, top) => {
   const userData = JSON.parse(localStorage.getItem("user"));
   const isLeagueOn = localStorage.getItem("activeLeagueId");
-  console.log("leageuss", isLeagueOn);
 
   addButton(scene, "HomeButton", left, top, () => {
     if (!scene.isEditBuilding)

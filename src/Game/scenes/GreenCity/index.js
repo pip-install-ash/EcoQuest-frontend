@@ -28,7 +28,6 @@ const CreateGreenCityScene = () => {
         sceneKey: "rexUI",
       });
       // this.leagueIsActive = null;
-      this.accountsStats = null;
       await fetchImplementation("get", "api/buildings/all-buildings")
         .then((res) => {
           const { data } = res;
@@ -36,23 +35,6 @@ const CreateGreenCityScene = () => {
         })
         .catch((err) => {
           console.log("buildings fetch", err);
-        });
-      const isLeagueOn = localStorage.getItem("activeLeagueId");
-      this.isLeagueOn = isLeagueOn;
-      console.log("ddl", isLeagueOn);
-      // this.leagueIsActive = isLeagueOn?.length > 1 ? isLeagueOn : false;
-      await fetchImplementation(
-        "get",
-        isLeagueOn?.length > 1
-          ? `api/league-stats/${isLeagueOn}?isGameOn=true`
-          : "api/points/all-points"
-      )
-        .then((res) => {
-          const { data } = res;
-          this.accountsStats = data;
-        })
-        .catch((err) => {
-          console.log("first fetch error", err);
         });
 
       this.testing = 0;
@@ -63,7 +45,7 @@ const CreateGreenCityScene = () => {
       coloredBackground(this, 0x70a541);
       drawInitalMap(this);
       BasicInfo(this, 36, 52);
-      this.accounts = AmountInfo(this, 1024, 52, this.accountsStats);
+      AmountInfo(this, 1024, 52);
       MainButtons(this, 72, 334);
       BuildUi(this);
       this.dialogContainer = this.add.container(720, 512).setVisible(false);

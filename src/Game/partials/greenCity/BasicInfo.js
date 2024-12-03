@@ -85,6 +85,17 @@ const BasicInfo = (scene, left, top) => {
     0,
     0
   );
+
+  const updatePopulation = (newPopulation) => {
+    const populationText = scene.children.list.find(
+      (child) => child.text && child.text.startsWith("Population count:")
+    );
+    if (populationText) {
+      populationText.setText(`Population count: ${newPopulation}`);
+    }
+  };
+
+  scene.updatePopulation = updatePopulation;
 };
 
 export default BasicInfo;

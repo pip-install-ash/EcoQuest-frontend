@@ -2,20 +2,21 @@ import { getAuth, getIdToken, signOut } from "firebase/auth";
 import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 
-const API_BASE_URL = "http://40.127.12.5:4000/";
-//  "http://localhost:4000/"; //change for deployment
-const logOutUser = async () => {
-  const auth = getAuth();
-  await signOut(auth);
-  localStorage.removeItem("token");
-  localStorage.removeItem("profile");
-  localStorage.removeItem("activeLeagueId");
-  localStorage.removeItem("activeLeagueName");
-  localStorage.removeItem("buildData");
-  localStorage.removeItem("gameInitMap");
-  toast.error("Session expired. Please login again");
-  window.location.href = "/";
-};
+const API_BASE_URL =
+  // "http://40.127.12.5:4000/";
+  "http://localhost:4000/"; //change for deployment
+// const logOutUser = async () => {
+//   const auth = getAuth();
+//   await signOut(auth);
+//   localStorage.removeItem("token");
+//   localStorage.removeItem("profile");
+//   localStorage.removeItem("activeLeagueId");
+//   localStorage.removeItem("activeLeagueName");
+//   localStorage.removeItem("buildData");
+//   localStorage.removeItem("gameInitMap");
+//   toast.error("Session expired. Please login again");
+//   window.location.href = "/";
+// };
 
 function isTokenExpired(token) {
   try {
@@ -50,9 +51,10 @@ export const fetchImplementation = async (method, path, params, headers) => {
   if (currentUser && isTokenExpired(token)) {
     token = await getIdToken(currentUser, true);
     localStorage.setItem("token", token);
-  } else if (!currentUser) {
-    logOutUser();
   }
+  // else if (!currentUser && isTokenExpired(token)) {
+  //   logOutUser();
+  // }
 
   if (token && localStorage.getItem("token") !== token) {
     localStorage.setItem("token", token);

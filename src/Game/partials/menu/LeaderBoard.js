@@ -1,22 +1,23 @@
+import { fetchImplementation } from "../../../utils/fetchRequest";
 import { addButton } from "../common";
 import { organizeDialog, showDialog } from "./base";
 
-const rowData = [
-  [1, "David251", 200],
-  [2, "David251", 200],
-  [3, "David251", 200],
-  [4, "David251", 200],
-  [5, "David251", 200],
-  [6, "David251", 200],
-];
-const rowData2 = [
-  [1, "House of Titan", 200],
-  [2, "House of Titan", 200],
-  [3, "House of Titan", 200],
-  [4, "House of Titan", 200],
-  [5, "House of Titan", 200],
-  [6, "House of Titan", 200],
-];
+// const rowData = [
+//   [1, "David251", 200],
+//   [2, "David251", 200],
+//   [3, "David251", 200],
+//   [4, "David251", 200],
+//   [5, "David251", 200],
+//   [6, "David251", 200],
+// ];
+// const rowData2 = [
+//   [1, "House of Titan", 200],
+//   [2, "House of Titan", 200],
+//   [3, "House of Titan", 200],
+//   [4, "House of Titan", 200],
+//   [5, "House of Titan", 200],
+//   [6, "House of Titan", 200],
+// ];
 
 /**
  * Shows a <LeaderBoard> dialog.
@@ -25,7 +26,20 @@ const rowData2 = [
  * @param {scene}
  * @returns {void}
  */
-const createLeaderboardDlg = (scene) => {
+const createLeaderboardDlg = async (scene) => {
+  const rowData = await fetchImplementation(
+    "get",
+    "api/points/global/leaderboard"
+  )
+    .then((res) => res.data.userListUI)
+    .catch((err) => console.log(err));
+  const rowData2 = await fetchImplementation(
+    "get",
+    "api/points/league/leaderboard"
+  )
+    .then((res) => res.data.leagueListUI)
+    .catch((err) => console.log(err));
+
   const dialogSetting = organizeDialog(
     scene,
     "LeaderboardDialog",
