@@ -1,8 +1,11 @@
+// src/Game/scenes/GreenCity/IsometricManager/EditBuilding.js
+
 import { Buildings } from "../../../../utils/const";
 import { fetchImplementation } from "../../../../utils/fetchRequest";
 import { calcIsForbidden } from "../../../../utils/utils";
 import { addButton, addImage } from "../../../partials/common";
 import { drawBuildings } from "./InitialMap";
+import AmountInfo from "../../../partials/greenCity/AmountInfo";
 
 const createEditBuildingContent = (
   scene,
@@ -33,6 +36,7 @@ const drawEditBuilding = (scene) => {
   const isCreating = scene.editBuilding.isCreating;
   const tileWidth = 96;
   const tileHeight = 64;
+
   const tileX = ((editBuilding.x - editBuilding.y) * tileWidth) / 2;
   const tileY = ((editBuilding.x + editBuilding.y) * tileHeight) / 2;
   const displayX = width / 2 + tileX;
@@ -89,6 +93,7 @@ const drawEditBuilding = (scene) => {
       }
     )
   );
+
   if (building.isBuilding)
     controlContent.add(
       addButton(
@@ -104,14 +109,18 @@ const drawEditBuilding = (scene) => {
           }
           // only push the building to the server if it is a new building
           if (editBuilding.isCreating) {
-            {
-              fetchImplementation("post", "api/user/assets", {
-                ...editBuilding,
-                leagueId,
-              }).catch((error) => {
-                console.log("Error posting assets:", error);
-              });
-            }
+            const buildingDes = buildData.filter((v) => {
+              return v?.id == editBuilding.buildingId;
+            })[0];
+            // Update AmountInfo stats
+            scene.updateStats(buildingDes);
+
+            fetchImplementation("post", "api/user/assets", {
+              ...editBuilding,
+              leagueId,
+            }).catch((error) => {
+              console.log("Error posting assets:", error);
+            });
           }
         }
       )
@@ -191,11 +200,13 @@ const drawEditBuilding = (scene) => {
       infoText.text = `Cost: $${buildingDes.cost}\nResident Capacity: ${buildingDes.residentCapacity}\nTax Income: $${buildingDes.taxIncome} per Resident\nElectricity consumption: ${buildingDes.electricityConsumption} units/Day\nWater usage: ${buildingDes.waterUsage} units/Day\nWaste produce: ${buildingDes.wasteProduce} units/Day`;
     }
   }
+
   buildingInformation.add([infoImage, infoTitle, infoText]);
 
   controlContent.add(buildingInformation);
   scene.controlContent = controlContent;
 };
+
 const discardEditBuilding = (scene) => {
   if (scene.editBuildingSprite) {
     scene.editBuildingSprite.destroy();
@@ -204,6 +215,7 @@ const discardEditBuilding = (scene) => {
     scene.controlContent.destroy();
   }
 };
+
 const placeEditBuilding = (scene) => {
   const editBuilding = scene.editBuilding;
   const building = Buildings.filter((v) => v.id === editBuilding.buildingId)[0];
@@ -231,4 +243,4 @@ const placeEditBuilding = (scene) => {
 };
 
 export default createEditBuildingContent;
-export { drawEditBuilding, discardEditBuilding };
+export { drawEditBuilding, discardEditBuilding, placeEditBuilding };

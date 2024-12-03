@@ -1,3 +1,4 @@
+import { fetchImplementation } from "../../../utils/fetchRequest";
 import { addButton } from "../common";
 
 /**
@@ -7,8 +8,26 @@ import { addButton } from "../common";
  * @param {scene, left, top}
  * @returns {void}
  */
-const AmountInfo = (scene, left, top, dataValue) => {
+const AmountInfo = async (scene, left, top) => {
+  const isLeagueOn = localStorage.getItem("activeLeagueId");
+
+  // this.leagueIsActive = isLeagueOn?.length > 1 ? isLeagueOn : false;
+  const accountsStats = await fetchImplementation(
+    "get",
+    isLeagueOn?.length > 1
+      ? `api/league-stats/${isLeagueOn}?isGameOn=true`
+      : "api/points/all-points"
+  )
+    .then((res) => {
+      return isLeagueOn?.length > 1 ? res.data.leagueStats : res.data;
+    })
+    .catch((err) => {
+      console.log("first fetch error", err);
+    });
+
+  const dataValue = accountsStats;
   scene.waterTap = 200;
+
   const graphics = scene.add.graphics();
   graphics.fillStyle(0x000000, 0.4);
   graphics.fillRoundedRect(left, top + 5, 160, 32, 16);
@@ -21,7 +40,7 @@ const AmountInfo = (scene, left, top, dataValue) => {
   addButton(scene, "WaterIcon", left + 335, top + 80, () => {
     waterText.text = scene.waterTap++;
   });
-  console.log("acc");
+
   //Eco point
   const ecoPoints = scene.add
     .text(left + 15, top + 21, "200", {
@@ -54,7 +73,6 @@ const AmountInfo = (scene, left, top, dataValue) => {
       fontSize: "18px",
     })
     .setOrigin(0, 0.5);
-
   // update value accourding to the dataValues of the user account
   if (dataValue) {
     if (dataValue.ecoPoints !== undefined) {
@@ -69,23 +87,30 @@ const AmountInfo = (scene, left, top, dataValue) => {
     if (dataValue.water !== undefined) {
       waterText.text = dataValue.water;
     }
+    if (dataValue.population !== undefined) {
+      scene.updatePopulation(dataValue.population);
+    }
   }
-  return {
-    updateWaterText: (newText) => {
-      console.log("called Update water", newText);
-      waterText.text = newText;
-    },
-    updateEcoPoints: (newText) => {
-      console.log("called updateEcoPoints", newText);
-      ecoPoints.text = newText;
-    },
-    updateGoldCoins: (newText) => {
-      goldCoins.setText(newText);
-    },
-    updateElePoints: (newText) => {
-      elePoints.text = newText;
-    },
+
+  const updateStats = (newStats) => {
+    if (newStats.ecoPoints !== undefined) {
+      ecoPoints.text = dataValue.ecoPoints - newStats.ecoPoints;
+    }
+    if (newStats.coins !== undefined) {
+      goldCoins.text = dataValue.coins - (newStats.cost + newStats.taxIncome);
+    }
+    if (newStats.electricityConsumption !== undefined) {
+      elePoints.text = dataValue.electricity - newStats.electricityConsumption;
+    }
+    if (newStats.waterUsage !== undefined) {
+      waterText.text = dataValue.water - newStats.waterUsage;
+    }
+    if (newStats.residentCapacity !== undefined) {
+      scene.updatePopulation(dataValue.population + newStats.residentCapacity);
+    }
   };
+
+  scene.updateStats = updateStats;
 };
 
 export default AmountInfo;
