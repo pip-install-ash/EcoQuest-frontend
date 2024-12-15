@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 
 const transferOwnership = async (leagueID, newOwnerID, leaveLeague) => {
   try {
-    console.log("transferOwnership", leagueID, newOwnerID, leaveLeague);
     // const response = await fetchImplementation(
     //   "post",
     //   `api/leagues/transfer-ownership?leaveLeague=${leaveLeague}`,
@@ -33,7 +32,6 @@ const createTransferOwnershipDlg = async (scene, leagueData) => {
     "get",
     `api/leagues/league-users/${leagueData.id}`
   );
-  console.log("USERS>>", usersInLeague);
   const dialogSetting = organizeDialog(
     scene,
     "TransferOwnershipDialog",
@@ -41,7 +39,6 @@ const createTransferOwnershipDlg = async (scene, leagueData) => {
     408
   );
   const stayButton = addButton(scene, "TransferStayButton", 0, 40, async () => {
-    console.log("DROP IT", dropDownList.text);
     await transferOwnership(1, 2, false);
     // closeDialog(scene);
   });

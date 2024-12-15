@@ -85,8 +85,6 @@ const addRow = (scene, data, y, userData) => {
     430,
     y + 10,
     async () => {
-      console.log("Resume");
-
       await fetchImplementation("get", `api/league-stats/${data.leagueID}`, {})
         .then((res) => {
           const { data, success } = res;
@@ -95,7 +93,6 @@ const addRow = (scene, data, y, userData) => {
             return;
           }
           const { leagueStats } = data;
-          console.log("league resumed", res);
           toast.success(`League resumed successfully`);
           localStorage.setItem(
             "gameInitMap",
@@ -115,7 +112,6 @@ const addRow = (scene, data, y, userData) => {
     }
   );
   const leaveButton = addButton(scene, "LeaveButton", 560, y + 10, () => {
-    console.log("Leave", data);
     // createLeaveLeagueDlg(scene, data, data.isOwner) // this is not working Issue with UI
   });
   const rect = scene.add.rectangle(0, y + 46, 1314, 1, 0x2d3020).setOrigin(0.5);

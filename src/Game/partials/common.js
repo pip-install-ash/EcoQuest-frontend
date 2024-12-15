@@ -543,9 +543,7 @@ const addComboBox = (scene, x, y, w, options, placeholder) => {
         },
       },
 
-      setValueCallback: function (dropDownList, value, previousValue) {
-        console.log(value);
-      },
+      setValueCallback: function (dropDownList, value, previousValue) {},
       value: undefined,
     })
     .setOrigin(0, 0.5)

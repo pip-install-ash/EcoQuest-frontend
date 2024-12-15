@@ -12,7 +12,6 @@ import { closeDialog, organizeDialog, showDialog } from "../../menu/base";
  */
 const createKickUserDlg = (scene, userData, activeLeagueId) => {
   const dialogSetting = organizeDialog(scene, "KickUserDialog", 674, 408);
-  console.log(activeLeagueId, "kickUSer OUt>>", userData);
   const leagueSettings = addText(
     scene,
     `Are you sure want to remove\n${userData[1]} from this league?`,
@@ -26,7 +25,6 @@ const createKickUserDlg = (scene, userData, activeLeagueId) => {
     0.5
   );
   const yesButton = addButton(scene, "YesContinueButton", 0, 20, async () => {
-    console.log("Continue");
     // 7 is the index of the user id in the userData array
     await fetchImplementation("post", `api/leagues/remove-user-from-league`, {
       userID: userData[7],

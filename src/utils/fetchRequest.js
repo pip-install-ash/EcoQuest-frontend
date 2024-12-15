@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 
 const API_BASE_URL = "http://40.127.12.5:4000/";
-// "http://localhost:4000/"; //change for deployment
+// "http://40.127.12.5:3000/"; //change for deployment
 // const logOutUser = async () => {
 //   const auth = getAuth();
 //   await signOut(auth);

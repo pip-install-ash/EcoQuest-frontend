@@ -99,8 +99,6 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   const leagueData = fetchedleagueData?.leagueData;
   const isUserOwner = fetchedleagueData?.isOwner;
 
-  console.log(loginedUser, "isOwner>>>", isUserOwner);
-
   const dialogSetting = organizeDialog(scene, "LeagueLobbyDialog", 1205, 795);
   const dialogBackground = dialogSetting[0];
 
@@ -693,7 +691,6 @@ const addUser = (scene, data, leagueData, isOwner, loginedUser) => {
       }
     }
   } else {
-    console.log("userID", data[7]);
     if (loginedUser?.user_id === data[7]) {
       actionButton = addButton(
         scene,

@@ -43,7 +43,6 @@ const createLeaveLeagueDlg = (scene, leagueData, isOwner) => {
     async () => {
       await fetchImplementation("delete", `api/leagues/delete/${leagueData.id}`)
         .then((res) => {
-          console.log("delete league", res);
           if (!res.success) {
             toast.error(res.message);
             return;
@@ -64,7 +63,6 @@ const createLeaveLeagueDlg = (scene, leagueData, isOwner) => {
     100,
     () => {
       if (!isOwner) {
-        console.log("owner>>>", isOwner);
         toast.error("You are not the owner of this league");
         return;
       }

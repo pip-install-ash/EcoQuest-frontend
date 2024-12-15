@@ -42,7 +42,6 @@ const createJoinLeagueDlg = async (scene) => {
       joiningCode,
     })
       .then((res) => {
-        console.log("league joined", res);
         if (res.success) {
           toast.success(`You have successfully joined the league.`);
         } else {

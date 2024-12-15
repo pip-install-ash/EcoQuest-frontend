@@ -54,7 +54,6 @@ const BasicInfo = (scene, left, top) => {
 
   // Fill and stroke the shape
   graphics.fillPath();
-  console.log("isLeagueOn", isLeagueOn);
   // show on whenever user is from a league
   if (isLeagueOn) {
     addText(

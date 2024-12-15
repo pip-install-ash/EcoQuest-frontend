@@ -11,8 +11,6 @@ import { fetchImplementation } from "../../../utils/fetchRequest";
 // import { useEffect } from 'react';
 
 const CreateGreenCityScene = () => {
-  console.log("CreateGreenCityScene");
-
   return {
     key: "GreenCitycene",
     preload: async function () {

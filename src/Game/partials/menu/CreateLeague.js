@@ -42,14 +42,6 @@ const createCreateLeagueDlg = (scene) => {
       return;
     }
 
-    console.log(">>POPO>>", noOfPlayers.split(" ").pop());
-    console.log(
-      leagueName,
-      noOfPlayers,
-      "Create Button Clicked",
-      scene.statusValue === "Private",
-      scene.statusValue
-    );
     // leagueName, numberOfPlayers, (userIDs = []), isPrivate;
     await fetchImplementation("post", `api/leagues/create`, {
       leagueName,
