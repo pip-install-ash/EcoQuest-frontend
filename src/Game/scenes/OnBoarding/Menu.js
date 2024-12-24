@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import { fetchImplementation } from "../../../utils/fetchRequest";
 import {
   addButton,
@@ -46,7 +45,7 @@ const createOnBoardingMenuScene = () => {
         localStorage.setItem("activeLeagueId", "");
         localStorage.setItem("activeLeagueName", "");
 
-        mapDetails.length > 1
+        mapDetails?.length > 1
           ? localStorage.setItem("gameInitMap", mapDetails)
           : localStorage.setItem("gameInitMap", ""); // to get the uodated Map
 

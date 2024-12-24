@@ -33,7 +33,7 @@ const reports = [
     content: "Ended: 12 hours ago",
   },
   {
-    title: "Earth Quake",
+    title: "Earth Lake",
     content: "Ended: 16 hours ago",
   },
 ];
@@ -50,8 +50,28 @@ const defaultTitleStyle = {
  * @param {scene}
  * @returns {void}
  */
-const createDisasterDlg = (scene) => {
+
+// const getEcoDisaster = (leagueID, isActive) => {
+//   const url = isActive
+//     ? "api/challenges/active-challenges"
+//     : "api/challenges/completed-challenges";
+
+//   return fetchImplementation("get", url, {
+//     ...(leagueID?.length > 0 ? { leagueID } : {}),
+//   })
+//     .then((responseData) => {
+//       console.log("fwtched data>>", responseData);
+//       return responseData;
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching challenges:", error);
+//       return [];
+//     });
+// };
+
+const createDisasterDlg = async (scene) => {
   const dialogSetting = organizeLeftPanel(scene);
+  // const activeChallenges = await getEcoDisaster(leagueID, true);
 
   const disasterTitle = addText(
     scene,

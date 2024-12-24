@@ -1,4 +1,4 @@
-import { addButton } from "../common";
+import { addButton, addImage } from "../common";
 
 /**
  * Initialize Dialog background and close button.
@@ -40,53 +40,66 @@ const organizeDialog = (
 };
 
 function displayNotification(scene, notification, yOffset) {
-  // Background Box
-  const box = scene.add.rectangle(700, yOffset, 900, 80, 0x222222, 0.9);
-  // box.setStrokeStyle(2, 0xffffff);
-
+  const adjustXAxis = -700;
   // Notification Icon
-  const icon = scene.add.image(100, yOffset, notification.notificationType);
-  icon.setScale(0.8);
+  const iconType =
+    notification.notificationType === "disaster"
+      ? "Disaster"
+      : notification.notificationType === "ecoChallenge"
+      ? "EcoChallenge"
+      : "Resources";
+  // this.load.image("assets/ui-components/Disaster.png");
+  const notifyIcon = addImage(
+    scene,
+    iconType,
+    150 + adjustXAxis,
+    yOffset + 15
+  ).setDisplaySize(50, 50);
 
   // Notification Text
-  const text = scene.add
-    .text(150, yOffset - 20, notification.message, {
-      fontSize: "14px",
-      color: "#ffffff",
-      fontFamily: "Arial",
-    })
+  const textDom = scene.add
+    .dom(adjustXAxis + 220, yOffset - 20)
+    .createFromHTML(
+      `<div style="font-family: Inter; font-size: 20px; color: #ffffff; max-width: 650px; text-align:left; line-height:30px">
+         ${notification.message}
+       </div>`
+    )
     .setOrigin(0);
 
-  // Parse HTML for rich formatting
-  text.setText(notification.message.replace(/<[^>]+>/g, ""));
-
   // Time Elapsed
-  const timeText = scene.add.text(780, yOffset - 20, notification.time, {
-    fontSize: "14px",
-    color: "#bbbbbb",
-    fontFamily: "Arial",
-  });
+  const timeText = scene.add.text(
+    adjustXAxis + 900,
+    yOffset - 10,
+    notification.time,
+    {
+      fontFamily: "Inter",
+      fontSize: 16,
+      color: "#bbbbbb",
+    }
+  );
 
-  // Go Button
-  const goButton = addButton(scene, "GoButton", 950, yOffset, () => {
+  const goButton = addButton(scene, "GoButton", 450, yOffset + 15, () => {
     console.log("Go Button Clicked for:", notification.message);
   });
 
-  const clearButton = addButton(scene, "ClearButton", 1000, yOffset, () => {
+  const clearButton = addButton(scene, "ClearButton", 550, yOffset + 15, () => {
     clearAllButton();
   });
 
-  scene.dialogContainer.add(goButton, clearButton);
+  const line = scene.add.graphics();
+  line.lineStyle(2, 0xffffff, 1);
+  line.lineBetween(adjustXAxis + 50, yOffset + 90, 650, yOffset + 90);
+
   const clearAllButton = () => {
-    box.destroy();
-    text.destroy();
+    textDom.destroy();
     timeText.destroy();
     goButton.destroy();
     clearButton.destroy();
-    icon.destroy();
+    line.destroy();
+    notifyIcon.destroy();
   };
 
-  return clearAllButton;
+  return [textDom, timeText, notifyIcon, goButton, line, clearButton];
 }
 
 /**

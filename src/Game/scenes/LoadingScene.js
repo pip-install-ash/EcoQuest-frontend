@@ -10,6 +10,8 @@ const createLoadingScene = () => {
     key: "LoadingScene",
     preload: function () {
       assetPack.forEach((element) => {
+        element.key === "Disaster" && console.log("DISASTER");
+        console.log("sss", element.key);
         if (element.type === "image") this.load.image(element.key, element.url);
       });
 

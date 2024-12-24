@@ -1,477 +1,492 @@
 [
-    {
-        "type": "image",
-        "key": "Panel",
-        "url": "assets/ui-components/dialogs/Panel.png"
-    },
-    {
-        "type": "image",
-        "key": "TutorialSettingDialog",
-        "url": "assets/ui-components/dialogs/TutorialSetting.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueLeaderboardDialog",
-        "url": "assets/ui-components/dialogs/LeagueLeaderboard.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueLobbyDialog",
-        "url": "assets/ui-components/dialogs/LeagueLobby.png"
-    },
-    {
-        "type": "image",
-        "key": "MessageFooter",
-        "url": "assets/ui-components/dialogs/MessageFooter.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueMessageDialog",
-        "url": "assets/ui-components/dialogs/LeagueMessage.png"
-    },
-    {
-        "type": "image",
-        "key": "BuildingRuleDialog",
-        "url": "assets/ui-components/dialogs/BuildingRule.png"
-    },
-    {
-        "type": "image",
-        "key": "AwardButton",
-        "url": "assets/ui-components/buttons/Game/AwardButton.png"
-    },
-    {
-        "type": "image",
-        "key": "BankIcon",
-        "url": "assets/ui-components/buttons/Game/BankIcon.png"
-    },
-    {
-        "type": "image",
-        "key": "BuildButton",
-        "url": "assets/ui-components/buttons/Game/BuildButton.png"
-    },
-    {
-        "type": "image",
-        "key": "ElectricityIcon",
-        "url": "assets/ui-components/buttons/Game/ElectricityIcon.png"
-    },
-    {
-        "type": "image",
-        "key": "GroupButton",
-        "url": "assets/ui-components/buttons/Game/GroupButton.png"
-    },
-    {
-        "type": "image",
-        "key": "HomeButton",
-        "url": "assets/ui-components/buttons/Game/HomeButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeafButton",
-        "url": "assets/ui-components/buttons/Game/LeafButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeafIcon",
-        "url": "assets/ui-components/buttons/Game/LeafIcon.png"
-    },
-    {
-        "type": "image",
-        "key": "LeftOffButton",
-        "url": "assets/ui-components/buttons/Game/LeftOffButton.png"
-    },
-    {
-        "type": "image",
-        "key": "NoGuideButton",
-        "url": "assets/ui-components/buttons/Game/NoGuideButton.png"
-    },
-    {
-        "type": "image",
-        "key": "ReportButton",
-        "url": "assets/ui-components/buttons/Game/ReportButton.png"
-    },
-    {
-        "type": "image",
-        "key": "RightOffButton",
-        "url": "assets/ui-components/buttons/Game/RightOffButton.png"
-    },
-    {
-        "type": "image",
-        "key": "Rubish",
-        "url": "assets/ui-components/buttons/Game/Rubish.png"
-    },
-    {
-        "type": "image",
-        "key": "SettingButton",
-        "url": "assets/ui-components/buttons/Game/SettingButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabEcoButton",
-        "url": "assets/ui-components/buttons/Game/TabEcoButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabEcoOffButton",
-        "url": "assets/ui-components/buttons/Game/TabEcoOffButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabGreenButton",
-        "url": "assets/ui-components/buttons/Game/TabGreenButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabGreenOffButton",
-        "url": "assets/ui-components/buttons/Game/TabGreenOffButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabHomeButton",
-        "url": "assets/ui-components/buttons/Game/TabHomeButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabHomeOffButton",
-        "url": "assets/ui-components/buttons/Game/TabHomeOffButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabIndustryButton",
-        "url": "assets/ui-components/buttons/Game/TabIndustryButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabIndustryOffButton",
-        "url": "assets/ui-components/buttons/Game/TabIndustryOffButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabRoadButton",
-        "url": "assets/ui-components/buttons/Game/TabRoadButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TabRoadOffButton",
-        "url": "assets/ui-components/buttons/Game/TabRoadOffButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueLobbyButton",
-        "url": "assets/ui-components/buttons/Game/LeagueLobbyButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueLobbyButtonOff",
-        "url": "assets/ui-components/buttons/Game/LeagueLobbyButtonOff.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueMessageButton",
-        "url": "assets/ui-components/buttons/Game/LeagueMessageButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueMessageButtonOff",
-        "url": "assets/ui-components/buttons/Game/LeagueMessageButtonOff.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueRequestButton",
-        "url": "assets/ui-components/buttons/Game/LeagueRequestButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueRequestButtonOff",
-        "url": "assets/ui-components/buttons/Game/LeagueRequestButtonOff.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueCodeButton",
-        "url": "assets/ui-components/buttons/Game/LeagueCodeButton.png"
-    },
-    {
-        "type": "image",
-        "key": "InviteFriendButton",
-        "url": "assets/ui-components/buttons/Game/InviteFriendButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueSettingButton",
-        "url": "assets/ui-components/buttons/Game/LeagueSettingButton.png"
-    },
-    {
-        "type": "image",
-        "key": "LeagueLeaveSmallButton",
-        "url": "assets/ui-components/buttons/Game/LeagueLeaveSmallButton.png"
-    },
-    {
-        "type": "image",
-        "key": "UserBell",
-        "url": "assets/ui-components/buttons/Game/UserBell.png"
-    },
-    {
-        "type": "image",
-        "key": "WarningButton",
-        "url": "assets/ui-components/buttons/Game/WarningButton.png"
-    },
-    {
-        "type": "image",
-        "key": "WaterIcon",
-        "url": "assets/ui-components/buttons/Game/WaterIcon.png"
-    },
-    {
-        "type": "image",
-        "key": "YesGuideButton",
-        "url": "assets/ui-components/buttons/Game/YesGuideButton.png"
-    },
-    {
-        "type": "image",
-        "key": "ActionLeaveButton",
-        "url": "assets/ui-components/buttons/Game/ActionLeaveButton.png"
-    },
-    {
-        "type": "image",
-        "key": "SendMessageButton",
-        "url": "assets/ui-components/buttons/Game/SendMessageButton.png"
-    },
-    {
-        "type": "image",
-        "key": "Offline",
-        "url": "assets/ui-components/buttons/Game/Offline.png"
-    },
-    {
-        "type": "image",
-        "key": "Online",
-        "url": "assets/ui-components/buttons/Game/Online.png"
-    },
-    {
-        "type": "image",
-        "key": "ActionKickButton",
-        "url": "assets/ui-components/buttons/Game/ActionKickButton.png"
-    },
-    {
-        "type": "image",
-        "key": "SendRequestSmallButton",
-        "url": "assets/ui-components/buttons/Game/SendButton.png"
-    },
-    {
-        "type": "image",
-        "key": "CancelButton",
-        "url": "assets/ui-components/buttons/Game/CancelButton.png"
-    },
-    {
-        "type": "image",
-        "key": "RequestBackground",
-        "url": "assets/ui-components/buttons/Game/RequestBackground.png"
-    },
-    {
-        "type": "image",
-        "key": "DonateButton",
-        "url": "assets/ui-components/buttons/Game/DonateButton.png"
-    },
-    {
-        "type": "image",
-        "key": "SendRequestButton",
-        "url": "assets/ui-components/buttons/Game/SendRequestButton.png"
-    },
-    {
-        "type": "image",
-        "key": "RequestButton",
-        "url": "assets/ui-components/buttons/Game/RequestButton.png"
-    },
-    {
-        "type": "image",
-        "key": "ViewButton",
-        "url": "assets/ui-components/buttons/Game/ViewButton.png"
-    },
-    {
-        "type": "image",
-        "key": "DiasterReportButton",
-        "url": "assets/ui-components/buttons/Game/DiasterReportButton.png"
-    },
-    {
-        "type": "image",
-        "key": "InformationButtonOff",
-        "url": "assets/ui-components/buttons/Game/InformationButtonOff.png"
-    },
-    {
-        "type": "image",
-        "key": "ReportButtonOff",
-        "url": "assets/ui-components/buttons/Game/ReportButtonOff.png"
-    },
-    {
-        "type": "image",
-        "key": "InformationButton",
-        "url": "assets/ui-components/buttons/Game/InformationButton.png"
-    },
-    {
-        "type": "image",
-        "key": "CompletedButton",
-        "url": "assets/ui-components/buttons/Game/CompletedButton.png"
-    },
-    {
-        "type": "image",
-        "key": "ActiveButtonOff",
-        "url": "assets/ui-components/buttons/Game/ActiveButtonOff.png"
-    },
-    {
-        "type": "image",
-        "key": "CompletedButtonOff",
-        "url": "assets/ui-components/buttons/Game/CompletedButtonOff.png"
-    },
-    {
-        "type": "image",
-        "key": "ActiveButton",
-        "url": "assets/ui-components/buttons/Game/ActiveButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TickButton",
-        "url": "assets/ui-components/buttons/Game/TickButton.png"
-    },
-    {
-        "type": "image",
-        "key": "CrossButton",
-        "url": "assets/ui-components/buttons/Game/CrossButton.png"
-    },
-    {
-        "type": "image",
-        "key": "InviteButton",
-        "url": "assets/ui-components/buttons/Game/InviteButton.png"
-    },
-    {
-        "type": "image",
-        "key": "DeleteLeagueButton",
-        "url": "assets/ui-components/buttons/Game/DeleteLeagueButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TransferOwnershipButton",
-        "url": "assets/ui-components/buttons/Game/TransferOwnershipButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TransferLeaveButton",
-        "url": "assets/ui-components/buttons/Game/TransferLeaveButton.png"
-    },
-    {
-        "type": "image",
-        "key": "TransferStayButton",
-        "url": "assets/ui-components/buttons/Game/TransferStayButton.png"
-    },
-    {
-        "type": "image",
-        "key": "BackButton",
-        "url": "assets/ui-components/buttons/Game/BackButton.png"
-    },
-    {
-        "type": "image",
-        "key": "SaveButton",
-        "url": "assets/ui-components/buttons/Game/SaveButton.png"
-    },
-    {
-        "type": "image",
-        "key": "YesContinueButton",
-        "url": "assets/ui-components/buttons/Game/YesContinueButton.png"
-    },
-    {
-        "type": "image",
-        "key": "NoCancelButton",
-        "url": "assets/ui-components/buttons/Game/NoCancelButton.png"
-    },
-    {
-        "type": "image",
-        "key": "RequestDialog",
-        "url": "assets/ui-components/dialogs/Request.png"
-    },
-    {
-        "type": "image",
-        "key": "LeftPanel",
-        "url": "assets/ui-components/dialogs/LeftPanel.png"
-    },
-    {
-        "type": "image",
-        "key": "InviteFriendDialog",
-        "url": "assets/ui-components/dialogs/InviteFriend.png"
-    },
-    {
-        "type": "image",
-        "key": "TransferOwnershipDialog",
-        "url": "assets/ui-components/dialogs/TransferOwnership.png"
-    },
-    {
-        "type": "image",
-        "key": "KickUserDialog",
-        "url": "assets/ui-components/dialogs/KickUser.png"
-    },
-    {
-        "type": "image",
-        "key": "LeaveLeagueDialog",
-        "url": "assets/ui-components/dialogs/LeaveLeague.png"
-    },
-    {
-        "type": "image",
-        "key": "RequestResourceDialog",
-        "url": "assets/ui-components/dialogs/RequestResource.png"
-    },
-    {
-        "type": "image",
-        "key": "DiscardButton",
-        "url": "assets/ui-components/buttons/Building/DiscardButton.png"
-    },
-    {
-        "type": "image",
-        "key": "DestroyButton",
-        "url": "assets/ui-components/buttons/Building/DestroyButton.png"
-    },
-    {
-        "type": "image",
-        "key": "PlaceButton",
-        "url": "assets/ui-components/buttons/Building/PlaceButton.png"
-    },
-    {
-        "type": "image",
-        "key": "RotateButton",
-        "url": "assets/ui-components/buttons/Building/RotateButton.png"
-    },
-    {
-        "type": "image",
-        "key": "BuildingInfo",
-        "url": "assets/ui-components/dialogs/BuildingInfo.png"
-    },
-    {
-        "type": "image",
-        "key": "GuideSkipButton",
-        "url": "assets/ui-components/buttons/Game/GuideSkip.png"
-    },
-    {
-        "type": "image",
-        "key": "GuideLeftButton",
-        "url": "assets/ui-components/buttons/Game/GuideLeft.png"
-    },
-    {
-        "type": "image",
-        "key": "GuideRightButton",
-        "url": "assets/ui-components/buttons/Game/GuideRight.png"
-    },
-    {
-        "type": "image",
-        "key": "GuideTriangle",
-        "url": "assets/ui-components/buttons/Game/GuideTriangle.png"
-    },
-    {
-        "type": "image",
-        "key": "Assistant",
-        "url": "assets/ui-components/Assistant.png"
-    },
-    {
-        "type": "image",
-        "key": "Hand",
-        "url": "assets/ui-components/Hand.png"
-    },
-    {
-        "type": "image",
-        "key": "NoRoad",
-        "url": "assets/ui-components/NoRoad.png"
-    }
+  {
+    "type": "image",
+    "key": "Panel",
+    "url": "assets/ui-components/dialogs/Panel.png"
+  },
+  {
+    "type": "image",
+    "key": "TutorialSettingDialog",
+    "url": "assets/ui-components/dialogs/TutorialSetting.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueLeaderboardDialog",
+    "url": "assets/ui-components/dialogs/LeagueLeaderboard.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueLobbyDialog",
+    "url": "assets/ui-components/dialogs/LeagueLobby.png"
+  },
+  {
+    "type": "image",
+    "key": "MessageFooter",
+    "url": "assets/ui-components/dialogs/MessageFooter.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueMessageDialog",
+    "url": "assets/ui-components/dialogs/LeagueMessage.png"
+  },
+  {
+    "type": "image",
+    "key": "BuildingRuleDialog",
+    "url": "assets/ui-components/dialogs/BuildingRule.png"
+  },
+  {
+    "type": "image",
+    "key": "AwardButton",
+    "url": "assets/ui-components/buttons/Game/AwardButton.png"
+  },
+  {
+    "type": "image",
+    "key": "BankIcon",
+    "url": "assets/ui-components/buttons/Game/BankIcon.png"
+  },
+  {
+    "type": "image",
+    "key": "BuildButton",
+    "url": "assets/ui-components/buttons/Game/BuildButton.png"
+  },
+  {
+    "type": "image",
+    "key": "ElectricityIcon",
+    "url": "assets/ui-components/buttons/Game/ElectricityIcon.png"
+  },
+  {
+    "type": "image",
+    "key": "GroupButton",
+    "url": "assets/ui-components/buttons/Game/GroupButton.png"
+  },
+  {
+    "type": "image",
+    "key": "HomeButton",
+    "url": "assets/ui-components/buttons/Game/HomeButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeafButton",
+    "url": "assets/ui-components/buttons/Game/LeafButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeafIcon",
+    "url": "assets/ui-components/buttons/Game/LeafIcon.png"
+  },
+  {
+    "type": "image",
+    "key": "LeftOffButton",
+    "url": "assets/ui-components/buttons/Game/LeftOffButton.png"
+  },
+  {
+    "type": "image",
+    "key": "NoGuideButton",
+    "url": "assets/ui-components/buttons/Game/NoGuideButton.png"
+  },
+  {
+    "type": "image",
+    "key": "ReportButton",
+    "url": "assets/ui-components/buttons/Game/ReportButton.png"
+  },
+  {
+    "type": "image",
+    "key": "RightOffButton",
+    "url": "assets/ui-components/buttons/Game/RightOffButton.png"
+  },
+  {
+    "type": "image",
+    "key": "Rubish",
+    "url": "assets/ui-components/buttons/Game/Rubish.png"
+  },
+  {
+    "type": "image",
+    "key": "SettingButton",
+    "url": "assets/ui-components/buttons/Game/SettingButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabEcoButton",
+    "url": "assets/ui-components/buttons/Game/TabEcoButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabEcoOffButton",
+    "url": "assets/ui-components/buttons/Game/TabEcoOffButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabGreenButton",
+    "url": "assets/ui-components/buttons/Game/TabGreenButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabGreenOffButton",
+    "url": "assets/ui-components/buttons/Game/TabGreenOffButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabHomeButton",
+    "url": "assets/ui-components/buttons/Game/TabHomeButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabHomeOffButton",
+    "url": "assets/ui-components/buttons/Game/TabHomeOffButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabIndustryButton",
+    "url": "assets/ui-components/buttons/Game/TabIndustryButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabIndustryOffButton",
+    "url": "assets/ui-components/buttons/Game/TabIndustryOffButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabRoadButton",
+    "url": "assets/ui-components/buttons/Game/TabRoadButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TabRoadOffButton",
+    "url": "assets/ui-components/buttons/Game/TabRoadOffButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueLobbyButton",
+    "url": "assets/ui-components/buttons/Game/LeagueLobbyButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueLobbyButtonOff",
+    "url": "assets/ui-components/buttons/Game/LeagueLobbyButtonOff.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueMessageButton",
+    "url": "assets/ui-components/buttons/Game/LeagueMessageButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueMessageButtonOff",
+    "url": "assets/ui-components/buttons/Game/LeagueMessageButtonOff.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueRequestButton",
+    "url": "assets/ui-components/buttons/Game/LeagueRequestButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueRequestButtonOff",
+    "url": "assets/ui-components/buttons/Game/LeagueRequestButtonOff.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueCodeButton",
+    "url": "assets/ui-components/buttons/Game/LeagueCodeButton.png"
+  },
+  {
+    "type": "image",
+    "key": "InviteFriendButton",
+    "url": "assets/ui-components/buttons/Game/InviteFriendButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueSettingButton",
+    "url": "assets/ui-components/buttons/Game/LeagueSettingButton.png"
+  },
+  {
+    "type": "image",
+    "key": "LeagueLeaveSmallButton",
+    "url": "assets/ui-components/buttons/Game/LeagueLeaveSmallButton.png"
+  },
+  {
+    "type": "image",
+    "key": "UserBell",
+    "url": "assets/ui-components/buttons/Game/UserBell.png"
+  },
+  {
+    "type": "image",
+    "key": "WarningButton",
+    "url": "assets/ui-components/buttons/Game/WarningButton.png"
+  },
+  {
+    "type": "image",
+    "key": "WaterIcon",
+    "url": "assets/ui-components/buttons/Game/WaterIcon.png"
+  },
+  {
+    "type": "image",
+    "key": "YesGuideButton",
+    "url": "assets/ui-components/buttons/Game/YesGuideButton.png"
+  },
+  {
+    "type": "image",
+    "key": "ActionLeaveButton",
+    "url": "assets/ui-components/buttons/Game/ActionLeaveButton.png"
+  },
+  {
+    "type": "image",
+    "key": "SendMessageButton",
+    "url": "assets/ui-components/buttons/Game/SendMessageButton.png"
+  },
+  {
+    "type": "image",
+    "key": "Offline",
+    "url": "assets/ui-components/buttons/Game/Offline.png"
+  },
+  {
+    "type": "image",
+    "key": "Online",
+    "url": "assets/ui-components/buttons/Game/Online.png"
+  },
+  {
+    "type": "image",
+    "key": "ActionKickButton",
+    "url": "assets/ui-components/buttons/Game/ActionKickButton.png"
+  },
+  {
+    "type": "image",
+    "key": "SendRequestSmallButton",
+    "url": "assets/ui-components/buttons/Game/SendButton.png"
+  },
+  {
+    "type": "image",
+    "key": "CancelButton",
+    "url": "assets/ui-components/buttons/Game/CancelButton.png"
+  },
+  {
+    "type": "image",
+    "key": "RequestBackground",
+    "url": "assets/ui-components/buttons/Game/RequestBackground.png"
+  },
+  {
+    "type": "image",
+    "key": "DonateButton",
+    "url": "assets/ui-components/buttons/Game/DonateButton.png"
+  },
+  {
+    "type": "image",
+    "key": "SendRequestButton",
+    "url": "assets/ui-components/buttons/Game/SendRequestButton.png"
+  },
+  {
+    "type": "image",
+    "key": "RequestButton",
+    "url": "assets/ui-components/buttons/Game/RequestButton.png"
+  },
+  {
+    "type": "image",
+    "key": "ViewButton",
+    "url": "assets/ui-components/buttons/Game/ViewButton.png"
+  },
+  {
+    "type": "image",
+    "key": "DiasterReportButton",
+    "url": "assets/ui-components/buttons/Game/DiasterReportButton.png"
+  },
+  {
+    "type": "image",
+    "key": "InformationButtonOff",
+    "url": "assets/ui-components/buttons/Game/InformationButtonOff.png"
+  },
+  {
+    "type": "image",
+    "key": "ReportButtonOff",
+    "url": "assets/ui-components/buttons/Game/ReportButtonOff.png"
+  },
+  {
+    "type": "image",
+    "key": "InformationButton",
+    "url": "assets/ui-components/buttons/Game/InformationButton.png"
+  },
+  {
+    "type": "image",
+    "key": "CompletedButton",
+    "url": "assets/ui-components/buttons/Game/CompletedButton.png"
+  },
+  {
+    "type": "image",
+    "key": "ActiveButtonOff",
+    "url": "assets/ui-components/buttons/Game/ActiveButtonOff.png"
+  },
+  {
+    "type": "image",
+    "key": "CompletedButtonOff",
+    "url": "assets/ui-components/buttons/Game/CompletedButtonOff.png"
+  },
+  {
+    "type": "image",
+    "key": "ActiveButton",
+    "url": "assets/ui-components/buttons/Game/ActiveButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TickButton",
+    "url": "assets/ui-components/buttons/Game/TickButton.png"
+  },
+  {
+    "type": "image",
+    "key": "CrossButton",
+    "url": "assets/ui-components/buttons/Game/CrossButton.png"
+  },
+  {
+    "type": "image",
+    "key": "InviteButton",
+    "url": "assets/ui-components/buttons/Game/InviteButton.png"
+  },
+  {
+    "type": "image",
+    "key": "DeleteLeagueButton",
+    "url": "assets/ui-components/buttons/Game/DeleteLeagueButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TransferOwnershipButton",
+    "url": "assets/ui-components/buttons/Game/TransferOwnershipButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TransferLeaveButton",
+    "url": "assets/ui-components/buttons/Game/TransferLeaveButton.png"
+  },
+  {
+    "type": "image",
+    "key": "TransferStayButton",
+    "url": "assets/ui-components/buttons/Game/TransferStayButton.png"
+  },
+  {
+    "type": "image",
+    "key": "BackButton",
+    "url": "assets/ui-components/buttons/Game/BackButton.png"
+  },
+  {
+    "type": "image",
+    "key": "SaveButton",
+    "url": "assets/ui-components/buttons/Game/SaveButton.png"
+  },
+  {
+    "type": "image",
+    "key": "YesContinueButton",
+    "url": "assets/ui-components/buttons/Game/YesContinueButton.png"
+  },
+  {
+    "type": "image",
+    "key": "NoCancelButton",
+    "url": "assets/ui-components/buttons/Game/NoCancelButton.png"
+  },
+  {
+    "type": "image",
+    "key": "RequestDialog",
+    "url": "assets/ui-components/dialogs/Request.png"
+  },
+  {
+    "type": "image",
+    "key": "LeftPanel",
+    "url": "assets/ui-components/dialogs/LeftPanel.png"
+  },
+  {
+    "type": "image",
+    "key": "InviteFriendDialog",
+    "url": "assets/ui-components/dialogs/InviteFriend.png"
+  },
+  {
+    "type": "image",
+    "key": "TransferOwnershipDialog",
+    "url": "assets/ui-components/dialogs/TransferOwnership.png"
+  },
+  {
+    "type": "image",
+    "key": "KickUserDialog",
+    "url": "assets/ui-components/dialogs/KickUser.png"
+  },
+  {
+    "type": "image",
+    "key": "LeaveLeagueDialog",
+    "url": "assets/ui-components/dialogs/LeaveLeague.png"
+  },
+  {
+    "type": "image",
+    "key": "RequestResourceDialog",
+    "url": "assets/ui-components/dialogs/RequestResource.png"
+  },
+  {
+    "type": "image",
+    "key": "DiscardButton",
+    "url": "assets/ui-components/buttons/Building/DiscardButton.png"
+  },
+  {
+    "type": "image",
+    "key": "DestroyButton",
+    "url": "assets/ui-components/buttons/Building/DestroyButton.png"
+  },
+  {
+    "type": "image",
+    "key": "PlaceButton",
+    "url": "assets/ui-components/buttons/Building/PlaceButton.png"
+  },
+  {
+    "type": "image",
+    "key": "RotateButton",
+    "url": "assets/ui-components/buttons/Building/RotateButton.png"
+  },
+  {
+    "type": "image",
+    "key": "BuildingInfo",
+    "url": "assets/ui-components/dialogs/BuildingInfo.png"
+  },
+  {
+    "type": "image",
+    "key": "GuideSkipButton",
+    "url": "assets/ui-components/buttons/Game/GuideSkip.png"
+  },
+  {
+    "type": "image",
+    "key": "GuideLeftButton",
+    "url": "assets/ui-components/buttons/Game/GuideLeft.png"
+  },
+  {
+    "type": "image",
+    "key": "GuideRightButton",
+    "url": "assets/ui-components/buttons/Game/GuideRight.png"
+  },
+  {
+    "type": "image",
+    "key": "GuideTriangle",
+    "url": "assets/ui-components/buttons/Game/GuideTriangle.png"
+  },
+  {
+    "type": "image",
+    "key": "Assistant",
+    "url": "assets/ui-components/Assistant.png"
+  },
+  {
+    "type": "image",
+    "key": "Hand",
+    "url": "assets/ui-components/Hand.png"
+  },
+  {
+    "type": "image",
+    "key": "NoRoad",
+    "url": "assets/ui-components/NoRoad.png"
+  },
+  {
+    "type": "image",
+    "key": "Disaster",
+    "url": "assets/ui-components/Disaster.png"
+  },
+  {
+    "type": "image",
+    "key": "EcoChallenge",
+    "url": "assets/ui-components/EcoChallenge.png"
+  },
+  {
+    "type": "image",
+    "key": "Resources",
+    "url": "assets/ui-components/Resources.png"
+  }
 ]

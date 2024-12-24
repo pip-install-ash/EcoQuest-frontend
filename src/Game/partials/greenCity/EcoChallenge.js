@@ -54,7 +54,7 @@ const defaultTitleStyle = {
 
 const getEcoChallenges = (leagueID, isActive) => {
   const url = isActive
-    ? "api/challenges/active-challenges"
+    ? "api/challenges/challenge-progress"
     : "api/challenges/completed-challenges";
 
   return fetchImplementation("get", url, {

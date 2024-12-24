@@ -5,7 +5,6 @@ import { fetchImplementation } from "../../../../utils/fetchRequest";
 import { calcIsForbidden } from "../../../../utils/utils";
 import { addButton, addImage } from "../../../partials/common";
 import { drawBuildings } from "./InitialMap";
-import AmountInfo from "../../../partials/greenCity/AmountInfo";
 
 const createEditBuildingContent = (
   scene,
