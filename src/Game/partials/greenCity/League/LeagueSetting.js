@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { addButton, addComboBox, addText } from "../../common";
 import { closeDialog, organizeDialog, showDialog } from "../../menu/base";
 
@@ -23,11 +24,62 @@ const createLeagueSettingDlg = (scene) => {
     0.5,
     0.5
   );
-  const privateButton = addButton(scene, "PrivateButton", -290, -50, () => {});
-  const publicButton = addButton(scene, "PublicButton", 280, -50, () => {});
-  const saveButton = addButton(scene, "SaveButton", 0, 170, () => {
-    closeDialog(scene);
+  const privateButton = addButton(scene, "PrivateButton", -290, -50, () => {
+    scene.statusValue = "Private";
+    statusText.text = "Status: Private";
   });
+  const publicButton = addButton(scene, "PublicButton", 280, -50, () => {
+    scene.statusValue = "Public";
+    statusText.text = "Status: Public";
+  });
+  const saveButton = addButton(scene, "SaveButton", 0, 170, async () => {
+    const leagueName = nameInputFiled.text;
+    const noOfPlayers = dropDownList.text;
+    if (leagueName === "" || noOfPlayers === "") {
+      toast.error("Please fill all the fields");
+      return;
+    }
+
+    console.log(
+      leagueName,
+      "noOfPlayers",
+      noOfPlayers,
+      "scene>>>",
+      scene.leagueData
+    );
+    // await fetchImplementation("post", `api/leagues/create`, {
+    //   leagueName,
+    //   numberOfPlayers: noOfPlayers.split(" ").pop(),
+    //   isPrivate: scene.statusValue === "Private",
+    // })
+    //   .then((res) => {
+    //     if (res.success) {
+    //       toast.success("League created successfully");
+    //     } else {
+    //       toast.error("Error creating league");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error", err);
+    //     toast.error("Error creating league");
+    //   });
+
+    // closeDialog(scene);
+  });
+
+  const statusText = addText(
+    scene,
+    "Status: Public",
+    -450,
+    220,
+    "Inter",
+    "24px",
+    "bold",
+    "#FFF",
+    0.5,
+    0.5
+  );
+
   const nameInputFiled = scene.add.rexInputText(-290, 68, 480, 56, {
     type: "text",
     text: "",
@@ -57,7 +109,7 @@ const createLeagueSettingDlg = (scene) => {
     publicButton,
     saveButton,
     nameInputFiled,
-    dropDownList
+    dropDownList,
   ]);
   showDialog(scene);
 };

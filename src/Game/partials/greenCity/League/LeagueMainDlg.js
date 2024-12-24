@@ -84,6 +84,23 @@ const messageData = [
     text: "Gorem dfgsdfgdsfgdg",
   },
 ];
+
+const preLoadLeagueRequests = async (leagueID) => {
+  try {
+    console.log("leagaa>>", leagueID);
+    return await fetchImplementation(
+      "get",
+      `api/coins-requests/pending-requests`,
+      {
+        leagueID,
+      }
+    ).then((res) => res.data);
+  } catch (error) {
+    console.error("Failed to fetch user data:", error);
+    return [];
+  }
+};
+
 /**
  * Shows a <LeagueMainDlg> dialog.
  *
@@ -93,12 +110,14 @@ const messageData = [
  */
 const createLeagueMainDlg = async (scene, leagueId) => {
   const fetchedleagueData = await fetchUserData(leagueId);
+  const leaguesRequests = await preLoadLeagueRequests(leagueId);
+  let selectedDonation = null;
   const loginedUser = localStorage.getItem("user").length
     ? JSON.parse(localStorage.getItem("user"))
     : "";
   const leagueData = fetchedleagueData?.leagueData;
   const isUserOwner = fetchedleagueData?.isOwner;
-
+  scene.leagueData = leagueData;
   const dialogSetting = organizeDialog(scene, "LeagueLobbyDialog", 1205, 795);
   const dialogBackground = dialogSetting[0];
 
@@ -208,7 +227,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   content1.add(
     addText(
       scene,
-      "Average Eco points: 12,730",
+      "Average Eco points: " + leagueData?.averageEcoPoints,
       0,
       -70,
       "Inter",
@@ -248,12 +267,23 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   );
 
   const lobbyContentContainer = scene.add.container(0, 0);
+  lobbyContentContainer.height = 150;
   fetchedleagueData?.userData?.forEach((v) => {
     lobbyContentContainer.add(
       addUser(scene, v, leagueData, isUserOwner, loginedUser)
     );
+    lobbyContentContainer.height += 100;
   });
-  makeScrollArea(scene, lobbyContentContainer, 100, 558, 1205, 350, 520);
+
+  makeScrollArea(
+    scene,
+    lobbyContentContainer,
+    100,
+    558,
+    1205,
+    350,
+    lobbyContentContainer.height
+  );
 
   content1.add(lobbyContentContainer);
 
@@ -302,26 +332,44 @@ const createLeagueMainDlg = async (scene, leagueId) => {
     })
   );
   const requestContentContainer = scene.add.container(0, 0);
-  requestContentContainer.add(addImage(scene, "RequestBackground", -150, -150));
-  requestContentContainer.add(
-    addText(
-      scene,
-      "Michael Scott",
-      -530,
-      -170,
-      "Inter",
-      "18px",
-      "Bold",
-      "#FCB651",
-      0,
-      1
-    )
+  requestContentContainer.height = 400;
+  console.log("leaguesRequests INSIDE>> :", leaguesRequests);
+
+  // I didn't add the await so that I can have the array data parallel to the requestContentContainer
+  // await leaguesRequests
+  //   .then((res) => {
+  leaguesRequests?.forEach((data, index) => {
+    const yOffset = -150 + index * 145;
+
+    addRequest(scene, data, requestContentContainer, yOffset);
+    // Donate Button
+    requestContentContainer.add(
+      addButton(scene, "DonateButton", 170, yOffset + 30, () => {
+        selectedDonation = data;
+        console.log(data);
+        donateDialogContainer.setVisible(true);
+      })
+    );
+
+    requestContentContainer.height += 150;
+  });
+  // })
+  // .catch((err) => {
+  //   console.log("ERROR >>", err);
+  // });
+
+  // requestData?.
+
+  makeScrollArea(
+    scene,
+    requestContentContainer,
+    100,
+    265,
+    1205,
+    480,
+    requestContentContainer.height
   );
-  requestContentContainer.add(
-    addButton(scene, "DonateButton", 170, -120, () => {
-      donateDialogContainer.setVisible(true);
-    })
-  );
+
   const donateDialogContainer = scene.add.container(0, 0);
   donateDialogContainer.add(
     scene.add
@@ -332,19 +380,44 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   donateDialogContainer.add(addImage(scene, "RequestDialog", 0, 0));
   const donateCancelBtn = addButton(scene, "CancelButton", -150, 220, () => {
     donateDialogContainer.setVisible(false);
+    selectedDonation = null;
   });
+  // Donate me poinst request Area
   const donateSendBtn = addButton(
     scene,
     "SendRequestSmallButton",
     140,
     220,
     () => {
-      donateDialogContainer.setVisible(false);
+      // fetchImplementation("post", "api/coins-requests/send-coins", {
+      //   coinsRequestID
+      // })
+      //   .then((res) => {
+      //     if (res.success) {
+      //       toast.success("Sent successfully");
+      //       donateDialogContainer.setVisible(false);
+      //     } else {
+      //       toast.error(res?.message || "Failed to donate.");
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.error("Failed to donate.:", err);
+      //     toast.error(err.message);
+      //   });
+
+      console.log(
+        scene.donateCoinText.text,
+        "\ndonateWaterText",
+        scene.donateWaterText.text,
+        "donateEleText",
+        scene.donateEleText.text
+      );
+      console.log(leagueData.id, "Donation Sent", selectedDonation);
     }
   );
   scene.donateEleText = addText(
     scene,
-    "300KW",
+    "200KW",
     -230,
     -152,
     "m-plus-rounded-1c",
@@ -378,6 +451,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
     0,
     0.5
   );
+
   scene.donateEleSlider = addSlider(
     scene,
     1,
@@ -425,14 +499,16 @@ const createLeagueMainDlg = async (scene, leagueId) => {
     },
     4
   );
+
   scene.eleInputField = scene.add.rexInputText(220, -115, 70, 56, {
     type: "number",
     text: "300",
     fontSize: "20px",
     fontFamily: "Kreon",
     placeholder: "",
-    color: "#000",
+    color: "#9999",
   });
+
   scene.eleInputField.on("textchange", () => {
     const inputValue = parseInt(scene.eleInputField.text);
     if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 300) {
@@ -445,7 +521,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   });
   scene.coinInputField = scene.add.rexInputText(220, 0, 70, 56, {
     type: "number",
-    text: "30000",
+    text: "327",
     fontSize: "20px",
     fontFamily: "Kreon",
     placeholder: "",
@@ -469,6 +545,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
     placeholder: "",
     color: "#000",
   });
+
   scene.waterInputField.on("textchange", () => {
     const inputValue = parseInt(scene.waterInputField.text);
     if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 200) {
@@ -479,6 +556,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
       scene.donateWaterSlider[2].displayWidth = sliderValue * 380 - 6;
     }
   });
+
   donateDialogContainer.add(donateCancelBtn);
   donateDialogContainer.add(donateSendBtn);
   donateDialogContainer.add(scene.donateEleSlider);
@@ -492,6 +570,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   donateDialogContainer.add(scene.waterInputField);
   donateDialogContainer.setVisible(false);
 
+  // below is the request modal data
   const requestDialogContainer = scene.add.container(0, 0);
   requestDialogContainer.add(
     scene.add
@@ -502,7 +581,59 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   requestDialogContainer.add(addImage(scene, "RequestResourceDialog", 0, 0));
   requestDialogContainer.add(
     addButton(scene, "RequestButton", 0, 180, () => {
-      requestDialogContainer.setVisible(false);
+      fetchImplementation("post", "api/coins-requests/request-coins", {
+        ...(leagueData?.id ? { leagueID: leagueData.id } : {}),
+        coinsRequested: {
+          electricity: requestEleInputField.text,
+          water: requestWaterInputField.text,
+          money: requestCoinInputField.text,
+        },
+      })
+        .then((res) => {
+          if (res.success) {
+            toast.success("Request sent successfully");
+            const leaguesRequests = preLoadLeagueRequests(leagueId);
+            leaguesRequests
+              .then((res) => {
+                res?.forEach((data, index) => {
+                  const yOffset = -150 + index * 145;
+
+                  addRequest(scene, data, requestContentContainer, yOffset);
+                  // Donate Button
+                  requestContentContainer.add(
+                    addButton(scene, "DonateButton", 170, yOffset + 30, () => {
+                      selectedDonation = data;
+                      console.log(data);
+                      donateDialogContainer.setVisible(true);
+                    })
+                  );
+
+                  requestContentContainer.height += 350;
+                });
+              })
+              .catch((err) => {
+                console.log("ERROR >>", err);
+              });
+            requestDialogContainer.setVisible(false);
+          } else {
+            toast.error(res?.message || "Failed to send request");
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to send request:", err);
+          toast.error(err.message);
+        });
+
+      console.log(
+        leagueData.id,
+        "LEAGUE ID\n",
+        scene.donateCoinText.text,
+        "RequestedREsorces>>",
+        requestEleInputField.text,
+        "<< ELE >>",
+        requestCoinInputField.text,
+        requestWaterInputField.text
+      );
     })
   );
   const requestEleInputField = scene.add.rexInputText(220, -90, 70, 56, {
@@ -515,7 +646,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   });
   const requestCoinInputField = scene.add.rexInputText(220, 0, 70, 56, {
     type: "number",
-    text: "30000",
+    text: "30",
     fontSize: "20px",
     fontFamily: "Kreon",
     placeholder: "",
@@ -775,4 +906,73 @@ const addMessage = (scene, data, y) => {
     messageHeight,
   };
 };
+
+const addRequest = (scene, data, requestContentContainer, yOffset) => {
+  const coinRequested = data.coinsRequested;
+  // Background for the row
+  requestContentContainer.add(
+    addImage(scene, "RequestBackground", -150, yOffset)
+  );
+
+  requestContentContainer.add(
+    addText(
+      scene,
+      data.name || "ASHLO",
+      -530,
+      yOffset - 20,
+      "Inter",
+      "18px",
+      "Bold",
+      "#FCB651",
+      0,
+      1
+    )
+  );
+
+  requestContentContainer.add(
+    addText(
+      scene,
+      coinRequested.electricity || "0",
+      -440,
+      yOffset + 30,
+      "Inter",
+      "16px",
+      "Bold",
+      "#FFFFFF",
+      0,
+      1
+    )
+  );
+
+  requestContentContainer.add(
+    addText(
+      scene,
+      coinRequested.money || "0",
+      -240,
+      yOffset + 30,
+      "Inter",
+      "16px",
+      "Bold",
+      "#FFFFFF",
+      0,
+      1
+    )
+  );
+
+  requestContentContainer.add(
+    addText(
+      scene,
+      coinRequested.water || "0",
+      -15,
+      yOffset + 30,
+      "Inter",
+      "16px",
+      "Bold",
+      "#FFFFFF",
+      0,
+      1
+    )
+  );
+};
+
 export default createLeagueMainDlg;

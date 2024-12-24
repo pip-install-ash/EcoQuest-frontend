@@ -26,7 +26,7 @@ const AmountInfo = async (scene, left, top) => {
     });
 
   const dataValue = accountsStats;
-  scene.waterTap = 200;
+  // scene.waterTap = 200;
 
   const graphics = scene.add.graphics();
   graphics.fillStyle(0x000000, 0.4);
@@ -38,7 +38,7 @@ const AmountInfo = async (scene, left, top) => {
   addButton(scene, "ElectricityIcon", left + 145, top + 80, () => {});
   addButton(scene, "BankIcon", left + 335, top + 20, () => {});
   addButton(scene, "WaterIcon", left + 335, top + 80, () => {
-    waterText.text = scene.waterTap++;
+    // waterText.text = scene.waterTap++;
   });
 
   //Eco point
@@ -76,7 +76,7 @@ const AmountInfo = async (scene, left, top) => {
   // update value accourding to the dataValues of the user account
   if (dataValue) {
     if (dataValue.ecoPoints !== undefined) {
-      ecoPoints.text = dataValue.ecoPoints;
+      ecoPoints.setText(dataValue.ecoPoints);
     }
     if (dataValue.coins !== undefined) {
       goldCoins.text = dataValue.coins;
@@ -94,19 +94,24 @@ const AmountInfo = async (scene, left, top) => {
 
   const updateStats = (newStats) => {
     if (newStats.ecoPoints !== undefined) {
-      ecoPoints.text = dataValue.ecoPoints - newStats.ecoPoints;
+      dataValue.ecoPoints -= newStats.ecoPoints;
+      ecoPoints.setText(dataValue.ecoPoints);
     }
-    if (newStats.coins !== undefined) {
-      goldCoins.text = dataValue.coins - (newStats.cost + newStats.taxIncome);
+    if (newStats.cost !== undefined) {
+      dataValue.coins -= newStats.cost + newStats.taxIncome;
+      goldCoins.text = dataValue.coins;
     }
     if (newStats.electricityConsumption !== undefined) {
-      elePoints.text = dataValue.electricity - newStats.electricityConsumption;
+      dataValue.electricity -= newStats.electricityConsumption;
+      elePoints.setText(dataValue.electricity);
     }
     if (newStats.waterUsage !== undefined) {
-      waterText.text = dataValue.water - newStats.waterUsage;
+      dataValue.water -= newStats.waterUsage;
+      waterText.text = dataValue.water;
     }
     if (newStats.residentCapacity !== undefined) {
-      scene.updatePopulation(dataValue.population + newStats.residentCapacity);
+      dataValue.population += newStats.residentCapacity;
+      scene.updatePopulation(dataValue.population);
     }
   };
 

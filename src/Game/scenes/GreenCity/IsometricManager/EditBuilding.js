@@ -29,7 +29,7 @@ const createEditBuildingContent = (
 
 const drawEditBuilding = (scene) => {
   const editBuilding = scene.editBuilding;
-  const buildData = JSON.parse(localStorage.getItem("buildData"));
+  const buildData = JSON.parse(localStorage.getItem("buildData") || "");
   const leagueId = localStorage.getItem("activeLeagueId");
 
   const { width, height } = scene.scale;
@@ -109,7 +109,7 @@ const drawEditBuilding = (scene) => {
           }
           // only push the building to the server if it is a new building
           if (editBuilding.isCreating) {
-            const buildingDes = buildData.filter((v) => {
+            const buildingDes = buildData?.filter((v) => {
               return v?.id == editBuilding.buildingId;
             })[0];
             // Update AmountInfo stats
@@ -151,6 +151,19 @@ const drawEditBuilding = (scene) => {
         -scene.editBuildingSprite.height - 30,
         async () => {
           discardEditBuilding(scene);
+
+          const buildingDes = buildData?.filter((v) => {
+            return v?.id == editBuilding.buildingId;
+          })[0];
+
+          // Update residentCapacity stats
+          scene.updateStats(
+            buildingDes.id == 1
+              ? buildingDes
+              : {
+                  residentCapacity: -buildingDes.residentCapacity,
+                }
+          );
           //removing/destroying an asset
           await fetchImplementation("delete", "api/user/assets", {
             buildingId: editBuilding.buildingId,

@@ -35,7 +35,9 @@ function populateList(scene, container) {
     itemText.setInteractive(); // Makes each item interactive
 
     // Handle item selection
-    itemText.on("pointerdown", () => {});
+    itemText.on("pointerdown", () => {
+      console.log("PointerDOwn");
+    });
 
     container.add(itemText); // Add the item to the container
   }

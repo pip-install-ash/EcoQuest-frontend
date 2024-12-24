@@ -1,43 +1,47 @@
+import { fetchImplementation } from "../../../utils/fetchRequest";
 import { addButton, addImage, addText } from "../common";
 import { organizeLeftPanel, showLeftPanel } from "../menu/base";
 
 const Actives = [
   {
-    title: "Upgrade 2 Houses: 1/2",
-    coin: 200,
+    message: "Upgrade 2 Houses: 1/2",
+    points: 200,
     checkable: true,
+    endTime: new Date("2024-12-23T23:59:59Z"),
   },
   {
-    title: "Build 4 Residential houses: 1/4",
-    coin: 200,
+    message: "Build 4 Residential houses: 1/4",
+    points: 200,
     checkable: true,
+    endTime: new Date("2024-12-24T23:59:59Z"),
   },
   {
-    title: "Build a Factory: 0/1",
-    coin: 200,
+    message: "Build a Factory: 0/1",
+    points: 200,
     checkable: true,
+    endTime: new Date("2024-12-23T08:59:59Z"),
   },
-  {
-    title: "Build a School: 0/1",
-    coin: 200,
-    checkable: false,
-  },
-  {
-    title: "Build a Hospital: 0/1",
-    coin: 200,
-    checkable: false,
-  },
-  {
-    title: "Build two Wind mill: 0/2",
-    coin: 200,
-    checkable: false,
-  },
+  // {
+  //   message: "Build a School: 0/1",
+  //   points: 200,
+  //   checkable: false,
+  // },
+  // {
+  //   message: "Build a Hospital: 0/1",
+  //   points: 200,
+  //   checkable: false,
+  // },
+  // {
+  //   message: "Build two Wind mill: 0/2",
+  //   points: 200,
+  //   checkable: false,
+  // },
 ];
 
 const completeds = [
   {
-    title: "Build one house: 1/1",
-    coin: 200,
+    message: "Build one house: 1/1",
+    points: 200,
     time: "2 hours ago",
   },
 ];
@@ -47,6 +51,25 @@ const defaultTitleStyle = {
   fontStyle: "bold",
   color: "#fff",
 };
+
+const getEcoChallenges = (leagueID, isActive) => {
+  const url = isActive
+    ? "api/challenges/active-challenges"
+    : "api/challenges/completed-challenges";
+
+  return fetchImplementation("get", url, {
+    ...(leagueID?.length > 0 ? { leagueID } : {}),
+  })
+    .then((responseData) => {
+      console.log("fwtched data>>", responseData);
+      return responseData;
+    })
+    .catch((error) => {
+      console.error("Error fetching challenges:", error);
+      return [];
+    });
+};
+
 /**
  * Shows a <EcoChallenge> dialog.
  *
@@ -54,9 +77,23 @@ const defaultTitleStyle = {
  * @param {scene}
  * @returns {void}
  */
-const createEcoChallengeDlg = (scene) => {
-  const dialogSetting = organizeLeftPanel(scene);
 
+const createEcoChallengeDlg = async (scene) => {
+  let intervals = [];
+  const isSceneClosed = () => {
+    intervals.forEach(clearInterval);
+    intervals = [];
+  };
+  if (!scene.createEcoChallengeDlg) {
+    scene.createEcoChallengeDlg = {};
+  }
+  const dialogSetting = organizeLeftPanel(scene, isSceneClosed);
+  scene.createEcoChallengeDlg.isSceneClosed = isSceneClosed;
+  const leagueID = localStorage.getItem("activeLeagueId");
+  const activeChallenges = await getEcoChallenges(leagueID, true);
+  const inActiveChallenges = await getEcoChallenges(leagueID, false);
+
+  console.log("API REQUESTS >>", activeChallenges.data, inActiveChallenges);
   const disasterTitle = addText(
     scene,
     "Eco-Challenge",
@@ -69,7 +106,6 @@ const createEcoChallengeDlg = (scene) => {
     0.5,
     0.5
   );
-
   //Tabs
   const activeButton = addButton(scene, "ActiveButton", -570, -350, () => {
     activeButton.setTexture("ActiveButton");
@@ -93,13 +129,16 @@ const createEcoChallengeDlg = (scene) => {
   //Active Tab
   const activeContent = scene.add.container(-690, -280);
   let displayY = 0;
-  let activeContents = [];
-  Actives.forEach((v) => {
-    const resultContent = addActive(scene, v, displayY);
-    activeContents = [...activeContents, ...resultContent.data];
-    displayY += resultContent.contentHeight;
-  });
-  activeContent.add([...activeContents]);
+
+  if (activeChallenges?.data?.length > 0) {
+    let activeContents = [];
+    activeChallenges.data.forEach((v) => {
+      const resultContent = addActive(scene, v, displayY, intervals);
+      activeContents = [...activeContents, ...resultContent.data];
+      displayY += resultContent.contentHeight;
+    });
+    activeContent.add([...activeContents]);
+  }
 
   //Completed Tab
   const completedContent = scene.add.container(-690, -280);
@@ -124,45 +163,77 @@ const createEcoChallengeDlg = (scene) => {
   showLeftPanel(scene);
 };
 
-const addActive = (scene, data, y) => {
+const addActive = (scene, data, y, intervals) => {
   const title = scene.add
-    .text(0, y, data.title, defaultTitleStyle)
+    .text(0, y, data.message, defaultTitleStyle)
     .setOrigin(0, 0);
   const coin = addImage(scene, "BankIcon", 10, y + 40).setDisplaySize(20, 20);
   const coinText = scene.add
-    .text(20, y + 40, `+${data.coin}`, {
+    .text(20, y + 40, `+${data.points}`, {
       fontFamily: "Inter",
       fontSize: "16px",
       color: "#D7E057",
     })
     .setOrigin(0, 0.5);
+
   const timeText = scene.add
-    .text(520, y + 55, "00:00:20:00", {
+    .text(520, y + 55, "00:00:00:00", {
       fontFamily: "Inter",
       fontSize: "16px",
       color: "#83C747",
     })
     .setOrigin(1, 0.5);
-  let additionalButtons = [];
-  if (data.checkable) {
-    const tickButton = addButton(scene, "TickButton", 450, y + 20, () => {});
-    const crossButton = addButton(scene, "CrossButton", 500, y + 20, () => {});
-    additionalButtons = [tickButton, crossButton];
-  }
 
+  const endTime = new Date(data.endTime); // Ensure endTime is a Date object
+  data.endTime && updateTime(endTime, intervals, timeText);
+
+  // let additionalButtons = [];
+  // if (data.checkable) {
+  //   const tickButton = addButton(scene, "TickButton", 450, y + 20, () => {});
+  //   const crossButton = addButton(scene, "CrossButton", 500, y + 20, () => {});
+  //   additionalButtons = [tickButton, crossButton];
+  // }
+  // ...additionalButtons
   return {
-    data: [title, coin, coinText, timeText, ...additionalButtons],
+    data: [title, coin, coinText, timeText],
     contentHeight: 100,
   };
+};
+const updateTime = (endTime, intervals, timeText) => {
+  // Set interval and clear if scene becomes hidden
+  const newInterval = setInterval(() => {
+    const currentTime = new Date();
+    const timeDiff = endTime - currentTime;
+    if (timeDiff <= 0) {
+      timeText?.setText("00:00:00:00");
+      clearInterval(newInterval);
+      return;
+    }
+    const hours = String(
+      Math.floor((timeDiff / (1000 * 60 * 60)) % 24)
+    ).padStart(2, "0");
+    const minutes = String(Math.floor((timeDiff / (1000 * 60)) % 60)).padStart(
+      2,
+      "0"
+    );
+    const seconds = String(Math.floor((timeDiff / 1000) % 60)).padStart(2, "0");
+    const milliseconds = String(Math.floor((timeDiff % 1000) / 10)).padStart(
+      2,
+      "0"
+    );
+
+    timeText?.setText(`${hours}:${minutes}:${seconds}:${milliseconds}`);
+  }, 100);
+  intervals.push(newInterval);
 };
 
 const addCompleted = (scene, data, y) => {
   const title = scene.add
-    .text(0, y, data.title, defaultTitleStyle)
+    .text(0, y, data.message, defaultTitleStyle)
     .setOrigin(0, 0);
   const coin = addImage(scene, "BankIcon", 10, y + 40).setDisplaySize(20, 20);
   const coinText = scene.add
-    .text(20, y + 40, `+${data.coin}`, {
+    .text(20, y + 40, `+${data.points}`, {
       fontFamily: "Inter",
       fontSize: "16px",
       color: "#D7E057",
