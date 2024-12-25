@@ -165,7 +165,14 @@ const createEcoChallengeDlg = async (scene) => {
 
 const addActive = (scene, data, y, intervals) => {
   const title = scene.add
-    .text(0, y, data.message, defaultTitleStyle)
+    .text(
+      0,
+      y,
+      `${data.message}: ${data.progress?.count || 0}/${
+        data?.requiredCount || 0
+      }`,
+      defaultTitleStyle
+    )
     .setOrigin(0, 0);
   const coin = addImage(scene, "BankIcon", 10, y + 40).setDisplaySize(20, 20);
   const coinText = scene.add
