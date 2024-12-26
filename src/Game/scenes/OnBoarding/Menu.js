@@ -101,6 +101,9 @@ const createOnBoardingMenuScene = () => {
 
       this.dialogContainer = this.add.container(720, 512).setVisible(false);
       fadeThisScreen(this);
+      if (this.sound && this.sound.context.state === "running") {
+        this.sound.stopAll();
+      }
     },
   };
 };

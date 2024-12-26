@@ -52,6 +52,11 @@ const CreateGreenCityScene = () => {
         createTutorialSettingDlg(this, () => {});
 
       fadeThisScreen(this);
+      const homeMusic = this.sound.add("homeAudio");
+      this.sound.volume = parseFloat(localStorage.getItem("volume") || "0.5");
+      homeMusic.play({
+        loop: true,
+      });
     },
   };
 };

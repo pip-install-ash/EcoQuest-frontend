@@ -1,5 +1,6 @@
 // src/Game/scenes/GreenCity/IsometricManager/EditBuilding.js
 
+import toast from "react-hot-toast";
 import { Buildings } from "../../../../utils/const";
 import { fetchImplementation } from "../../../../utils/fetchRequest";
 import { calcIsForbidden } from "../../../../utils/utils";
@@ -101,25 +102,41 @@ const drawEditBuilding = (scene) => {
         isCreating ? 0 : -25,
         -scene.editBuildingSprite.height - 30,
         async () => {
-          if (!editBuilding.isForbidden) {
-            discardEditBuilding(scene);
-            scene.isEditBuilding = false;
-            placeEditBuilding(scene);
-          }
-          // only push the building to the server if it is a new building
           if (editBuilding.isCreating) {
             const buildingDes = buildData?.filter((v) => {
               return v?.id == editBuilding.buildingId;
             })[0];
-            // Update AmountInfo stats
-            scene.updateStats(buildingDes);
 
-            fetchImplementation("post", "api/user/assets", {
-              ...editBuilding,
-              leagueId,
-            }).catch((error) => {
-              console.log("Error posting assets:", error);
-            });
+            if (
+              (scene.dataValue?.ecoPoints - (buildingDes?.ecoPoints || 0) > 0,
+              scene.dataValue?.coins - buildingDes.cost > 0 &&
+                scene.dataValue?.electricity -
+                  buildingDes.electricityConsumption >
+                  0 &&
+                scene.dataValue?.water - buildingDes.waterUsage > 0)
+            ) {
+              scene.sound.add("buildAudio").play();
+              scene.updateStats(buildingDes);
+              fetchImplementation("post", "api/user/assets", {
+                ...editBuilding,
+                leagueId,
+              }).catch((error) => {
+                console.log("Error posting assets:", error);
+              });
+            } else {
+              toast.error(
+                "You don't have enough resources to build this asset"
+              );
+              discardEditBuilding(scene);
+              scene.isEditBuilding = false;
+              return;
+            }
+          }
+
+          if (!editBuilding.isForbidden) {
+            discardEditBuilding(scene);
+            scene.isEditBuilding = false;
+            placeEditBuilding(scene);
           }
         }
       )
@@ -163,6 +180,7 @@ const drawEditBuilding = (scene) => {
                   residentCapacity: -buildingDes.residentCapacity,
                 }
           );
+          scene.sound.add("destoryAudio").play();
           //removing/destroying an asset
           await fetchImplementation("delete", "api/user/assets", {
             buildingId: editBuilding.buildingId,

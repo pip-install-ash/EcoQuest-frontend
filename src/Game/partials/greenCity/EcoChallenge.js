@@ -91,9 +91,9 @@ const createEcoChallengeDlg = async (scene) => {
   scene.createEcoChallengeDlg.isSceneClosed = isSceneClosed;
   const leagueID = localStorage.getItem("activeLeagueId");
   const activeChallenges = await getEcoChallenges(leagueID, true);
-  const inActiveChallenges = await getEcoChallenges(leagueID, false);
+  const completedChallenges = await getEcoChallenges(leagueID, false);
 
-  console.log("API REQUESTS >>", activeChallenges.data, inActiveChallenges);
+  console.log("API REQUESTS >>", activeChallenges.data, completedChallenges);
   const disasterTitle = addText(
     scene,
     "Eco-Challenge",
@@ -144,12 +144,15 @@ const createEcoChallengeDlg = async (scene) => {
   const completedContent = scene.add.container(-690, -280);
   displayY = 0;
   let completedContents = [];
-  completeds.forEach((v) => {
-    const resultContent = addCompleted(scene, v, displayY);
-    completedContents = [...completedContents, ...resultContent.data];
-    displayY += resultContent.contentHeight;
-  });
-  completedContent.add([...completedContents]);
+
+  if (completedChallenges?.data?.length > 0) {
+    completedChallenges.data.forEach((v) => {
+      const resultContent = addCompleted(scene, v, displayY);
+      completedContents = [...completedContents, ...resultContent.data];
+      displayY += resultContent.contentHeight;
+    });
+    completedContent.add([...completedContents]);
+  }
   completedContent.setVisible(false);
 
   scene.dialogContainer.add([
@@ -235,8 +238,18 @@ const updateTime = (endTime, intervals, timeText) => {
 };
 
 const addCompleted = (scene, data, y) => {
+  console.log("dataaaa>>>", data);
+  const endTime = data?.endTime || "20 min ago"; // Ensure endTime is a Date object
+
   const title = scene.add
-    .text(0, y, data.message, defaultTitleStyle)
+    .text(
+      0,
+      y,
+      `${data.message}: ${data.progress?.count || 0}/${
+        data?.requiredCount || 0
+      }`,
+      defaultTitleStyle
+    )
     .setOrigin(0, 0);
   const coin = addImage(scene, "BankIcon", 10, y + 40).setDisplaySize(20, 20);
   const coinText = scene.add
@@ -255,7 +268,7 @@ const addCompleted = (scene, data, y) => {
     })
     .setOrigin(1, 0);
   const timeText = scene.add
-    .text(520, y + 35, data.time, {
+    .text(520, y + 35, endTime, {
       fontFamily: "Inter",
       fontSize: "16px",
       color: "#B0B0B0",

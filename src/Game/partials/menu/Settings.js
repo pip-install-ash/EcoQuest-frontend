@@ -18,17 +18,21 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     1,
     250,
     0,
-    (val) => {}
+    (val) => {
+      console.log(val, "this.notificationCheckBox");
+    }
   );
 
   const soundCheckBox = addCheckButton(
     scene,
     "RoundCheckOn",
     "RoundCheckOff",
-    1,
+    !scene.sound.mute,
     250,
     75,
-    (val) => {}
+    (val) => {
+      scene.sound.mute = val;
+    }
   );
 
   const guideCheckBox = addCheckButton(
@@ -38,7 +42,9 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     1,
     250,
     150,
-    (val) => {}
+    (val) => {
+      console.log(val, "this.showTutorial", this.showTutorial);
+    }
   );
 
   const deleteAccountButton = addButton(
@@ -51,7 +57,9 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     }
   );
 
-  // const changeButton = addButton(scene, 'ChangeButton', 210, -90, () => {});
+  const changeButton = addButton(scene, "ChangeButton", 210, -90, () => {
+    console.log("Change Button Clicked", userNameText.text);
+  });
 
   const emailText = addText(
     scene,
@@ -91,14 +99,18 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
 
   const sliderPanel = addSlider(
     scene,
-    0.5,
+    parseFloat(localStorage.getItem("volume") || "0.5"),
     0,
     280,
     600,
     12,
     16,
     0x518f12,
-    (val) => {},
+    (val) => {
+      console.log(scene.sound.volume, "VOLUME CHANGER>>>", val);
+      scene.sound.volume = val;
+      localStorage.setItem("volume", val);
+    },
     1
   );
 
@@ -109,7 +121,7 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     soundCheckBox,
     guideCheckBox,
     deleteAccountButton,
-    // changeButton,
+    changeButton,
     // inputText,
     userNameText,
     emailText,

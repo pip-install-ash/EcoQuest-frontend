@@ -10,9 +10,11 @@ const createLoadingScene = () => {
     key: "LoadingScene",
     preload: function () {
       assetPack.forEach((element) => {
-        element.key === "Disaster" && console.log("DISASTER");
         if (element.type === "image") this.load.image(element.key, element.url);
       });
+      this.load.audio("homeAudio", "assets/home.mp3");
+      this.load.audio("destoryAudio", "assets/destory.wav");
+      this.load.audio("buildAudio", "assets/build.wav");
 
       onboardingAssetPack.forEach((element) => {
         if (element.type === "image") this.load.image(element.key, element.url);

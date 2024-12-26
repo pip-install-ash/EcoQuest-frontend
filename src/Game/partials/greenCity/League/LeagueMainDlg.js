@@ -142,7 +142,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   const dialogSetting = organizeDialog(scene, "LeagueLobbyDialog", 1205, 795);
   const dialogBackground = dialogSetting[0];
 
-  socket = io("localhost:4000");
+  socket = io("api.ecoquest.app");
   socket.emit("joinLeague", leagueId);
   console.log("loginUserId>>>", loginUserId);
 

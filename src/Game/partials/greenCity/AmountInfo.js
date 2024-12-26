@@ -26,6 +26,7 @@ const AmountInfo = async (scene, left, top) => {
     });
 
   const dataValue = accountsStats;
+  scene.dataValue = dataValue;
   // scene.waterTap = 200;
 
   const graphics = scene.add.graphics();
