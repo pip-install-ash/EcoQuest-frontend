@@ -238,7 +238,6 @@ const updateTime = (endTime, intervals, timeText) => {
 };
 
 const addCompleted = (scene, data, y) => {
-  console.log("dataaaa>>>", data);
   const endTime = data?.endTime || "20 min ago"; // Ensure endTime is a Date object
 
   const title = scene.add

@@ -85,7 +85,25 @@ const BasicInfo = (scene, left, top) => {
     0
   );
 
-  const updatePopulation = (newPopulation) => {
+  const updatePopulation = (newPopulation, progressW) => {
+    if (progressW) {
+      graphics.fillStyle(0x23f52c, 1);
+      graphics.beginPath();
+      graphics.moveTo(progressX + progressR, progressY);
+      graphics.lineTo(progressX + progressW, progressY);
+      graphics.lineTo(progressX + progressW, progressY + progressH);
+      graphics.lineTo(progressX + progressR, progressY + progressH);
+      graphics.arc(
+        progressX + progressR,
+        progressY + progressR,
+        progressR,
+        Phaser.Math.DegToRad(90),
+        Phaser.Math.DegToRad(270)
+      );
+      graphics.closePath();
+      graphics.fillPath();
+    }
+
     const populationText = scene.children.list.find(
       (child) => child.text && child.text.startsWith("Population count:")
     );

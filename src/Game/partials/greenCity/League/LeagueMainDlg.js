@@ -6,7 +6,10 @@ import createInviteFriendDlg from "./InviteFriend";
 import createLeagueSettingDlg from "./LeagueSetting";
 import createLeaveLeagueDlg from "./LeaveLeague";
 import createKickUserDlg from "./KickUser";
-import { fetchImplementation } from "../../../../utils/fetchRequest";
+import {
+  fetchImplementation,
+  SOCKET_BASE_URL,
+} from "../../../../utils/fetchRequest";
 import toast from "react-hot-toast";
 import io from "socket.io-client";
 
@@ -142,7 +145,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   const dialogSetting = organizeDialog(scene, "LeagueLobbyDialog", 1205, 795);
   const dialogBackground = dialogSetting[0];
 
-  socket = io("api.ecoquest.app");
+  socket = io(SOCKET_BASE_URL);
   socket.emit("joinLeague", leagueId);
   console.log("loginUserId>>>", loginUserId);
 

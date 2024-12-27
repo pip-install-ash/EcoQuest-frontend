@@ -1,4 +1,4 @@
-import { fetchImplementation } from "../../../utils/fetchRequest";
+import { fetchImplementation, logOutUser } from "../../../utils/fetchRequest";
 import {
   addButton,
   fadeThisScreen,
@@ -93,8 +93,7 @@ const createOnBoardingMenuScene = () => {
 
       addButton(this, "Menu-Exit", 720, 820, () =>
         createExitDlg(this, () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("gameInitMap");
+          logOutUser();
           transitionToNextScene(this, "OnBoardingSignInScene");
         })
       );

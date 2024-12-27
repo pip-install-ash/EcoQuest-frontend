@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { fetchImplementation } from "../../../utils/fetchRequest";
 import { addButton } from "../common";
 
@@ -36,7 +37,26 @@ const AmountInfo = async (scene, left, top) => {
   graphics.fillRoundedRect(left + 191, top + 5, 160, 32, 16);
   graphics.fillRoundedRect(left + 191, top + 63, 160, 32, 16);
   addButton(scene, "LeafIcon", left + 145, top + 20, () => {});
-  addButton(scene, "ElectricityIcon", left + 145, top + 80, () => {});
+  addButton(scene, "ElectricityIcon", left + 145, top + 80, async () => {
+    const accountsStats = await fetchImplementation(
+      "post",
+      `api/user/days-based-points-calculation`,
+      {
+        ...(isLeagueOn.length > 1 ? { leagueId: isLeagueOn } : {}),
+        noOfDays: 5,
+      }
+    )
+      .then((res) => {
+        console.log("RESS>>>", res);
+        toast.success(
+          res.message || "Points added successfully for 5 days forward."
+        );
+        updateTextValues(res.data);
+      })
+      .catch((err) => {
+        console.log("first fetch error", err);
+      });
+  });
   addButton(scene, "BankIcon", left + 335, top + 20, () => {});
   addButton(scene, "WaterIcon", left + 335, top + 80, () => {
     // waterText.text = scene.waterTap++;
@@ -74,8 +94,8 @@ const AmountInfo = async (scene, left, top) => {
       fontSize: "18px",
     })
     .setOrigin(0, 0.5);
-  // update value accourding to the dataValues of the user account
-  if (dataValue) {
+
+  const updateTextValues = (dataValue) => {
     if (dataValue.ecoPoints !== undefined) {
       ecoPoints.setText(dataValue.ecoPoints);
     }
@@ -89,8 +109,13 @@ const AmountInfo = async (scene, left, top) => {
       waterText.text = dataValue.water;
     }
     if (dataValue.population !== undefined) {
-      scene.updatePopulation(dataValue.population);
+      scene.updatePopulation(dataValue.population, dataValue.garbage);
     }
+  };
+
+  // update value accourding to the dataValues of the user account
+  if (dataValue) {
+    updateTextValues(dataValue);
   }
 
   const updateStats = (newStats) => {

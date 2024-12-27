@@ -35,7 +35,6 @@ const CreateGreenCityScene = () => {
           console.log("buildings fetch", err);
         });
 
-      this.testing = 0;
       this.isEditBuilding = false;
     },
 

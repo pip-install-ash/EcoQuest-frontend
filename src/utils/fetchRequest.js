@@ -1,24 +1,27 @@
 import { getAuth, getIdToken, signOut } from "firebase/auth";
 import { jwtDecode } from "jwt-decode";
-import toast from "react-hot-toast";
 
-export const API_BASE_URL = "https://api.ecoquest.app/";
-// "http://localhost:4000/";
+export const SOCKET_BASE_URL = "api.ecoquest.app";
+const API_BASE_URL = "https://api.ecoquest.app/";
+//"http://localhost:4000/";
 // "http://40.127.12.5:4000/";
 // "http://40.127.12.5:3000/"; //change for deployment
 
-// const logOutUser = async () => {
-//   const auth = getAuth();
-//   await signOut(auth);
-//   localStorage.removeItem("token");
-//   localStorage.removeItem("profile");
-//   localStorage.removeItem("activeLeagueId");
-//   localStorage.removeItem("activeLeagueName");
-//   localStorage.removeItem("buildData");
-//   localStorage.removeItem("gameInitMap");
-//   toast.error("Session expired. Please login again");
-//   window.location.href = "/";
-// };
+export const logOutUser = async () => {
+  const auth = getAuth();
+  await signOut(auth);
+  localStorage.removeItem("token");
+  localStorage.removeItem("profile");
+  localStorage.removeItem("activeLeagueId");
+  localStorage.removeItem("activeLeagueName");
+  localStorage.removeItem("buildData");
+  localStorage.removeItem("gameInitMap");
+  localStorage.removeItem("user");
+  localStorage.removeItem("userData");
+  localStorage.removeItem("email");
+  // toast.error("Session expired. Please login again");
+  // window.location.href = "/";
+};
 
 function isTokenExpired(token) {
   try {
