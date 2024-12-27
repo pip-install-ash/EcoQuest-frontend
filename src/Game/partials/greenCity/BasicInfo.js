@@ -104,11 +104,13 @@ const BasicInfo = (scene, left, top) => {
       graphics.fillPath();
     }
 
-    const populationText = scene.children.list.find(
-      (child) => child.text && child.text.startsWith("Population count:")
-    );
-    if (populationText) {
-      populationText.setText(`Population count: ${newPopulation}`);
+    if (newPopulation) {
+      const populationText = scene.children.list.find(
+        (child) => child.text && child.text.startsWith("Population count:")
+      );
+      if (populationText) {
+        populationText.setText(`Population count: ${newPopulation}`);
+      }
     }
   };
 

@@ -109,7 +109,10 @@ const AmountInfo = async (scene, left, top) => {
       waterText.text = dataValue.water;
     }
     if (dataValue.population !== undefined) {
-      scene.updatePopulation(dataValue.population, dataValue.garbage);
+      scene.updatePopulation(dataValue.population);
+    }
+    if (dataValue.garbage !== undefined) {
+      scene.updatePopulation(undefined, dataValue.garbage);
     }
   };
 
