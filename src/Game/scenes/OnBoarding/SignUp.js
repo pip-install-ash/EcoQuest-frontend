@@ -5,7 +5,7 @@ import {
   transitionToNextScene,
 } from "../../partials/common";
 import toast from "react-hot-toast";
-import { fetchImplementation } from "../../../utils/fetchRequest";
+import { API_BASE_URL, fetchImplementation } from "../../../utils/fetchRequest";
 
 const createOnBoardingSignUpScene = () => {
   return {
@@ -73,10 +73,13 @@ const createOnBoardingSignUpScene = () => {
           return;
         }
 
-        await fetchImplementation("post", "register", {
-          userName: username,
-          email,
-          password,
+        await fetch(`${API_BASE_URL}register`, {
+          method: "POST",
+          data: JSON.stringify({
+            userName: username,
+            email,
+            password,
+          }),
         })
           .then((res) => {
             toast.success("Account created successfully");

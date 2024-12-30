@@ -120,15 +120,15 @@ const drawBuildings = (scene) => {
       )[0];
       scene.gameMap[i].setTexture(building.tile);
       scene.gameMap[i].setScale(cell.isRotate ? -1 : 1, 1);
-      if (building.isBuilding)
-        scene.iconMap.add(
-          addImage(
-            scene,
-            "NoRoad",
-            width / 2 + tileX,
-            (-height * 2) / 5 + tileY - tileHeight * building.h
-          )
-        );
+      // if (building.isBuilding)
+      //   scene.iconMap.add(
+      //     addImage(
+      //       scene,
+      //       "NoRoad",
+      //       width / 2 + tileX,
+      //       (-height * 2) / 5 + tileY - tileHeight * building.h
+      //     )
+      //   );
       //   } else {
       // scene.gameMap[i].setTexture("IsoTile");
       //   }
