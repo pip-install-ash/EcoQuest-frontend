@@ -93,7 +93,6 @@ const createEcoChallengeDlg = async (scene) => {
   const activeChallenges = await getEcoChallenges(leagueID, true);
   const completedChallenges = await getEcoChallenges(leagueID, false);
 
-  console.log("API REQUESTS >>", activeChallenges.data, completedChallenges);
   const disasterTitle = addText(
     scene,
     "Eco-Challenge",
@@ -132,7 +131,7 @@ const createEcoChallengeDlg = async (scene) => {
 
   if (activeChallenges?.data?.length > 0) {
     let activeContents = [];
-    activeChallenges.data.forEach((v) => {
+    activeChallenges?.data?.forEach((v) => {
       const resultContent = addActive(scene, v, displayY, intervals);
       activeContents = [...activeContents, ...resultContent.data];
       displayY += resultContent.contentHeight;
@@ -146,7 +145,7 @@ const createEcoChallengeDlg = async (scene) => {
   let completedContents = [];
 
   if (completedChallenges?.data?.length > 0) {
-    completedChallenges.data.forEach((v) => {
+    completedChallenges.data?.forEach((v) => {
       const resultContent = addCompleted(scene, v, displayY);
       completedContents = [...completedContents, ...resultContent.data];
       displayY += resultContent.contentHeight;

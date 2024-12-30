@@ -15,7 +15,7 @@ const organizeDialog = (
   originX = 0.5,
   originY = 0.5
 ) => {
-  scene.createEcoChallengeDlg?.isSceneClosed?.(); //clear intervals of eco-challenge
+  scene?.createEcoChallengeDlg?.isSceneClosed?.(); //clear intervals of eco-challenge
   // Clear previous dialog contents
   scene.dialogContainer.removeAll(true);
 
