@@ -1,5 +1,6 @@
 import { addButton, addText } from "../common";
 import Phaser from "phaser";
+import createNotificationDlg from "../menu/Notification";
 
 /**
  * Makes a <BasicInfo> panel.
@@ -12,7 +13,9 @@ const BasicInfo = (scene, left, top) => {
   const leagueName = localStorage.getItem("activeLeagueName");
   const isLeagueOn = localStorage.getItem("activeLeagueId")?.length > 1;
 
-  addButton(scene, "UserBell", left + 25, top + 25, () => {});
+  addButton(scene, "UserBell", left + 25, top + 25, () => {
+    createNotificationDlg(scene);
+  });
   addButton(scene, "Rubish", left + 25, top + 127, () => {});
   const graphics = scene.add.graphics();
   graphics.fillStyle(0x000000, 0.4);
