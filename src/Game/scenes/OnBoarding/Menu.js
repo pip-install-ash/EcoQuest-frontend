@@ -31,6 +31,11 @@ const createOnBoardingMenuScene = () => {
     },
 
     create: function () {
+      const homeMusic = this.sound.add("homeAudio");
+      this.sound.volume = parseFloat(localStorage.getItem("volume") || "0.5");
+      homeMusic.play({
+        loop: true,
+      });
       scaleBackground(this, "MenuBackground");
       // addButton(this, "Resume-League", 720, 280, async () => {
       //   createMyLeaguesDlg(this);
@@ -100,9 +105,10 @@ const createOnBoardingMenuScene = () => {
 
       this.dialogContainer = this.add.container(720, 512).setVisible(false);
       fadeThisScreen(this);
-      if (this.sound && this.sound.context.state === "running") {
-        this.sound.stopAll();
-      }
+
+      // if (this.sound && this.sound.context.state === "running") {
+      //   this.sound.stopAll();
+      // }
     },
   };
 };

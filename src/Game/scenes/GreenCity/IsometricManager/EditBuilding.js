@@ -115,8 +115,10 @@ const drawEditBuilding = (scene) => {
                   0 &&
                 scene.dataValue?.water - buildingDes.waterUsage > 0)
             ) {
-              scene.sound.add("buildAudio").play();
-              scene.updateStats(buildingDes);
+              !scene?.allSoundEffectMute &&
+                scene.sound.add("buildAudio").play();
+
+              scene?.updateStats(buildingDes);
               fetchImplementation("post", "api/user/assets", {
                 ...editBuilding,
                 leagueId,
@@ -173,14 +175,14 @@ const drawEditBuilding = (scene) => {
           })[0];
 
           // Update residentCapacity stats
-          scene.updateStats(
+          scene?.updateStats(
             buildingDes.id == 1
               ? buildingDes
               : {
                   residentCapacity: -buildingDes.residentCapacity,
                 }
           );
-          scene.sound.add("destoryAudio").play();
+          !scene?.allSoundEffectMute && scene.sound.add("destoryAudio").play();
           //removing/destroying an asset
           await fetchImplementation("delete", "api/user/assets", {
             buildingId: editBuilding.buildingId,

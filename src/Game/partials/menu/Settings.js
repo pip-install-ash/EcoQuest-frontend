@@ -27,11 +27,12 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     scene,
     "RoundCheckOn",
     "RoundCheckOff",
-    !scene.sound.mute,
+    !scene.allSoundEffectMute,
     250,
     75,
     (val) => {
-      scene.sound.mute = val;
+      // scene.sound.mute = val;
+      scene.allSoundEffectMute = val;
     }
   );
 
@@ -107,7 +108,6 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     16,
     0x518f12,
     (val) => {
-      console.log(scene.sound.volume, "VOLUME CHANGER>>>", val);
       scene.sound.volume = val;
       localStorage.setItem("volume", val);
     },

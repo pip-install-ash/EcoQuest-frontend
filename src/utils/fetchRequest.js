@@ -2,7 +2,7 @@ import { getAuth, getIdToken, signOut } from "firebase/auth";
 import { jwtDecode } from "jwt-decode";
 
 export const SOCKET_BASE_URL = "api.ecoquest.app";
-const API_BASE_URL = "https://api.ecoquest.app/";
+export const API_BASE_URL = "https://api.ecoquest.app/";
 //"http://localhost:4000/";
 // "http://40.127.12.5:4000/";
 // "http://40.127.12.5:3000/"; //change for deployment
