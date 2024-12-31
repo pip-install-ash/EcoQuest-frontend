@@ -74,8 +74,11 @@ const createOnBoardingSignUpScene = () => {
         }
 
         await fetch(`${API_BASE_URL}register`, {
-          method: "POST",
-          data: JSON.stringify({
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             userName: username,
             email,
             password,
@@ -86,6 +89,7 @@ const createOnBoardingSignUpScene = () => {
             transitionToNextScene(this, "OnBoardingSignInScene");
           })
           .catch((err) => {
+            console.log("ERROR::?>>", err);
             alert(err.message);
             return;
           });
