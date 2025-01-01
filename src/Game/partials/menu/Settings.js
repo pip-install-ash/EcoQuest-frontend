@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+import { firebaseConfig } from "../../../utils/const";
 import { addButton, addCheckButton, addSlider, addText } from "../common";
 import { organizeDialog, showDialog } from "./base";
 
@@ -58,9 +60,37 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     }
   );
 
-  // const changeButton = addButton(scene, "ChangeButton", 210, -90, () => {
-  //   console.log("Change Button Clicked", userNameText.text);
-  // });
+  const changeButton = addButton(scene, "ChangeButton", 210, -85, () => {
+    console.log("Change Button Clicked", passwordText.text);
+    const API_KEY = firebaseConfig.apiKey;
+    fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idToken: localStorage.getItem("token") || "",
+          password: passwordText.text,
+          returnSecureToken: true,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          console.error("Error updating password:", data.error.message);
+          toast.error(data.error.message + " Kindly Login again.");
+        } else {
+          console.log("Password updated successfully:", data);
+          toast.success("Password updated successfully.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 
   const emailText = addText(
     scene,
@@ -75,18 +105,15 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     0.5
   );
 
-  const userNameText = addText(
-    scene,
-    userData?.userName || "",
-    -285,
-    -100,
-    "Kreon",
-    "20px",
-    "bold",
-    "#000",
-    0,
-    0.5
-  );
+  const passwordText = scene.add.rexInputText(-80, -90, 410, 56, {
+    type: "text",
+    text: "",
+    fontSize: "20px",
+    fontFamily: "Kreon",
+    placeholder: "Enter New Password",
+    color: "#000",
+  });
+
   // const inputText = scene.add.rexInputText(-105, -170, 355, 56, {
   //   type: 'password',
   //   fontSize: '20px',
@@ -121,9 +148,9 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     soundCheckBox,
     guideCheckBox,
     deleteAccountButton,
-    // changeButton,
+    changeButton,
     // inputText,
-    userNameText,
+    passwordText,
     emailText,
   ]);
   showDialog(scene);
