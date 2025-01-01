@@ -81,7 +81,7 @@ const createLeagueLeaderboardDlg = async (scene, leagueId) => {
   // ];
   if (userData.length > 0) {
     userData?.forEach((v) => {
-      contentContainer.add(addRanking(scene, v[0], v[1], v[2].toFixed(2)));
+      contentContainer.add(addRanking(scene, v[0], v[1], v[2].toFixed(1)));
     });
   }
 

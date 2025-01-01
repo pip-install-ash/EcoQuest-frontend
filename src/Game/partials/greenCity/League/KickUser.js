@@ -11,6 +11,7 @@ import { closeDialog, organizeDialog, showDialog } from "../../menu/base";
  * @returns {void}
  */
 const createKickUserDlg = (scene, userData, activeLeagueId) => {
+  console.log("USERDATA>>", userData);
   const dialogSetting = organizeDialog(scene, "KickUserDialog", 674, 408);
   const leagueSettings = addText(
     scene,

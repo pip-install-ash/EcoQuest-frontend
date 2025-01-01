@@ -83,9 +83,9 @@ const createCreateLeagueDlg = (scene) => {
     color: "#000",
   });
   const options = [
-    { text: "2 to 20", value: 0 },
-    { text: "20 to 50", value: 1 },
-    { text: "50 to 100", value: 2 },
+    { text: "10", value: 0 },
+    { text: "25", value: 1 },
+    { text: "50", value: 2 },
   ];
 
   const dropDownList = addComboBox(
@@ -94,7 +94,7 @@ const createCreateLeagueDlg = (scene) => {
     67,
     480,
     options,
-    "Select no of players 2 to 20"
+    "Select no of players 10 to 50"
   );
 
   scene.dialogContainer.add([

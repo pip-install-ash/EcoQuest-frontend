@@ -3,6 +3,7 @@ import { fetchImplementation } from "../../../utils/fetchRequest";
 import { addButton, transitionToNextScene } from "../common";
 import { organizeDialog, showDialog } from "./base";
 import { gameInitMap } from "../../packs/intial.map";
+import createKickUserDlg from "../greenCity/League/KickUser";
 // import createLeaveLeagueDlg from "../greenCity/League/LeaveLeague";
 
 const leagues = [
@@ -33,7 +34,7 @@ const leagues = [
  * @returns {void}
  */
 const createMyLeaguesDlg = async (scene) => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const userData = JSON.parse(localStorage.getItem("user"));
   const fetchedData = await fetchImplementation(
     "get",
     `api/leagues/my-leagues`
@@ -111,10 +112,30 @@ const addRow = (scene, data, y, userData) => {
         });
     }
   );
-  const leaveButton = addButton(scene, "LeaveButton", 560, y + 10, () => {
-    // createLeaveLeagueDlg(scene, data, data.isOwner) // this is not working Issue with UI
-  });
   const rect = scene.add.rectangle(0, y + 46, 1314, 1, 0x2d3020).setOrigin(0.5);
+
+  const leaveButton = addButton(scene, "LeaveButton", 560, y + 10, async () => {
+    await fetchImplementation("post", `api/leagues/remove-user-from-league`, {
+      userID: userData.user_id,
+      leagueID: data.leagueID,
+    })
+      .then((res) => {
+        toast.success("League is left successfully");
+        [
+          name,
+          players,
+          points,
+          lastLogin,
+          actionButton,
+          leaveButton,
+          rect,
+        ].forEach((el) => el.destroy());
+      })
+      .catch((err) => {
+        console.log("Error", err);
+        toast.error("Error leaving league");
+      });
+  });
 
   return [name, players, points, lastLogin, actionButton, leaveButton, rect];
 };
