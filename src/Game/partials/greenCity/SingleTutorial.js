@@ -1,6 +1,8 @@
 import { addButton, addImage } from "../common";
 const texts = [
-  "Hello mario54 and welcome!\nMy name is Paul and i will be your personal Assistant for your City.\nFirst, lets get familiar with everything",
+  `Hello ${localStorage.getItem(
+    "userName"
+  )} and welcome!\nMy name is Paul and i will be your personal Assistant for your City.\nFirst, lets get familiar with everything`,
   "This is the HOME button to take you back to the main menu",
   "that’s the SETTINGS PAGE button",
   "RULES AND REGULATIONS, you can read the rules and regulations here",
@@ -8,7 +10,7 @@ const texts = [
   "There will be occasional disasters, you can check that on this DISASTER PAGE",
   "Access your Eco Challenge here to earn rewards",
   "You can view how much resources you have left to carry out actions",
-  "Now let’s start by building residential housing  Click on “Build”"
+  "Now let’s start by building residential housing  Click on “Build”",
 ];
 const handPoints = [
   { x: -300, y: -300, angle: 0 },

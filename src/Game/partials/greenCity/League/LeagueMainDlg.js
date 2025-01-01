@@ -13,7 +13,7 @@ import {
 import toast from "react-hot-toast";
 import io from "socket.io-client";
 
-const fetchUserData = async (leagueId) => {
+export const fetchUserData = async (leagueId) => {
   try {
     const leagueData = await fetchImplementation(
       "get",
@@ -44,6 +44,7 @@ const fetchUserData = async (leagueId) => {
 //   [6, "Mictt", 200, 200, 45, 1, 0],
 //   [7, "Micott", 200, 200, 45, 1, 1],
 // ];
+
 const messageData = [
   {
     isMe: true,
@@ -105,11 +106,38 @@ const preLoadLeagueRequests = async (leagueID) => {
   }
 };
 
+const leagueMessages = async (leagueID) => {
+  try {
+    const response = await fetchImplementation(
+      "get",
+      `api/chat/messages/${leagueID}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch league messages:", error);
+    return [];
+  }
+};
+
 let socket;
 let messageInput;
 
+function appendMessage(scene, container, msg) {
+  const { messageArea, messageHeight } = addMessage(
+    scene,
+    msg,
+    container.height + 20
+  );
+  container.add(messageArea);
+  container.height += messageHeight;
+  container.y = 227 - container.height; // Scroll to end
+
+  // Scroll container to bottom
+  // const viewHeight = 527; // same as in makeScrollArea
+  // container.y = Math.min(0, viewHeight - container.height);
+}
+
 function renderMessages(scene, container, data) {
-  container.removeAll(true);
   let y = 20;
   container.height = 0;
 
@@ -120,7 +148,7 @@ function renderMessages(scene, container, data) {
     container.height += messageHeight;
   });
 
-  container.y = Math.min(0, 527 - container.height);
+  container.y = Math.min(0, 227 - container.height);
 }
 
 /**
@@ -131,14 +159,22 @@ function renderMessages(scene, container, data) {
  * @returns {void}
  */
 const createLeagueMainDlg = async (scene, leagueId) => {
-  const fetchedleagueData = await fetchUserData(leagueId);
-  const leaguesRequests = await preLoadLeagueRequests(leagueId);
-  let selectedDonation = null;
   const loginedUser = localStorage.getItem("user").length
     ? JSON.parse(localStorage.getItem("user"))
     : "";
-  console.log("loginedUser >><><>", loginedUser);
+
   const loginUserId = loginedUser?.user_id;
+  const fetchedleagueData = await fetchUserData(leagueId);
+  const leaguesRequests = await preLoadLeagueRequests(leagueId);
+  const messageData = (await leagueMessages(leagueId))
+    .map((msg) => ({
+      isMe: msg.senderId === loginUserId,
+      user: msg.senderName,
+      text: msg.message,
+    }))
+    .reverse();
+  let selectedDonation = null;
+
   const leagueData = fetchedleagueData?.leagueData;
   const isUserOwner = fetchedleagueData?.isOwner;
   scene.leagueData = leagueData;
@@ -320,6 +356,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
 
   const messageContentContainer = scene.add.container(0, 100);
   messageContentContainer.height = 250;
+  renderMessages(scene, messageContentContainer, messageData);
 
   content2.add(
     addButton(scene, "SendMessageButton", 540, 345, () => {
@@ -341,7 +378,11 @@ const createLeagueMainDlg = async (scene, leagueId) => {
         // );
 
         messageData.push({ isMe: true, text: msgText });
-        renderMessages(scene, messageContentContainer, messageData);
+        appendMessage(
+          scene,
+          messageContentContainer,
+          messageData[messageData.length - 1]
+        );
         messageInput.text = "";
       }
     })
@@ -350,13 +391,6 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   content2.setVisible(false);
 
   socket.on(leagueId, (messageDoc) => {
-    console.log(
-      "sendo",
-      messageDoc.senderId !== loginUserId,
-      messageDoc.senderId,
-      "\n senderId socket messageDoc>>>",
-      messageDoc
-    );
     if (messageDoc.senderId !== loginUserId) {
       // const { messageArea } = addMessage(
       //   scene,
@@ -373,12 +407,15 @@ const createLeagueMainDlg = async (scene, leagueId) => {
         text: messageDoc.message,
       });
 
-      renderMessages(scene, messageContentContainer, messageData);
+      appendMessage(
+        scene,
+        messageContentContainer,
+        messageData[messageData.length - 1]
+      );
     }
   });
   console.log(messageContentContainer.height, "height");
 
-  console.log("messageData.length * 320>>>", messageData.length * 320);
   makeScrollArea(
     scene,
     messageContentContainer,
@@ -386,7 +423,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
     265,
     1205,
     527,
-    messageData.length * 320
+    messageContentContainer.height
   );
   // messageContentContainer.y = Math.min(0, 527 - messageContentContainer.height);
   content2.add(messageContentContainer);
@@ -699,17 +736,6 @@ const createLeagueMainDlg = async (scene, leagueId) => {
           console.error("Failed to send request:", err);
           toast.error(err.message);
         });
-
-      console.log(
-        leagueData.id,
-        "LEAGUE ID\n",
-        scene.donateCoinText.text,
-        "RequestedREsorces>>",
-        requestEleInputField.text,
-        "<< ELE >>",
-        requestCoinInputField.text,
-        requestWaterInputField.text
-      );
     })
   );
   const requestEleInputField = scene.add.rexInputText(220, -90, 70, 56, {

@@ -28,6 +28,10 @@ const MainButtons = (scene, left, top) => {
     addButton(scene, "GroupButton", left + 1288, top, () => {
       if (!scene.isEditBuilding) createLeagueMainDlg(scene, isLeagueOn);
     });
+
+    addButton(scene, "AwardButton", left, top + 288, () => {
+      if (!scene.isEditBuilding) createLeagueLeaderboardDlg(scene, isLeagueOn);
+    });
   }
 
   addButton(scene, "SettingButton", left, top + 96, () => {
@@ -43,9 +47,7 @@ const MainButtons = (scene, left, top) => {
   addButton(scene, "ReportButton", left, top + 192, () => {
     if (!scene.isEditBuilding) createBuildingRuleDlg(scene);
   });
-  addButton(scene, "AwardButton", left, top + 288, () => {
-    if (!scene.isEditBuilding) createLeagueLeaderboardDlg(scene);
-  });
+
   addButton(scene, "WarningButton", left, top + 498, () => {
     if (!scene.isEditBuilding) createDisasterDlg(scene);
   });

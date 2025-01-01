@@ -78,9 +78,9 @@ function displayNotification(scene, notification, yOffset) {
     }
   );
 
-  const goButton = addButton(scene, "GoButton", 450, yOffset + 15, () => {
-    console.log("Go Button Clicked for:", notification.message);
-  });
+  // const goButton = addButton(scene, "GoButton", 450, yOffset + 15, () => {
+  //   console.log("Go Button Clicked for:", notification.message);
+  // });
 
   const clearButton = addButton(scene, "ClearButton", 550, yOffset + 15, () => {
     clearAllButton();
@@ -93,13 +93,20 @@ function displayNotification(scene, notification, yOffset) {
   const clearAllButton = () => {
     textDom.destroy();
     timeText.destroy();
-    goButton.destroy();
+    // goButton.destroy();
     clearButton.destroy();
     line.destroy();
     notifyIcon.destroy();
   };
 
-  return [textDom, timeText, notifyIcon, goButton, line, clearButton];
+  return [
+    textDom,
+    timeText,
+    notifyIcon,
+    // goButton,
+    line,
+    clearButton,
+  ];
 }
 
 /**

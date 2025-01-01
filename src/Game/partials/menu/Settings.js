@@ -44,7 +44,7 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     250,
     150,
     (val) => {
-      console.log(val, "this.showTutorial", this.showTutorial);
+      // console.log(val, "this.showTutorial", this.showTutorial);
     }
   );
 
@@ -58,9 +58,9 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     }
   );
 
-  const changeButton = addButton(scene, "ChangeButton", 210, -90, () => {
-    console.log("Change Button Clicked", userNameText.text);
-  });
+  // const changeButton = addButton(scene, "ChangeButton", 210, -90, () => {
+  //   console.log("Change Button Clicked", userNameText.text);
+  // });
 
   const emailText = addText(
     scene,
@@ -121,7 +121,7 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
     soundCheckBox,
     guideCheckBox,
     deleteAccountButton,
-    changeButton,
+    // changeButton,
     // inputText,
     userNameText,
     emailText,

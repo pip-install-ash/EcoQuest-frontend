@@ -1,3 +1,4 @@
+import { fetchImplementation } from "../../../utils/fetchRequest";
 import { addButton } from "../common";
 import { makeScrollArea } from "../greenCity/League/LeagueMainDlg";
 import { displayNotification, organizeDialog, showDialog } from "./base";
@@ -28,6 +29,18 @@ const notifications = [
     time: "30 minutes ago",
   },
 ];
+
+const getNotification = async () => {
+  return await fetchImplementation("get", "api/notifications/all-notifications")
+    .then((res) => {
+      console.log("res<<", res);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log("first fetch error", err);
+      return [];
+    });
+};
 /**
  * Shows a <Notification> dialog.
  *
@@ -35,14 +48,16 @@ const notifications = [
  * @param {scene, onAccept}
  * @returns {void}
  */
-const createNotificationDlg = (scene) => {
+
+const createNotificationDlg = async (scene) => {
+  const getAllNotifications = await getNotification();
   const dialogSetting = organizeDialog(scene, "NotificationDialog", 1314, 877);
 
   const contentContainer = scene.add.container(0, 0);
   contentContainer.height = 250;
   let yOffset = -290;
 
-  notifications.forEach((notification) => {
+  getAllNotifications.forEach((notification) => {
     contentContainer.add(displayNotification(scene, notification, yOffset));
     yOffset += 140; // Space between notifications
     contentContainer.height += 250;

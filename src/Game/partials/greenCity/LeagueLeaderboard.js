@@ -1,6 +1,7 @@
 import { addText } from "../common";
 import { organizeDialog, showDialog } from "../menu/base";
 import Phaser from "phaser";
+import { fetchUserData } from "./League/LeagueMainDlg";
 
 /**
  * Shows a <LeagueLeaderboard> dialog.
@@ -9,7 +10,11 @@ import Phaser from "phaser";
  * @param {scene}
  * @returns {void}
  */
-const createLeagueLeaderboardDlg = (scene) => {
+const createLeagueLeaderboardDlg = async (scene, leagueId) => {
+  const fetchedleagueData = await fetchUserData(leagueId);
+  console.log("first", fetchedleagueData);
+  const leagueData = fetchedleagueData?.leagueData;
+  const userData = fetchedleagueData?.userData;
   const dialogSetting = organizeDialog(
     scene,
     "LeagueLeaderboardDialog",
@@ -21,7 +26,7 @@ const createLeagueLeaderboardDlg = (scene) => {
   //Display League title
   const leagueTitle = addText(
     scene,
-    "Titanic House",
+    leagueData?.leagueName,
     0,
     -230,
     "Inter",
@@ -37,47 +42,48 @@ const createLeagueLeaderboardDlg = (scene) => {
   const contentHeight = 700;
   const contentContainer = scene.add.container(0, 0);
 
-  const rankingData = [
-    {
-      ranking: 1,
-      user: "David251",
-      ecoScore: 200,
-    },
-    {
-      ranking: 2,
-      user: "David251",
-      ecoScore: 200,
-    },
-    {
-      ranking: 3,
-      user: "David251",
-      ecoScore: 200,
-    },
-    {
-      ranking: 4,
-      user: "David251",
-      ecoScore: 200,
-    },
-    {
-      ranking: 5,
-      user: "David251",
-      ecoScore: 200,
-    },
-    {
-      ranking: 6,
-      user: "David251",
-      ecoScore: 200,
-    },
-    {
-      ranking: 7,
-      user: "David251",
-      ecoScore: 200,
-    },
-  ];
-
-  rankingData.forEach((v) => {
-    contentContainer.add(addRanking(scene, v.ranking, v.user, v.ecoScore));
-  });
+  // const rankingData = [
+  //   {
+  //     ranking: 1,
+  //     user: "David251",
+  //     ecoScore: 200,
+  //   },
+  //   {
+  //     ranking: 2,
+  //     user: "David251",
+  //     ecoScore: 200,
+  //   },
+  //   {
+  //     ranking: 3,
+  //     user: "David251",
+  //     ecoScore: 200,
+  //   },
+  //   {
+  //     ranking: 4,
+  //     user: "David251",
+  //     ecoScore: 200,
+  //   },
+  //   {
+  //     ranking: 5,
+  //     user: "David251",
+  //     ecoScore: 200,
+  //   },
+  //   {
+  //     ranking: 6,
+  //     user: "David251",
+  //     ecoScore: 200,
+  //   },
+  //   {
+  //     ranking: 7,
+  //     user: "David251",
+  //     ecoScore: 200,
+  //   },
+  // ];
+  if (userData.length > 0) {
+    userData?.forEach((v) => {
+      contentContainer.add(addRanking(scene, v[0], v[1], v[2].toFixed(2)));
+    });
+  }
 
   const maskShape = scene.make.graphics();
   maskShape.fillRect(250, 420, viewWidth, viewHeight);

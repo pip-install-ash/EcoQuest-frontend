@@ -152,7 +152,7 @@ const addRow = (scene, y, data) => {
     ...defaultStyle,
     color: "#fff",
   });
-  const eco = scene.add.text(200, y, `${data[2]} eco points`, {
+  const eco = scene.add.text(200, y, `${data[2].toFixed(3)} eco points`, {
     ...defaultStyle,
     color: "#FCB651",
   });

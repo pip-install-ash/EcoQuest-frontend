@@ -58,6 +58,10 @@ const createOnBoardingSignInScene = () => {
             );
             const mapDetails = userDetails?.gameInitMap;
             localStorage.setItem("user", JSON.stringify(userDetails));
+            localStorage.setItem(
+              "userName",
+              JSON.stringify(userDetails.userName)
+            );
             mapDetails && localStorage.setItem("gameInitMap", mapDetails);
             toast.success("Successfully signed in");
             transitionToNextScene(this, "OnBoardingMenuScene");
