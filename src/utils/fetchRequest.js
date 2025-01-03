@@ -1,9 +1,12 @@
 import { getAuth, getIdToken, signOut } from "firebase/auth";
 import { jwtDecode } from "jwt-decode";
+import toast from "react-hot-toast";
 
-export const SOCKET_BASE_URL = "api.ecoquest.app";
-export const API_BASE_URL = "https://api.ecoquest.app/";
-//"http://localhost:4000/";
+export const SOCKET_BASE_URL = "localhost:4000";
+// "api.ecoquest.app";
+export const API_BASE_URL =
+  // "https://api.ecoquest.app/";
+  "http://localhost:4000/";
 // "http://40.127.12.5:4000/";
 // "http://40.127.12.5:3000/"; //change for deployment
 
@@ -17,7 +20,8 @@ export const logOutUser = async () => {
   localStorage.removeItem("buildData");
   localStorage.removeItem("gameInitMap");
   localStorage.removeItem("user");
-  localStorage.removeItem("userData");
+  localStorage.removeItem("userName");
+  localStorage.removeItem("user");
   localStorage.removeItem("email");
   // toast.error("Session expired. Please login again");
   // window.location.href = "/";
@@ -82,6 +86,7 @@ export const fetchImplementation = async (method, path, params, headers) => {
     return response.json();
   } catch (error) {
     console.error("Error fetching data:", error);
+    toast.error("Error fetching data, kindly login again or refresh the page");
     throw new Error(error?.message || "Error fetching data");
   }
 };

@@ -1,40 +1,42 @@
 import { addButton, addText } from "../common";
 import { organizeLeftPanel, showLeftPanel } from "../menu/base";
+import { fetchImplementation } from "../../../utils/fetchRequest";
+import toast from "react-hot-toast";
 
 const informations = [
   {
     title: "Fire Outbreak",
     content:
-      "Causes: Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+      "A sudden fire spreads uncontrollably, causing chaos and destruction in its path. Buildings and resources are at risk of being engulfed in flames.",
   },
   {
     title: "Earthquake",
     content:
-      "Causes: Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+      "The ground trembles violently, toppling structures and disrupting the stability of the area. Damage is widespread and unpredictable.",
   },
   {
     title: "Hurricane",
     content:
-      "Causes: Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+      "A massive storm with strong winds and heavy rain wreaks havoc, devastating everything in its trajectory and flooding large areas.",
   },
 ];
 
 const reports = [
   {
-    title: "Earth Quake",
-    content: "Ended: 5 hours ago",
+    disaster: "Earth Quake",
+    time: "Ended: 5 hours ago",
   },
   {
-    title: "Earth Quake",
-    content: "Ended: 7 hours ago",
+    disaster: "Earth Quake",
+    time: "Ended: 7 hours ago",
   },
   {
-    title: "Flood",
-    content: "Ended: 12 hours ago",
+    disaster: "Flood",
+    time: "Ended: 12 hours ago",
   },
   {
-    title: "Earth Lake",
-    content: "Ended: 16 hours ago",
+    disaster: "Earth Lake",
+    time: "Ended: 16 hours ago",
   },
 ];
 const defaultTitleStyle = {
@@ -51,25 +53,28 @@ const defaultTitleStyle = {
  * @returns {void}
  */
 
-// const getEcoDisaster = (leagueID, isActive) => {
-//   const url = isActive
-//     ? "api/challenges/active-challenges"
-//     : "api/challenges/completed-challenges";
+const getEcoDisasterData = async (leagueID) => {
+  const url = "api/disasters/user-destructions";
 
-//   return fetchImplementation("get", url, {
-//     ...(leagueID?.length > 0 ? { leagueID } : {}),
-//   })
-//     .then((responseData) => {
-//       console.log("fwtched data>>", responseData);
-//       return responseData;
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching challenges:", error);
-//       return [];
-//     });
-// };
+  return await fetchImplementation("get", url, {
+    leagueId: leagueID,
+  })
+    .then((responseData) => {
+      console.log("fwtched data>>", responseData);
+      !responseData.data.length && toast.error("No destructions exist yet.");
+      return responseData.data;
+    })
+    .catch((error) => {
+      console.error("Error fetching challenges:", error);
+      toast.error("Error fetching destructions");
+      return [];
+    });
+  // return responseGot;
+};
 
-const createDisasterDlg = async (scene) => {
+const createDisasterDlg = async (scene, leagueID) => {
+  console.log("here we are ", leagueID);
+  const reportsData = await getEcoDisasterData(leagueID);
   const dialogSetting = organizeLeftPanel(scene);
   // const activeChallenges = await getEcoDisaster(leagueID, true);
 
@@ -121,18 +126,22 @@ const createDisasterDlg = async (scene) => {
   const reportContent = scene.add.container(-690, -280);
   displayY = 0;
   let reportContents = [];
-  reports.forEach((v) => {
-    const resultContent = addReport(scene, v, displayY, () => {
-      disasterTitle.setText("Earth Quake");
-      detailContent.setVisible(true);
-      informationButton.setVisible(false);
-      informationContent.setVisible(false);
-      reportButton.setVisible(false);
-      reportContent.setVisible(false);
+  if (reportsData?.length >= 0) {
+    reportsData.forEach((v) => {
+      const resultContent = addReport(scene, v, displayY, (selected) => {
+        disasterTitle.setText(selected.disaster);
+        timeDescription.setText(selected.time);
+        propertyDescription.setText(selected.destructionMessage);
+        detailContent.setVisible(true);
+        informationButton.setVisible(false);
+        informationContent.setVisible(false);
+        reportButton.setVisible(false);
+        reportContent.setVisible(false);
+      });
+      reportContents = [...reportContents, ...resultContent.data];
+      displayY += resultContent.contentHeight;
     });
-    reportContents = [...reportContents, ...resultContent.data];
-    displayY += resultContent.contentHeight;
-  });
+  }
   reportContent.add([...reportContents]);
   reportContent.setVisible(false);
 
@@ -208,16 +217,16 @@ const addInformation = (scene, data, y) => {
 
 const addReport = (scene, data, y, onView) => {
   const title = scene.add
-    .text(0, y, data.title, defaultTitleStyle)
+    .text(0, y, data.disaster, defaultTitleStyle)
     .setOrigin(0, 0);
   const content = scene.add
-    .text(200, y, data.content, {
+    .text(200, y, data.time, {
       fontFamily: "Inter",
       fontSize: "16px",
     })
     .setOrigin(0, 0);
   const viewButton = addButton(scene, "ViewButton", 470, y + 13, () =>
-    onView()
+    onView(data)
   );
   return {
     data: [title, content, viewButton],

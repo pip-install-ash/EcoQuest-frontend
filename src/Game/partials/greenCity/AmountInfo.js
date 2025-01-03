@@ -9,9 +9,25 @@ import { addButton } from "../common";
  * @param {scene, left, top}
  * @returns {void}
  */
+
+const fetchRandomEvents = async () => {
+  try {
+    const responseDisaster = await fetchImplementation(
+      "get",
+      "api/disasters/random-disaster"
+    );
+    const responseChallenge = await fetchImplementation(
+      "get",
+      "api/challenges/create-challenge"
+    );
+
+    toast.success("New disaster and challenge created");
+  } catch (error) {
+    console.error("Error fetching random disaster:", error);
+  }
+};
 const AmountInfo = async (scene, left, top) => {
   const isLeagueOn = localStorage.getItem("activeLeagueId");
-
   // this.leagueIsActive = isLeagueOn?.length > 1 ? isLeagueOn : false;
   const accountsStats = await fetchImplementation(
     "get",
@@ -58,8 +74,9 @@ const AmountInfo = async (scene, left, top) => {
       });
   });
   addButton(scene, "BankIcon", left + 335, top + 20, () => {});
-  addButton(scene, "WaterIcon", left + 335, top + 80, () => {
+  addButton(scene, "WaterIcon", left + 335, top + 80, async () => {
     // waterText.text = scene.waterTap++;
+    await fetchRandomEvents();
   });
 
   //Eco point

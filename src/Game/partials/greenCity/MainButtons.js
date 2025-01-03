@@ -49,7 +49,7 @@ const MainButtons = (scene, left, top) => {
   });
 
   addButton(scene, "WarningButton", left, top + 498, () => {
-    if (!scene.isEditBuilding) createDisasterDlg(scene);
+    if (!scene.isEditBuilding) createDisasterDlg(scene, isLeagueOn);
   });
   addButton(scene, "LeafButton", left, top + 594, () => {
     if (!scene.isEditBuilding) createEcoChallengeDlg(scene);
