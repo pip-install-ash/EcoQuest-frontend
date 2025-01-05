@@ -2,11 +2,10 @@ import { getAuth, getIdToken, signOut } from "firebase/auth";
 import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 
-export const SOCKET_BASE_URL = "localhost:4000";
-// "api.ecoquest.app";
-export const API_BASE_URL =
-  // "https://api.ecoquest.app/";
-  "http://localhost:4000/";
+export const SOCKET_BASE_URL = "api.ecoquest.app";
+// "localhost:4000";
+export const API_BASE_URL = "https://api.ecoquest.app/";
+// "http://localhost:4000/";
 // "http://40.127.12.5:4000/";
 // "http://40.127.12.5:3000/"; //change for deployment
 
@@ -80,13 +79,20 @@ export const fetchImplementation = async (method, path, params, headers) => {
         Authorization: `Bearer ${token}`,
       },
       body: method === "get" ? undefined : JSON.stringify(params),
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      return res;
     });
-
     // Todo: original impl had an option to return response.text() depending on the contents of 'jsonEndpoints'
     return response.json();
   } catch (error) {
-    console.error("Error fetching data:", error);
-    toast.error("Error fetching data, kindly login again or refresh the page");
+    if (error.message === "Forbidden") {
+      toast.error(
+        "Error fetching data, kindly login again or refresh the page"
+      );
+    }
     throw new Error(error?.message || "Error fetching data");
   }
 };

@@ -46,8 +46,12 @@ const CreateGreenCityScene = () => {
       MainButtons(this, 72, 334);
       BuildUi(this);
       this.dialogContainer = this.add.container(720, 512).setVisible(false);
+      const checkshowTuto = localStorage.getItem("showTutorial");
 
-      if (this.showTutorial === true || this.showTutorial === undefined)
+      if (
+        this.showTutorial === true ||
+        (checkshowTuto == "undefined" && this.showTutorial === undefined)
+      )
         createTutorialSettingDlg(this, () => {});
 
       fadeThisScreen(this);

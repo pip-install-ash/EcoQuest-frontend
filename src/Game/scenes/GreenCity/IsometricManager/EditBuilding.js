@@ -29,7 +29,12 @@ const createEditBuildingContent = (
 
 const drawEditBuilding = (scene) => {
   const editBuilding = scene.editBuilding;
-  const buildData = JSON.parse(localStorage.getItem("buildData") || "");
+  const buildDatalocal = localStorage.getItem("buildData");
+
+  const buildData =
+    buildDatalocal?.length > 0 && buildDatalocal !== "undefined"
+      ? JSON.parse(localStorage.getItem("buildData"))
+      : null;
   const leagueId = localStorage.getItem("activeLeagueId");
 
   const { width, height } = scene.scale;
@@ -117,7 +122,6 @@ const drawEditBuilding = (scene) => {
             ) {
               !scene?.allSoundEffectMute &&
                 scene.sound.add("buildAudio").play();
-
               scene?.updateStats(buildingDes);
               fetchImplementation("post", "api/user/assets", {
                 ...editBuilding,

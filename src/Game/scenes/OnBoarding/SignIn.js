@@ -17,8 +17,9 @@ const createOnBoardingSignInScene = () => {
     create: function () {
       const { width, height } = this.scale;
       scaleBackground(this, "SignInBackground");
+      const checkshowTuto = localStorage.getItem("showTutorial");
 
-      this.showTutorial = true;
+      this.showTutorial = checkshowTuto == "false" ? false : true;
       const emailInput = this.add
         .rexInputText(width / 2 - 190, height / 2 - 80, 380, 56, {
           type: "text",

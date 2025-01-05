@@ -12,14 +12,8 @@ import { addButton } from "../common";
 
 const fetchRandomEvents = async () => {
   try {
-    const responseDisaster = await fetchImplementation(
-      "get",
-      "api/disasters/random-disaster"
-    );
-    const responseChallenge = await fetchImplementation(
-      "get",
-      "api/challenges/create-challenge"
-    );
+    await fetchImplementation("get", "api/disasters/random-disaster");
+    await fetchImplementation("get", "api/challenges/create-challenge");
 
     toast.success("New disaster and challenge created");
   } catch (error) {
@@ -54,7 +48,7 @@ const AmountInfo = async (scene, left, top) => {
   graphics.fillRoundedRect(left + 191, top + 63, 160, 32, 16);
   addButton(scene, "LeafIcon", left + 145, top + 20, () => {});
   addButton(scene, "ElectricityIcon", left + 145, top + 80, async () => {
-    const accountsStats = await fetchImplementation(
+    await fetchImplementation(
       "post",
       `api/user/days-based-points-calculation`,
       {
@@ -63,7 +57,6 @@ const AmountInfo = async (scene, left, top) => {
       }
     )
       .then((res) => {
-        console.log("RESS>>>", res);
         toast.success(
           res.message || "Points added successfully for 5 days forward."
         );
@@ -76,7 +69,7 @@ const AmountInfo = async (scene, left, top) => {
   addButton(scene, "BankIcon", left + 335, top + 20, () => {});
   addButton(scene, "WaterIcon", left + 335, top + 80, async () => {
     // waterText.text = scene.waterTap++;
-    await fetchRandomEvents();
+    fetchRandomEvents();
   });
 
   //Eco point
@@ -142,6 +135,14 @@ const AmountInfo = async (scene, left, top) => {
     if (newStats.ecoPoints !== undefined) {
       dataValue.ecoPoints -= newStats.ecoPoints;
       ecoPoints.setText(dataValue.ecoPoints);
+    }
+    if (newStats.ecoEarning !== undefined) {
+      dataValue.ecoPoints += newStats.ecoEarning;
+      ecoPoints.setText(dataValue.ecoPoints);
+    }
+    if (newStats.wasteRemoval !== undefined) {
+      dataValue.garbage -= newStats.wasteRemoval;
+      scene.updatePopulation(undefined, dataValue.garbage);
     }
     if (newStats.cost !== undefined) {
       dataValue.coins -= newStats.cost + newStats.taxIncome;

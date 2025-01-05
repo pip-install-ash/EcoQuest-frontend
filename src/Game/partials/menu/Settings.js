@@ -37,16 +37,18 @@ const createSettingDlg = (scene, deleteAcount, userData) => {
       scene.allSoundEffectMute = val;
     }
   );
-
+  const checkshowTuto = localStorage.getItem("showTutorial");
   const guideCheckBox = addCheckButton(
     scene,
     "RoundCheckOn",
     "RoundCheckOff",
-    1,
+    checkshowTuto === "true" ? false : true,
     250,
     150,
     (val) => {
-      // console.log(val, "this.showTutorial", this.showTutorial);
+      console.log(!val, "this.showTutorial", scene.showTutorial);
+      scene.showTutorial = !val;
+      localStorage.setItem("showTutorial", !val);
     }
   );
 

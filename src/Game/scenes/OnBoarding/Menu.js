@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { fetchImplementation, logOutUser } from "../../../utils/fetchRequest";
 import {
   addButton,
@@ -45,16 +46,23 @@ const createOnBoardingMenuScene = () => {
           "get",
           "user-details",
           {}
-        );
-        const mapDetails = userDetails?.gameInitMap;
-        localStorage.setItem("activeLeagueId", "");
-        localStorage.setItem("activeLeagueName", "");
+        ).catch((err) => {
+          toast.error("Error fetching user details");
+          transitionToNextScene(this, "OnBoardingSignInScene");
+          console.log("err:", err);
+          return null;
+        });
+        if (userDetails) {
+          const mapDetails = userDetails?.gameInitMap;
+          localStorage.setItem("activeLeagueId", "");
+          localStorage.setItem("activeLeagueName", "");
 
-        mapDetails?.length > 1
-          ? localStorage.setItem("gameInitMap", mapDetails)
-          : localStorage.setItem("gameInitMap", ""); // to get the uodated Map
+          mapDetails?.length > 1
+            ? localStorage.setItem("gameInitMap", mapDetails)
+            : localStorage.setItem("gameInitMap", ""); // to get the uodated Map
 
-        transitionToNextScene(this, "GreenCitycene");
+          transitionToNextScene(this, "GreenCitycene");
+        }
       });
 
       addButton(this, "Menu-League", 720, 420, () => {
