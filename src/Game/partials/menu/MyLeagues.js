@@ -38,7 +38,9 @@ const createMyLeaguesDlg = async (scene) => {
   const fetchedData = await fetchImplementation(
     "get",
     `api/leagues/my-leagues`
-  );
+  ).catch((err) => {
+    return { data: { leaguesForUI: [] } };
+  });
   const myLeaguesList = fetchedData?.data?.leaguesForUI;
   const dialogSetting = organizeDialog(scene, "MyLeaguesDialog", 1314, 841);
 
@@ -77,8 +79,18 @@ const addRow = (scene, data, y, userData) => {
   const points = scene.add
     .text(-100, y, data.AverageEchoPoints, textStyle)
     .setOrigin(0, 0.5);
+
+  const formattedDate =
+    data?.lastLogin !== "N/A"
+      ? new Date(data.lastLogin).toLocaleString("en-US", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        })
+      : data?.lastLogin;
+  // lastLogin.setText();
+
   const lastLogin = scene.add
-    .text(120, y, data.lastLogin, textStyle)
+    .text(120, y, formattedDate, textStyle)
     .setOrigin(0, 0.5);
   const actionButton = addButton(
     scene,

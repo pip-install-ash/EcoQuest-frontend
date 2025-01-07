@@ -77,7 +77,7 @@ const BasicInfo = (scene, left, top) => {
 
   addText(
     scene,
-    "Population count: 10",
+    "Population count: 0",
     left + 10,
     top + 65,
     "Kreon",
