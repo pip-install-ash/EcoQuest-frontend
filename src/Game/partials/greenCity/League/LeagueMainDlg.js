@@ -527,19 +527,26 @@ const createLeagueMainDlg = async (scene, leagueId) => {
     140,
     220,
     () => {
+      const coinsStats = {
+        coins: parseInt(scene.donateCoinText.text.replace("$", "")),
+        water: parseInt(scene.donateWaterText.text.replace(" LTR", "")),
+        electricity: parseInt(scene.donateEleText.text.replace("KW", "")),
+      };
       fetchImplementation(
         "post",
         `api/coins-requests/send-coins/${selectedDonation.id}`,
-        {
-          coins: parseInt(scene.donateCoinText.text.replace("$", "")),
-          water: parseInt(scene.donateWaterText.text.replace(" LTR", "")),
-          electricity: parseInt(scene.donateEleText.text.replace("KW", "")),
-        }
+        coinsStats
       )
-        .then((res) => {
+        .then(async (res) => {
           if (res.success) {
             toast.success("Sent successfully");
+            scene.updateStats({
+              electricityConsumption: coinsStats.electricity,
+              cost: coinsStats.coins,
+              waterUsage: coinsStats.water,
+            });
             donateDialogContainer.setVisible(false);
+            await refreshTheList();
           } else {
             toast.error(res?.message || "Failed to donate.");
           }
@@ -549,12 +556,12 @@ const createLeagueMainDlg = async (scene, leagueId) => {
           toast.error(err.message);
         });
 
-      console.log(
-        scene.donateCoinText.text,
-        scene.donateWaterText.text,
-        scene.donateEleText.text
-      );
-      console.log(leagueData.id, "Donation Sent", selectedDonation);
+      // console.log(
+      //   scene.donateCoinText.text,
+      //   scene.donateWaterText.text,
+      //   scene.donateEleText.text
+      // );
+      // console.log(leagueData.id, "Donation Sent", selectedDonation);
     }
   );
   scene.donateEleText = addText(
@@ -734,33 +741,11 @@ const createLeagueMainDlg = async (scene, leagueId) => {
           money: requestCoinInputField.text,
         },
       })
-        .then((res) => {
+        .then(async (res) => {
           if (res.success) {
             toast.success("Request sent successfully");
-            const leaguesRequests = preLoadLeagueRequests(leagueId);
-            leaguesRequests
-              .then((res) => {
-                res?.forEach((data, index) => {
-                  const yOffset = -150 + index * 145;
-
-                  addRequest(scene, data, requestContentContainer, yOffset);
-                  // Donate Button
-                  requestContentContainer.add(
-                    addButton(scene, "DonateButton", 170, yOffset + 30, () => {
-                      selectedDonation = data;
-                      console.log(selectedDonation, "PPISP?");
-                      updateDonationDialog(scene, data);
-                      donateDialogContainer.setVisible(true);
-                    })
-                  );
-
-                  requestContentContainer.height += 350;
-                });
-              })
-              .catch((err) => {
-                console.log("ERROR >>", err);
-              });
             requestDialogContainer.setVisible(false);
+            await refreshTheList();
           } else {
             toast.error(res?.message || "Failed to send request");
           }
@@ -771,6 +756,34 @@ const createLeagueMainDlg = async (scene, leagueId) => {
         });
     })
   );
+
+  const refreshTheList = async () => {
+    const leaguesRequests = await preLoadLeagueRequests(leagueId);
+    if (leaguesRequests?.length) {
+      leaguesRequests?.forEach((data, index) => {
+        const yOffset = -150 + index * 145;
+
+        addRequest(scene, data, requestContentContainer, yOffset);
+        // Donate Button
+        requestContentContainer.add(
+          addButton(scene, "DonateButton", 170, yOffset + 30, () => {
+            selectedDonation = data;
+            console.log(selectedDonation, "PPISP?");
+            updateDonationDialog(scene, data);
+            donateDialogContainer.setVisible(true);
+          })
+        );
+
+        requestContentContainer.height += 350;
+      });
+
+      // .catch((err) => {
+      //   console.log("ERROR >>", err);
+      // });
+    } else {
+      requestContentContainer.setVisible(false);
+    }
+  };
   const requestEleInputField = scene.add.rexInputText(220, -90, 70, 56, {
     type: "number",
     text: "300",

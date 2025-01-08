@@ -82,7 +82,7 @@ const AmountInfo = async (scene, left, top) => {
     .setOrigin(0, 0.5);
   //Coin point
   const goldCoins = scene.add
-    .text(left + 206, top + 21, "$100,000", {
+    .text(left + 206, top + 21, "$5000", {
       fontFamily: "Kreon",
       fontStyle: "bold",
       fontSize: "18px",
@@ -90,7 +90,7 @@ const AmountInfo = async (scene, left, top) => {
     .setOrigin(0, 0.5);
   //Ele point
   const elePoints = scene.add
-    .text(left + 15, top + 79, "$100,000", {
+    .text(left + 15, top + 79, "200", {
       fontFamily: "Kreon",
       fontStyle: "bold",
       fontSize: "18px",
@@ -145,7 +145,7 @@ const AmountInfo = async (scene, left, top) => {
       scene.updatePopulation(undefined, dataValue.garbage);
     }
     if (newStats.cost !== undefined) {
-      dataValue.coins -= newStats.cost + newStats.taxIncome;
+      dataValue.coins -= newStats.cost + (newStats?.taxIncome || 0);
       goldCoins.text = dataValue.coins;
     }
     if (newStats.electricityConsumption !== undefined) {
@@ -161,7 +161,7 @@ const AmountInfo = async (scene, left, top) => {
       scene.updatePopulation(dataValue.population);
     }
   };
-
+  // scene.updateTextValues = updateTextValues;
   scene.updateStats = updateStats;
 };
 

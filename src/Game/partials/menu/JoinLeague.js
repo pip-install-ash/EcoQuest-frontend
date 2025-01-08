@@ -49,8 +49,8 @@ const createJoinLeagueDlg = async (scene) => {
         }
       })
       .catch((err) => {
-        console.log("error joining league", err);
-        toast.error("Error joining league");
+        console.log("error joining league", err.message);
+        toast.error(err?.message || "Error joining league");
       });
   });
 
@@ -109,7 +109,7 @@ const addRow = (scene, data, y) => {
       })
       .catch((err) => {
         console.log("error joining league", err);
-        toast.error("Error joining league");
+        toast.error(err?.message || "Error joining league");
       });
   });
   const rect = scene.add.rectangle(0, y + 46, 1314, 1, 0x2d3020).setOrigin(0.5);
