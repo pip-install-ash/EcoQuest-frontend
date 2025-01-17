@@ -301,7 +301,8 @@ const createLeagueMainDlg = async (scene, leagueId) => {
   content1.add(
     addText(
       scene,
-      "Average Eco points: " + leagueData?.averageEcoPoints,
+      "Average Eco points: " +
+        parseFloat(leagueData?.averageEcoPoints).toFixed(2),
       0,
       -70,
       "Inter",
