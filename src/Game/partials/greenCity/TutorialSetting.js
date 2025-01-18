@@ -18,10 +18,12 @@ const createTutorialSettingDlg = (scene, onAccept) => {
   );
   const noGuideButton = addButton(scene, "NoGuideButton", 160, 50, () => {
     scene.showTutorial = false;
+    localStorage.setItem("showTutorial", false);
     closeDialog(scene);
   });
   const yesGuideButton = addButton(scene, "YesGuideButton", -160, 50, () => {
     scene.showTutorial = true;
+    localStorage.setItem("showTutorial", true);
     closeDialog(scene);
     createSingleTutorial(scene);
   });

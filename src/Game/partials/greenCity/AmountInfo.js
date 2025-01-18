@@ -13,7 +13,7 @@ import { addButton } from "../common";
 const fetchRandomEvents = async () => {
   try {
     await fetchImplementation("get", "api/disasters/random-disaster");
-    await fetchImplementation("get", "api/challenges/create-challenge");
+    await fetchImplementation("post", "api/challenges/create-challenge");
 
     toast.success("New disaster and challenge created");
   } catch (error) {
@@ -46,7 +46,22 @@ const AmountInfo = async (scene, left, top) => {
   graphics.fillRoundedRect(left, top + 63, 160, 32, 16);
   graphics.fillRoundedRect(left + 191, top + 5, 160, 32, 16);
   graphics.fillRoundedRect(left + 191, top + 63, 160, 32, 16);
-  addButton(scene, "LeafIcon", left + 145, top + 20, () => {});
+  addButton(scene, "LeafIcon", left + 145, top + 20, async () => {
+    await fetchImplementation("get", "api/disasters/random-disaster")
+      .then((res) => {
+        console.log(" disaster res>>>", res);
+        // res.data && toast.success("New disaster created");
+        if (res.success) {
+          toast.success("New disasters created");
+        } else {
+          toast.error(res.message || "Error creating disaster");
+        }
+      })
+      .catch((err) => {
+        console.log("error", err);
+        toast.error("Error creating disaster");
+      });
+  });
   addButton(scene, "ElectricityIcon", left + 145, top + 80, async () => {
     await fetchImplementation(
       "post",
@@ -66,7 +81,21 @@ const AmountInfo = async (scene, left, top) => {
         console.log("first fetch error", err);
       });
   });
-  addButton(scene, "BankIcon", left + 335, top + 20, () => {});
+  addButton(scene, "BankIcon", left + 335, top + 20, async () => {
+    await fetchImplementation("post", "api/challenges/create-challenge")
+      .then((res) => {
+        console.log(" challenge res>>>", res);
+        if (res.success) {
+          toast.success("New challenge created");
+        } else {
+          toast.error(res.message || "Error creating challenge");
+        }
+      })
+      .catch((err) => {
+        console.log("error", err);
+        toast.error("Error creating challenge");
+      });
+  });
   addButton(scene, "WaterIcon", left + 335, top + 80, async () => {
     // waterText.text = scene.waterTap++;
     fetchRandomEvents();

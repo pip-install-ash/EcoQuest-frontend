@@ -49,8 +49,9 @@ const CreateGreenCityScene = () => {
       const checkshowTuto = localStorage.getItem("showTutorial");
 
       if (
-        this.showTutorial === true ||
-        (checkshowTuto == "undefined" && this.showTutorial === undefined)
+        this.showTutorial == true ||
+        ((checkshowTuto == "undefined" || checkshowTuto == null) &&
+          this.showTutorial === undefined)
       )
         createTutorialSettingDlg(this, () => {});
 

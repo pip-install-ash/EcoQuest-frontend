@@ -22,6 +22,8 @@ export const logOutUser = async () => {
   localStorage.removeItem("userName");
   localStorage.removeItem("user");
   localStorage.removeItem("email");
+
+  localStorage.removeItem("showTutorial");
   // toast.error("Session expired. Please login again");
   // window.location.href = "/";
 };

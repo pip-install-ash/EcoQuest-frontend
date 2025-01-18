@@ -37,7 +37,7 @@ const createLoadingScene = () => {
       this.add.image(width / 2, height / 2 - 50, "Logo");
 
       this.add
-        .text(width / 2, height / 2 + 60, "Eco-Challenge", {
+        .text(width / 2, height / 2 + 60, "Build Green, Live Clean", {
           ...DefaultFontStyle,
           font: "24px Work Sans",
         })
