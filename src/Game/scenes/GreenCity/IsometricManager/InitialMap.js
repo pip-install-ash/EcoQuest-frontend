@@ -102,7 +102,19 @@ const drawInitalMap = (scene) => {
   scene.iconMap = scene.add.container(0, 0);
   drawBuildings(scene);
 };
-const drawBuildings = (scene) => {
+const drawBuildings = async (scene) => {
+  const isLeagueOn = localStorage.getItem("activeLeagueId");
+  const userBuildings = await fetchImplementation("get", "api/user/assets", {
+    leagueId: isLeagueOn,
+  })
+    .then((res) => res.data)
+    .catch((error) => {
+      console.error("Error posting assets:", error);
+    });
+  let destoryBuilds = !!userBuildings?.length
+    ? userBuildings?.filter((v) => v.isDestroyed)
+    : [];
+
   const { width, height } = scene.scale;
   scene.iconMap.removeAll(true);
   const tmpInitmap = scene.gameInitMap;
@@ -118,26 +130,38 @@ const drawBuildings = (scene) => {
       const building = Buildings.filter(
         (v) => parseInt(v.id) === parseInt(cell.key)
       )[0];
-      scene.gameMap[i].setTexture(building.tile);
+
+      if (
+        destoryBuilds?.length &&
+        destoryBuilds?.some((v) => v.buildingId === building.id)
+      ) {
+        destoryBuilds = destoryBuilds.filter(
+          (v) => v.buildingId !== building.id
+        );
+        scene.gameMap[i].setTexture("IsoDestroyed");
+
+        // scene.iconMap.add(
+        //   addImage(
+        //     scene,
+        //     "NoRoad",
+        //     width / 2 + tileX,
+        //     (-height * 2) / 5 + tileY - tileHeight * building.h
+        //   )
+        // );
+      } else {
+        scene.gameMap[i].setTexture(building.tile);
+      }
+
       scene.gameMap[i].setScale(cell.isRotate ? -1 : 1, 1);
-      // if (building.isBuilding)
-      //   scene.iconMap.add(
-      //     addImage(
-      //       scene,
-      //       "NoRoad",
-      //       width / 2 + tileX,
-      //       (-height * 2) / 5 + tileY - tileHeight * building.h
-      //     )
-      //   );
-      //   } else {
-      // scene.gameMap[i].setTexture("IsoTile");
-      //   }
+
+      //  else {
+      //   scene.gameMap[i].setTexture("IsoTile");
+      // }
       i++;
     });
   });
   const strigfyMap = JSON.stringify(scene.gameInitMap);
   localStorage.setItem("gameInitMap", strigfyMap);
-  const isLeagueOn = localStorage.getItem("activeLeagueId");
 
   //store map changes into database
   console.log("this.leagueIsActive? BEfore'' :", isLeagueOn);

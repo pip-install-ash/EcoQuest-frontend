@@ -233,7 +233,50 @@ const drawEditBuilding = (scene) => {
 
     if (buildingDes) {
       infoTitle.text = buildingDes.title;
-      infoText.text = `Cost: $${buildingDes.cost}\nResident Capacity: ${buildingDes.residentCapacity}\nTax Income: $${buildingDes.taxIncome} per Resident\nElectricity consumption: ${buildingDes.electricityConsumption} units/Day\nWater usage: ${buildingDes.waterUsage} units/Day\nWaste produce: ${buildingDes.wasteProduce} units/Day`;
+      let infoTextContent = `Cost: $${buildingDes.cost}\n`;
+      let lineCount = 1;
+
+      if (buildingDes.residentCapacity > 0 && lineCount < 6) {
+        infoTextContent += `Resident Capacity: ${buildingDes.residentCapacity}\n`;
+        lineCount++;
+      }
+      if (buildingDes.taxIncome > 0 && lineCount < 6) {
+        infoTextContent += `Tax Income: $${buildingDes.taxIncome} per Resident\n`;
+        lineCount++;
+      }
+      if (buildingDes.electricityConsumption > 0 && lineCount < 6) {
+        infoTextContent += `Electricity consumption: ${buildingDes.electricityConsumption} units/Day\n`;
+        lineCount++;
+      }
+      if (buildingDes.waterUsage > 0 && lineCount < 6) {
+        infoTextContent += `Water usage: ${buildingDes.waterUsage}/Day\n`;
+        lineCount++;
+      }
+      if (buildingDes.wasteProduce > 0 && lineCount < 6) {
+        infoTextContent += `Waste produce: ${buildingDes.wasteProduce}/Day\n`;
+        lineCount++;
+      }
+      if (buildingDes.ecoEarning > 0 && lineCount < 6) {
+        infoTextContent += `Eco Earning: ${buildingDes.ecoEarning}/Day\n`;
+        lineCount++;
+      }
+      if (buildingDes.eleEarning > 0 && lineCount < 6) {
+        infoTextContent += `Electricity Earning: ${buildingDes.eleEarning}/Day\n`;
+        lineCount++;
+      }
+      if (buildingDes.maintenanceCost > 0 && lineCount < 6) {
+        infoTextContent += `Maintenance Cost: $${buildingDes.maintenanceCost}/Day\n`;
+        lineCount++;
+      }
+      if (buildingDes.waterEarning > 0 && lineCount < 6) {
+        infoTextContent += `Water Earning: ${buildingDes.waterEarning}/Day\n`;
+        lineCount++;
+      }
+      if (buildingDes.wasteRemoval > 0 && lineCount < 6) {
+        infoTextContent += `Waste Removal: ${buildingDes.wasteRemoval}/Day\n`;
+        lineCount++;
+      }
+      infoText.text = infoTextContent.trim();
     }
   }
 

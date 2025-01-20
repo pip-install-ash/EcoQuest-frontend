@@ -533,6 +533,19 @@ const createLeagueMainDlg = async (scene, leagueId) => {
         water: parseInt(scene.donateWaterText.text.replace(" LTR", "")),
         electricity: parseInt(scene.donateEleText.text.replace("KW", "")),
       };
+      const maxElectricity = selectedDonation?.coinsRequested?.electricity;
+      const maxMoney = selectedDonation?.coinsRequested?.money;
+      const maxWater = selectedDonation?.coinsRequested?.water;
+
+      if (
+        coinsStats.electricity > maxElectricity ||
+        coinsStats.coins > maxMoney ||
+        coinsStats.water > maxWater
+      ) {
+        toast.error("Donation values exceed the requested amounts.");
+        return;
+      }
+
       fetchImplementation(
         "post",
         `api/coins-requests/send-coins/${selectedDonation.id}`,
@@ -541,6 +554,7 @@ const createLeagueMainDlg = async (scene, leagueId) => {
         .then(async (res) => {
           if (res.success) {
             toast.success("Sent successfully");
+            // update the stats on the points bar of home
             scene.updateStats({
               electricityConsumption: coinsStats.electricity,
               cost: coinsStats.coins,

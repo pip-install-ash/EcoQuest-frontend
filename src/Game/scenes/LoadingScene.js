@@ -43,14 +43,14 @@ const createLoadingScene = () => {
         })
         .setOrigin(0.5, 0.5);
 
-      this.add
-        .text(
-          width / 2,
-          height - 30,
-          "2024 YourPal.ai All rights reserved.",
-          DefaultFontStyle
-        )
-        .setOrigin(0.5, 0.5);
+      // this.add
+      //   .text(
+      //     width / 2,
+      //     height - 30,
+      //     "2024 YourPal.ai All rights reserved.",
+      //     DefaultFontStyle
+      //   )
+      //   .setOrigin(0.5, 0.5);
 
       const progressBar = createRoundedProgressBar(
         this,

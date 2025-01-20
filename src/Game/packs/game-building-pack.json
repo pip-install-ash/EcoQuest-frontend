@@ -268,5 +268,10 @@
     "type": "image",
     "key": "IsoSkyScrapper",
     "url": "assets/isometric/SkyScrapper.png"
+  },
+  {
+    "type": "image",
+    "key": "IsoDestroyed",
+    "url": "assets/isometric/Distroyed.png"
   }
 ]
