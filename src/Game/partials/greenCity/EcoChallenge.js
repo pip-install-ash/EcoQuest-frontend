@@ -170,7 +170,7 @@ const addActive = (scene, data, y, intervals) => {
     .text(
       0,
       y,
-      `${data.message}: ${data.progress?.count || 0}/${
+      `${data?.message}: ${data?.progress?.count || 0}/${
         data?.requiredCount || 0
       }`,
       defaultTitleStyle
@@ -178,7 +178,7 @@ const addActive = (scene, data, y, intervals) => {
     .setOrigin(0, 0);
   const coin = addImage(scene, "BankIcon", 10, y + 40).setDisplaySize(20, 20);
   const coinText = scene.add
-    .text(20, y + 40, `+${data.points}`, {
+    .text(20, y + 40, `+${data?.points}`, {
       fontFamily: "Inter",
       fontSize: "16px",
       color: "#D7E057",
@@ -193,11 +193,11 @@ const addActive = (scene, data, y, intervals) => {
     })
     .setOrigin(1, 0.5);
 
-  const endTime = new Date(data.endTime); // Ensure endTime is a Date object
-  data.endTime && updateTime(endTime, intervals, timeText);
+  const endTime = new Date(data?.endTime); // Ensure endTime is a Date object
+  data?.endTime && updateTime(endTime, intervals, timeText);
 
   // let additionalButtons = [];
-  // if (data.checkable) {
+  // if (data?.checkable) {
   //   const tickButton = addButton(scene, "TickButton", 450, y + 20, () => {});
   //   const crossButton = addButton(scene, "CrossButton", 500, y + 20, () => {});
   //   additionalButtons = [tickButton, crossButton];
@@ -243,7 +243,7 @@ const addCompleted = (scene, data, y) => {
     .text(
       0,
       y,
-      `${data.message}: ${data.progress?.count || 0}/${
+      `${data?.message}: ${data?.progress?.count || 0}/${
         data?.requiredCount || 0
       }`,
       defaultTitleStyle
@@ -251,7 +251,7 @@ const addCompleted = (scene, data, y) => {
     .setOrigin(0, 0);
   const coin = addImage(scene, "BankIcon", 10, y + 40).setDisplaySize(20, 20);
   const coinText = scene.add
-    .text(20, y + 40, `+${data.points}`, {
+    .text(20, y + 40, `+${data?.points}`, {
       fontFamily: "Inter",
       fontSize: "16px",
       color: "#D7E057",

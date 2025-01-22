@@ -90,11 +90,14 @@ const BasicInfo = (scene, left, top) => {
 
   const updatePopulation = (newPopulation, progressW) => {
     if (progressW) {
+      const greenWidth =
+        progressX + progressW > 245 ? 240 : progressX + progressW;
+
       graphics.fillStyle(0x23f52c, 1);
       graphics.beginPath();
       graphics.moveTo(progressX + progressR, progressY);
-      graphics.lineTo(progressX + progressW, progressY);
-      graphics.lineTo(progressX + progressW, progressY + progressH);
+      graphics.lineTo(greenWidth, progressY);
+      graphics.lineTo(greenWidth, progressY + progressH);
       graphics.lineTo(progressX + progressR, progressY + progressH);
       graphics.arc(
         progressX + progressR,
