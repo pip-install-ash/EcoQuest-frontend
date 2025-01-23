@@ -68,7 +68,7 @@ const AmountInfo = async (scene, left, top) => {
       `api/user/days-based-points-calculation`,
       {
         ...(isLeagueOn.length > 1 ? { leagueId: isLeagueOn } : {}),
-        noOfDays: 5,
+        noOfDays: 1,
       }
     )
       .then((res) => {
