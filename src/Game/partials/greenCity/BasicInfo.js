@@ -90,8 +90,9 @@ const BasicInfo = (scene, left, top) => {
 
   const updatePopulation = (newPopulation, progressW) => {
     if (progressW) {
+      const calculatedWidth = progressX + progressW;
       const greenWidth =
-        progressX + progressW > 245 ? 240 : progressX + progressW;
+        calculatedWidth > 245 ? 240 : calculatedWidth < 0 ? 0 : calculatedWidth;
 
       graphics.fillStyle(0x23f52c, 1);
       graphics.beginPath();
