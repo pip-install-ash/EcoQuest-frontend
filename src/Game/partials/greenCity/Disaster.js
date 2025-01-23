@@ -19,6 +19,11 @@ const informations = [
     content:
       "A massive storm with strong winds and heavy rain wreaks havoc, devastating everything in its trajectory and flooding large areas.",
   },
+  {
+    title: "Flood",
+    content:
+      "Heavy rainfall causes rivers to overflow, submerging buildings and infrastructure. The floodwaters disrupt daily life and pose significant risks to safety and property.",
+  },
 ];
 
 const reports = [

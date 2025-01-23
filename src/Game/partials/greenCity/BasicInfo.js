@@ -92,7 +92,11 @@ const BasicInfo = (scene, left, top) => {
     if (progressW) {
       const calculatedWidth = progressX + progressW;
       const greenWidth =
-        calculatedWidth > 245 ? 240 : calculatedWidth < 0 ? 0 : calculatedWidth;
+        calculatedWidth > 245
+          ? 240
+          : calculatedWidth < 0
+          ? progressX + 5
+          : calculatedWidth;
 
       graphics.fillStyle(0x23f52c, 1);
       graphics.beginPath();
